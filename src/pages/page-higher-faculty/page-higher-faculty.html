@@ -1,0 +1,239 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../layout/shared-styles.html">
+<link rel="import" href="../../layout/flexbox-grid.html">
+<!-- <link rel="import" href="../../../redux/profile/page-01-redux.html"> -->
+<link rel="import" href="../../redux/register/register-redux.html">
+<link rel="import" href="../../redux-mixin.html">
+<link rel="import" href="../../mixins/animate-mixin.html">
+<link rel="import" href="../../i18n/profile/page-01-i18n.html">
+<link rel="import" href="../../mixins/common-mixin.html">
+<!-- <link rel="import" href="../../../components/nylon-animate-css/nylon-animate-css.html"> -->
+<link rel="import" href="../../components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../components/aqa-form/aqa-input.html">
+<link rel="import" href="../../components/aqa-button/aqa-button.html">
+<link rel="import" href="../../components/aqa-title/aqa-title-name.html">
+<link rel="import" href="../../components/aqa-form/aqa-date-picker.html">
+<link rel="import" href="../../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../components/aqa-form/aqa-combo-box.html">
+
+<link rel="import" href="../../components/aqa-vaadin-grid/aqa-vaadin-grid.html">
+<link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid-column.html">
+<link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../components/aqa-tooltip/aqa-tooltip.html">
+<link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+
+
+
+<dom-module id="page-higher-faculty">
+    <template>
+        <!-- <style include="nylon-animate-css"></style> -->
+        <style include="flexbox-grid shared-styles">
+            /* #example-sizing-contain {
+                width: 100%;
+                height: auto;
+            } */
+
+            #output_image {
+                width: 100%;
+                height: auto;
+                min-width: 96px;
+                min-height: auto;
+                margin: 0 auto;
+            }
+
+            img {
+                width: 100px;
+                hyphens: 100px;
+            }
+
+            .img-circle {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+
+            .flex-container {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .header-content>b {
+                font-family: MitrLight;
+            }
+
+            .flex {
+                display: flex;
+            }
+
+            .flex-item {
+                margin: 0 auto;
+            }
+
+            .groove {
+                border: 1px solid #e4eaec;
+                border-radius: 3px
+            }
+            /* .main {
+                border-bottom: #EEE solid 1px;
+                background-color: #F5F5F5;
+                height: 48px;
+                border-bottom: #EEE solid 1px;
+                font-size: 1rem;
+                color: #707070;
+            } */
+        </style>
+        <div class="page-container">
+            <aqa-title-name item=[[info.basic]]></aqa-title-name>
+            <aqa-panel id="basic">
+                <app-toolbar slot="header">
+                    <div main-title>ค้นหาคณะ/หน่วยงานเทียบเท่า</div>
+                </app-toolbar>
+                <div slot="content">
+                    <aqa-vaadin-grid>
+                        <div class="row center-sm ">
+                            <aqa-input class="form "  value="[[info.id]]"></aqa-input>
+                            <div class="col-lg-1">
+                                <div style="padding:1rem 1rem;">
+                                    <aqa-button type="login " on-tap="_save">ค้นหา</aqa-button>
+                                </div>
+                            </div>
+                        </div>
+                    </aqa-vaadin-grid>
+                </div>
+            </aqa-panel>
+            <aqa-panel id="basic">
+                <app-toolbar slot="header">
+                    <div main-title>ข้อมูลรายชื่อคณะ/หน่วยงานเทียบเท่า</div>
+                </app-toolbar>
+                <div slot="content">
+                    <aqa-vaadin-grid>
+                        <vaadin-grid id="material" items="{{datas}}">
+                            <vaadin-grid-column width="5%" flex-grow="0">
+                                <template class="header">
+                                    <div class="header" style="text-align: center">[[i18n.common.no]]</div>
+                                </template>
+                                <template>
+                                    <div style="text-align: center">[[count(index)]]</div>
+                                </template>
+                            </vaadin-grid-column>
+
+                            <vaadin-grid-column width="15%" flex-grow="0">
+                                <template class="header">
+                                    <div class="header">
+                                        รหัสสถานศึกษา
+                                    </div>
+                                </template>
+                                <template>
+                                    <div>[[item.academy.label]]</div>
+                                </template>
+                            </vaadin-grid-column>
+
+                            <vaadin-grid-column width="30%" flex-grow="0">
+                                <template class="header">
+                                    <div class="header">
+                                        ชื่อสถานศึกษา
+                                    </div>
+                                </template>
+                                <template>
+                                    <div>[[item.degree_full]]</div>
+                                </template>
+                            </vaadin-grid-column>
+
+                            <vaadin-grid-column width="20%" flex-grow="0">
+                                <template class="header">
+                                    <div class="header">กลุ่มสาขาวิชา</div>
+                                </template>
+                                <template>
+                                    <div>[[item.faculty.label]]</div>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="20%" flex-grow="0">
+                                <template class="header">
+                                    <div class="header">ลักษณะการจัดการสถานศึกษา</div>
+                                </template>
+                                <template>
+                                    <div>[[item.field_study.label]]</div>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="10%" flex-grow="0">
+                                <template class="header">
+                                    <div class="header">เครื่องมือ</div>
+                                </template>
+                                <template>
+                                    <div style="display:flex">
+                                        <aqa-tooltip label="ดู & แก้ไขรายละเอียด">
+                                            <paper-icon-button class="btn-edit" icon="create" noink on-click="_openPanelRight"></paper-icon-button>
+                                        </aqa-tooltip>
+                                        <!-- <aqa-tooltip label="ลบ">
+                                            <paper-icon-button class="btn-delete" icon="icomoon:bin" noink on-click="_delete"></paper-icon-button>
+                                        </aqa-tooltip> -->
+
+                                    </div>
+                                </template>
+                            </vaadin-grid-column>
+
+                        </vaadin-grid>
+                    </aqa-vaadin-grid>
+
+                    <paper-tooltip id="tooltip" position="top" offset="0"></paper-tooltip>
+                    <div style="display:inline">
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div style="margin-top:1rem">จำนวนรายการทั้งหมด [[datas.length]] รายการ </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div style="margin-top:1rem; text-align:right">แก้ไขล่าสุดวันที่ : 25/10/2560
+                                    <br> ผู้แก้ไข : รองศาสตร์จารย์บรรเจิด เริศฤดี </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </aqa-panel>
+
+
+            
+
+        </div>
+        </div>
+    </template>
+
+    <script>
+        /**
+         * `page-basic-campus` Description
+         *
+         * @summary ShortDescription.
+         * @customElement
+         * @polymer
+         * @extends {Polymer.Element}
+         */
+        class PageHigherFaculty extends AnimateMixin(CommonMixin(ReduxMixin(Polymer.Element))) {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'page-higher-faculty';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    i18n: {
+                        type: Object,
+                        statePath: 'i18n'
+                    },
+                };
+            }
+            ready() {
+                super.ready();
+            }
+
+        }
+
+        window.customElements.define(PageHigherFaculty.is, PageHigherFaculty);
+    </script>
+</dom-module>
