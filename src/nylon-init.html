@@ -42,7 +42,7 @@
 <dom-module id="nylon-init">
   <template>
     <style>
-       :host {
+      :host {
         display: block;
       }
 
@@ -50,52 +50,26 @@
         display: none;
       }
     </style>
-    {{checkLoginPage(pathName)}}
     <nylon-dialog></nylon-dialog>
-    <!-- <template is="dom-if" if={{!checkLoginPage(pathName)}}> -->
-    <!-- <layout-main id="layoutMain" path-name="[[pathName]]">
-        <nylon-pages id="nylonPage">
-          <page-register path="/"></page-register>
-          <page-profile path="/profile/:name"></page-profile>
-          <page-approve path="/approve"></page-approve>
-          <page-test-login path="/"></page-test-login>
-          <page-dashboard path="/dashboard" rule></page-dashboard>
-          <page-tests path="/tests"></page-tests>
-          <page-401 path="*"></page-401>
-          <page-404 path="*"></page-404>
-        </nylon-pages>
-      </layout-main> -->
-    <div hidden="{{checkUrl}}">
-      <layout-main id="layoutMain" path-name="[[pathName]]">
-        <nylon-pages id="nylonPage">
-          <!-- <page-register path="/"></page-register> -->
-          <page-profile path="/profile/:name"></page-profile>
-          <page-approve path="/approve"></page-approve>
-          <!-- <page-test-login path="/"></page-test-login> -->
-          <page-dashboard path="/dashboard" rule></page-dashboard>
-          <page-tests path="/tests"></page-tests>
-          <!-- <page-401 path="*"></page-401> -->
-          <page-basic-data path="/basic-data"></page-basic-data>
-          <page-higher-education path="/higher-education"></page-higher-education>
-          <page-higher-ceo path="/higher-ceo"></page-higher-ceo>
-          <page-higher-coordinator path="/higher-coordinator"></page-higher-coordinator>
-          <page-higher-campus path="/higher-campus"></page-higher-campus>
-          <page-higher-outlocation path="/higher-outlocation"></page-higher-outlocation>
-          <page-higher-faculty path="/higher-faculty"></page-higher-faculty>
-          <page-higher-sarlist path="/higher-sarlist"></page-higher-sarlist>
-          <page-higher-report path="/higher-report"></page-higher-report>
-          <page-higher-attachment path="higher-attachment"></page-higher-attachment>
+    <layout-main id="layoutMain" path-name="[[pathName]]">
+      <nylon-pages id="nylonPage">
+        <page-tests path="/tests"></page-tests>
+        <!-- <page-401 path="*"></page-401> -->
+        <page-basic-data path="/basic-data/ข้อมูลพื้นฐาน"></page-basic-data>
+        <page-higher-education path="/higher-education"></page-higher-education>
+        <page-higher-ceo path="/higher-ceo"></page-higher-ceo>
+        <page-higher-coordinator path="/higher-coordinator"></page-higher-coordinator>
+        <page-higher-campus path="/higher-campus"></page-higher-campus>
+        <page-higher-outlocation path="/higher-outlocation"></page-higher-outlocation>
+        <page-higher-faculty path="/higher-faculty"></page-higher-faculty>
+        <page-higher-sarlist path="/higher-sarlist"></page-higher-sarlist>
+        <page-higher-report path="/higher-report"></page-higher-report>
+        <page-higher-attachment path="higher-attachment"></page-higher-attachment>
 
 
-          <page-404 path="*"></page-404>
-        </nylon-pages>
-      </layout-main>
-    </div>
-    <!-- </template> -->
-    <template is="dom-if" if={{checkUrl}}>
-      <page-test-login path="/"></page-test-login>
-    </template>
-
+        <page-404 path="*"></page-404>
+      </nylon-pages>
+    </layout-main>
 
 
 
@@ -119,10 +93,6 @@
           dashboard: {
             type: Boolean,
             value: false
-          },
-          checkUrl: {
-            type: Boolean,
-            value: true
           },
         }
       }
@@ -162,14 +132,6 @@
           this.dashboard = true;
         } else {
           this.dashboard = false;
-        }
-      }
-      checkLoginPage(path) {
-        // console.log(path);
-        if (path === "/") {
-          this.set('checkUrl', true)
-        } else {
-          this.set('checkUrl', false)
         }
       }
       // checkLoginPage(login, dashboard) {
