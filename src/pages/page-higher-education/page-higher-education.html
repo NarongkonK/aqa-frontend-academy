@@ -114,16 +114,44 @@
 
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                    <aqa-input class="form " label="ระดับชั้นปีที่เปิดสอน" value="[[info.id]]" class="required" required></aqa-input>
+                                    <!-- <aqa-input class="form " label="ระดับชั้นปีที่เปิดสอน" value="[[info.id]]" class="required" required></aqa-input> -->
+                                    <aqa-combo-box always-float-label label="ระดับชั้นปีที่เปิดสอน" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.region"
+                                        class="required" required>
+                                        <template>
+                                            [[item.label]]
+                                        </template>
+                                    </aqa-combo-box>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                    <aqa-input class="form " label="ประเภท" value="[[info.id]]" class="required" required></aqa-input>
+                                    <!-- <aqa-input class="form " label="ประเภท" value="[[info.id]]" class="required" required></aqa-input> -->
+                                    <aqa-combo-box always-float-label label="ประเภท" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.region"
+                                        class="required" required>
+                                        <template>
+                                            [[item.label]]
+                                        </template>
+                                    </aqa-combo-box>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                    <aqa-input class="form " label="สังกัด" value="[[info.id]]" class="required" required></aqa-input>
+                                    <!-- <aqa-input class="form " label="สังกัด" value="[[info.id]]" class="required" required></aqa-input> -->
+                                    <aqa-combo-box always-float-label label="สังกัด" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.region"
+                                        class="required" required>
+                                        <template>
+                                            [[item.label]]
+                                        </template>
+                                    </aqa-combo-box>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                    <aqa-input class="form " label="สถานภาพ" value="[[info.id]]" class="required" required></aqa-input>
+                                    <!-- <aqa-input class="form " label="สถานภาพ" value="[[info.id]]" class="required" required></aqa-input> -->
+                                    <aqa-combo-box always-float-label label="สถานภาพ" items='{{regionList}}'
+                                        value="{{address.region_id}}" item-label-path="label" item-value-path="value" on-selected-item-changed="getObject"
+                                        object-name="address.region" class="required" required>
+                                        <template>
+                                            [[item.label]]
+                                        </template>
+                                    </aqa-combo-box>
                                 </div>
                             </div>
                         </div>
