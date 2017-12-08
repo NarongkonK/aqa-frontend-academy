@@ -22,6 +22,8 @@
 <link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 
+<link rel="import" href="../components/page-address.html">
+
 
 
 <dom-module id="page-higher-education">
@@ -145,9 +147,9 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                                     <!-- <aqa-input class="form " label="สถานภาพ" value="[[info.id]]" class="required" required></aqa-input> -->
-                                    <aqa-combo-box always-float-label label="สถานภาพ" items='{{regionList}}'
-                                        value="{{address.region_id}}" item-label-path="label" item-value-path="value" on-selected-item-changed="getObject"
-                                        object-name="address.region" class="required" required>
+                                    <aqa-combo-box always-float-label label="สถานภาพ" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.region"
+                                        class="required" required>
                                         <template>
                                             [[item.label]]
                                         </template>
@@ -163,120 +165,21 @@
         </div>
 
         <div class="page-container">
-            <!-- <aqa-title-name item=[[info.basic]]></aqa-title-name> -->
-            <aqa-panel id="basic">
-                <app-toolbar slot="header">
-                    <div main-title>ที่ตั้งสถานศึกษา</div>
-                </app-toolbar>
-
-                <div slot="content">
-                    <div class="row center-sm" style="text-align:left">
-                        <div class=" col-xs-12 col-lg-12">
-                            <div style="margin:1rem"></div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
-                                    <aqa-input class="form " label="เลขที่" value="[[info.id]]" class="required" required></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
-                                    <aqa-input label="หมู่ที่" value="[[info.type_assessor.ASSESSORTYPDESC]]"></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <aqa-input label="หมู่บ้าน" value="[[info.type_assessor.ASSESSORTYPDESC]]"></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <aqa-input label="อาคาร" value="[[info.type_assessor.ASSESSORTYPDESC]]"></aqa-input>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
-                                    <aqa-input class="form " label="ซอย" value="[[info.id]]"></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <aqa-input label="ถนน" value="[[info.type_assessor.ASSESSORTYPDESC]]"></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                    <aqa-combo-box always-float-label label="ภาค" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
-                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.region"
-                                        class="required" required>
-                                        <template>
-                                            [[item.label]]
-                                        </template>
-                                    </aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">[[checkIsRegion(address.region_id,address.region_id.*)]]
-                                    <aqa-combo-box always-float-label label="จังหวัด" items='{{provinceList}}' value="{{address.province_id}}" item-label-path="label"
-                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.province"
-                                        class="required" required>
-                                        <template>
-                                            [[item.label]]
-                                        </template>
-                                    </aqa-combo-box>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">[[checkIsProvince(address.province_id,address.province_id.*)]]
-                                    <aqa-combo-box always-float-label label="อำเภอ/เขต" items='{{amphoeList}}' value="{{address.amphoeList_id}}" item-label-path="label"
-                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.amphoe"
-                                        class="required" required>
-                                        <template>
-                                            [[item.label]]
-                                        </template>
-                                    </aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">[[checkIsAmphoe(address.amphoeList_id,address.amphoeList_id.*)]]
-                                    <aqa-combo-box always-float-label label="ตำบล/แขวง" items='{{districtList}}' value="{{address.district_id}}" item-label-path="label"
-                                        item-value-path="value" on-selected-item-changed="getObject" object-name="address.district"
-                                        class="required" required>
-                                        <template>
-                                            [[item.label]]
-                                        </template>
-                                    </aqa-combo-box>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <aqa-input label="รหัสไปรษณีย์" value="{{address.zipcode}}" class="required" required></aqa-input>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">[[checkIsProvince(address.province_id,address.province_id.*)]]
-                                    <aqa-input type="phone" label="โทรศัพท์" value="{{address.mobile_phone}}"></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">[[checkIsAmphoe(address.amphoeList_id,address.amphoeList_id.*)]]
-                                    <aqa-input label="โทรสาร" value=""></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                                    <aqa-input label="ID Line" value="{{address.zipcode}}"></aqa-input>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">[[checkIsProvince(address.province_id,address.province_id.*)]]
-                                    <aqa-input label="เว็บไซต์" value="{{address.mobile_phone}}"></aqa-input>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">[[checkIsAmphoe(address.amphoeList_id,address.amphoeList_id.*)]]
-                                    <aqa-input label="อีเมล์" value=""></aqa-input>
-                                </div>
-
-                            </div>
+            <page-address></page-address>
+            <paper-tooltip id="tooltip" position="top" offset="0"></paper-tooltip>
+            <div style="display:inline">
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div style="margin-top:1rem">
+                            <!-- จำนวนรายการทั้งหมด [[datas.length]] รายการ  -->
                         </div>
-
                     </div>
-                    <paper-tooltip id="tooltip" position="top" offset="0"></paper-tooltip>
-                    <div style="display:inline">
-                        <div class="row">
-                            <div class="col-xs-12 col-md-6">
-                                <div style="margin-top:1rem">
-                                    <!-- จำนวนรายการทั้งหมด [[datas.length]] รายการ  -->
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-6">
-                                <div style="margin-top:1rem; text-align:right">แก้ไขล่าสุดวันที่ : 25/10/2560
-                                    <br> ผู้แก้ไข : รองศาสตร์จารย์บรรเจิด เริศฤดี </div>
-                            </div>
-                        </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div style="margin-top:1rem; text-align:right">แก้ไขล่าสุดวันที่ : 25/10/2560
+                            <br> ผู้แก้ไข : รองศาสตร์จารย์บรรเจิด เริศฤดี </div>
                     </div>
                 </div>
-                <!-- </aqa-panel> -->
+            </div>
         </div>
     </template>
 
