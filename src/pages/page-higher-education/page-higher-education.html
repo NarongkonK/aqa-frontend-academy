@@ -23,6 +23,7 @@
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 
 <link rel="import" href="../components/page-address.html">
+<link rel="import" href="../../components/nylon-panel-card/nylon-panel-card.html">
 
 
 
@@ -165,22 +166,33 @@
         </div>
 
         <div class="page-container">
-            <page-address></page-address>
-            <paper-tooltip id="tooltip" position="top" offset="0"></paper-tooltip>
-            <div style="display:inline">
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <div style="margin-top:1rem">
-                            <!-- จำนวนรายการทั้งหมด [[datas.length]] รายการ  -->
-                        </div>
+            <aqa-panel id="basic">
+                <app-toolbar slot="header">
+                    <div main-title>ที่ตั้งสถานศึกษา</div>
+                </app-toolbar>
+
+                <div slot="content">
+                    <page-address></page-address>
+                </div>
+            </aqa-panel>
+        </div>
+
+        <!-- <page-address></page-address> -->
+        <paper-tooltip id="tooltip" position="top" offset="0"></paper-tooltip>
+        <div style="display:inline">
+            <div class="row">
+                <div class="col-xs-12 col-md-6">
+                    <div style="margin-top:1rem">
+                        <!-- จำนวนรายการทั้งหมด [[datas.length]] รายการ  -->
                     </div>
-                    <div class="col-xs-12 col-md-6">
-                        <div style="margin-top:1rem; text-align:right">แก้ไขล่าสุดวันที่ : 25/10/2560
-                            <br> ผู้แก้ไข : รองศาสตร์จารย์บรรเจิด เริศฤดี </div>
-                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div style="margin-top:1rem; text-align:right">แก้ไขล่าสุดวันที่ : 25/10/2560
+                        <br> ผู้แก้ไข : รองศาสตร์จารย์บรรเจิด เริศฤดี </div>
                 </div>
             </div>
         </div>
+        <!-- </div> -->
     </template>
 
     <script>
