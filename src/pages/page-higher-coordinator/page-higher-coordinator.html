@@ -22,6 +22,9 @@
 <link rel="import" href="../../../bower_components/vaadin-grid/vaadin-grid-column.html">
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 
+<link rel="import" href="../../components/nylon-panel-right/nylon-panel-right.html">
+<link rel="import" href="../../components/nylon-panel-card/nylon-panel-card.html">
+
 
 
 <dom-module id="page-higher-coordinator">
@@ -86,24 +89,10 @@
             <aqa-title-name item=[[info.basic]]></aqa-title-name>
             <aqa-panel id="basic">
                 <app-toolbar slot="header">
-                    <div main-title>ผู้ประสานงานสถานศึกษา</div>
+                    <div main-title>ข้อมูลผู้ประสานงานสถานศึกษา</div>
                 </app-toolbar>
 
                 <div slot="content">
-                    <!-- <div class="row between-xs">
-                        <div class="col-xs-2">
-                            <div class="box">
-                                <div  main-title>ข้อมูลพื้นฐานสถานศึกษา</div>
-                            </div>
-                        </div>
-                        <div class="col-xs-2">
-                            <div class="box">
-                                between
-                            </div>
-                        </div>
-                    </div> -->
-                    
-                   
                     <aqa-vaadin-grid>
                         <vaadin-grid id="material" items="{{datas}}">
                             <vaadin-grid-column width="5%" flex-grow="0">
@@ -115,18 +104,18 @@
                                 </template>
                             </vaadin-grid-column>
 
-                            <vaadin-grid-column width="30%" flex-grow="0">
+                            <vaadin-grid-column width="20%" flex-grow="0">
                                 <template class="header">
                                     <div class="header">
                                         ชื่อ-นามสกุล
                                     </div>
                                 </template>
                                 <template>
-                                    <div>[[item.academy.label]]</div>
+                                    <div>[[item.name]]</div>
                                 </template>
                             </vaadin-grid-column>
 
-                            <vaadin-grid-column width="25%" flex-grow="0">
+                            <vaadin-grid-column width="20%" flex-grow="0">
                                 <template class="header">
                                     <div class="header">
                                         ตำแหน่ง
@@ -145,12 +134,24 @@
                                     <div>[[item.faculty.label]]</div>
                                 </template>
                             </vaadin-grid-column>
-                            <vaadin-grid-column width="25%" flex-grow="0">
+                            <vaadin-grid-column width="20%" flex-grow="0">
                                 <template class="header">
                                     <div class="header">อีเมล์</div>
                                 </template>
                                 <template>
                                     <div>[[item.field_study.label]]</div>
+                                </template>
+                            </vaadin-grid-column>
+                            <vaadin-grid-column width="20%" flex-grow="0">
+                                <template class="header">
+                                    <div class="header"></div>
+                                </template>
+                                <template>
+                                    <div class="row center-xs">
+                                        <div style="padding:0rem 2rem;">
+                                            <aqa-button type="login " on-tap="_detail">รายละเอียด</aqa-button>
+                                        </div>
+                                    </div>
                                 </template>
                             </vaadin-grid-column>
 
@@ -172,6 +173,58 @@
 
                 </div>
             </aqa-panel>
+
+            <nylon-panel-right id="panelRight" title="สาขาที่เชี่ยวชาญ" width="80%">
+                <nylon-panel-card slot="content">
+                    <div slot="content">
+                        <div class="row">
+                            <div class="col-md-offset-1  col-md-5">
+                                <aqa-combo-box always-float-label label=ตำแหน่งทางวิชาการ items='{{specialistgroup}}' value="{{data.group_specialist_id}}"
+                                    item-label-path="label" item-value-path="value" on-selected-item-changed="getObject" object-name="data.group_specialist">
+                                    <template>
+                                        [[item.label]]
+                                    </template>
+                                </aqa-combo-box>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-3">
+                                <aqa-input label=คำนำหน้าชื่อ value="{{data.prefix_th}}"></aqa-input>
+                                <!-- <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value"></aqa-combo-box> -->
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
+                                <aqa-input class="required" required label=ชื่อ value="{{data.firstname_th}}" auto-validate pattern="[a-zA-Zก-์. ]*" error-message="ตัวอักษรเท่านั้น"></aqa-input>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                                <aqa-input class="required" required label=นามสกุล value="{{data.lastname_th}}" auto-validate pattern="[a-zA-Zก-์. ]*" error-message="ตัวอักษรเท่านั้น"></aqa-input>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-4">
+                                <aqa-input class="required" required label=ตำแหน่ง value="{{data.}}"></aqa-input>
+                            </div>
+                            <div class="col-md-3">
+                                <aqa-input label=โทรศัพท์ value="{{data.}}" type="phone"></aqa-input>
+                            </div>
+                            <div class="col-md-3">
+                                <aqa-input required label=อีเมล์ value="{{data.email}}"></aqa-input>
+                            </div>
+                        </div>
+                        <div class="row center-xs">
+                            <!-- <div class="col-lg-2">
+                                <div style="padding:0rem 2rem;">
+                                    <aqa-button type="success btn-full-width" on-tap="_save">[[i18n.button.save.label]]</aqa-button>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-2">
+                                <div style="padding:0rem 2rem;">
+                                    <aqa-button type="default btn-full-width" on-tap="_closePanelRight">[[i18n.button.close.label]]</aqa-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nylon-panel-card>
+            </nylon-panel-right>
 
         </div>
         </div>
@@ -203,10 +256,31 @@
                         type: Object,
                         statePath: 'i18n'
                     },
+                    datas: {
+                        type: Array,
+                        value: [
+                            {
+                                name: 'test'
+                            }
+                        ]
+                    }
                 };
             }
             ready() {
                 super.ready();
+            }
+            _detail(e) {
+                // if (e.currentTarget.getAttribute('action') == 'edit') {
+                //     this.set('data', e.model.item)
+                //     this.set('_index', e.model.index)
+                // } else {
+                // this.set('data', {})
+                // this.set('_index', undefined)
+                // }
+                this.$.panelRight.open();
+            }
+            _closePanelRight() {
+                this.$.panelRight.close();
             }
 
         }
