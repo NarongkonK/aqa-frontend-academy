@@ -23,6 +23,8 @@
 <link rel="import" href="../../../bower_components/paper-tooltip/paper-tooltip.html">
 <link rel="import" href="../../components/aqa-tooltip/aqa-tooltip.html">
 <link rel="import" href="../../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../components/nylon-panel-right/nylon-panel-right.html">
+
 
 
 
@@ -93,7 +95,7 @@
                 <div slot="content">
                     <aqa-vaadin-grid>
                         <div class="row center-sm ">
-                            <aqa-input class="form "  value="[[info.id]]"></aqa-input>
+                            <aqa-input class="form " value="[[info.id]]"></aqa-input>
                             <div class="col-lg-1">
                                 <div style="padding:1rem 1rem;">
                                     <aqa-button type="login " on-tap="_save">ค้นหา</aqa-button>
@@ -126,11 +128,11 @@
                                     </div>
                                 </template>
                                 <template>
-                                    <div>[[item.academy.label]]</div>
+                                    <div>[[item.name]]</div>
                                 </template>
                             </vaadin-grid-column>
 
-                            <vaadin-grid-column width="30%" flex-grow="0">
+                            <vaadin-grid-column width="25%" flex-grow="0">
                                 <template class="header">
                                     <div class="header">
                                         ชื่อสถานศึกษา
@@ -149,7 +151,7 @@
                                     <div>[[item.faculty.label]]</div>
                                 </template>
                             </vaadin-grid-column>
-                            <vaadin-grid-column width="20%" flex-grow="0">
+                            <vaadin-grid-column width="15%" flex-grow="0">
                                 <template class="header">
                                     <div class="header">ลักษณะการจัดการสถานศึกษา</div>
                                 </template>
@@ -157,19 +159,15 @@
                                     <div>[[item.field_study.label]]</div>
                                 </template>
                             </vaadin-grid-column>
-                            <vaadin-grid-column width="10%" flex-grow="0">
+                            <vaadin-grid-column width="20%" flex-grow="0">
                                 <template class="header">
-                                    <div class="header">เครื่องมือ</div>
+                                    <div class="header"></div>
                                 </template>
                                 <template>
-                                    <div style="display:flex">
-                                        <aqa-tooltip label="ดู & แก้ไขรายละเอียด">
-                                            <paper-icon-button class="btn-edit" icon="create" noink on-click="_openPanelRight"></paper-icon-button>
-                                        </aqa-tooltip>
-                                        <!-- <aqa-tooltip label="ลบ">
-                                            <paper-icon-button class="btn-delete" icon="icomoon:bin" noink on-click="_delete"></paper-icon-button>
-                                        </aqa-tooltip> -->
-
+                                    <div class="row center-xs">
+                                        <div style="padding:0rem 2rem;">
+                                            <aqa-button type="login " on-tap="_detail">รายละเอียด</aqa-button>
+                                        </div>
                                     </div>
                                 </template>
                             </vaadin-grid-column>
@@ -193,8 +191,90 @@
                 </div>
             </aqa-panel>
 
+            <nylon-panel-right id="panelRight" title="วิทยาเขต" width="80%">
+                <!-- <nylon-panel-card slot="content"> -->
+                <div slot="content">
+                    <aqa-panel id="basic">
+                        <app-toolbar slot="header">
+                            <div main-title>ข้อมูลคณะ/หน่วยงานเทียบเท่า</div>
+                        </app-toolbar>
 
-            
+                        <div slot="content">
+                            <div class="row center-sm" style="text-align:left">
+                                <div class=" col-xs-12 col-lg-12">
+                                    <div style="margin:1rem"></div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+                                            <aqa-input class="form " label="รหัสคณะ/หน่วยงานเทียบเท่า" value="[[info.id]]" ></aqa-input>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+                                            <aqa-input label="ชื่อคณะ/หน่วยงานเทียบเท่า" value="[[info.type_assessor.ASSESSORTYPDESC]]" class="required" required></aqa-input>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+                                            <aqa-combo-box always-float-label label="ระดับชั้นที่เปิดสอน" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                                item-value-path="value" on-selected-item-changed="getObject" object-name="address.region"
+                                                class="required" required>
+                                                <template>
+                                                    [[item.label]]
+                                                </template>
+                                            </aqa-combo-box>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+                                            <!-- <aqa-input class="form " label="สาขาวิชา" value="[[info.id]]" class="required" required></aqa-input> -->
+                                            <aqa-combo-box always-float-label label="สาขาวิชา" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                                item-value-path="value" on-selected-item-changed="getObject" object-name="address.region">
+                                                <template>
+                                                    [[item.label]]
+                                                </template>
+                                            </aqa-combo-box>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                                            <aqa-combo-box always-float-label label="ลักษณะการจัดการศึกษา" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                                item-value-path="value" on-selected-item-changed="getObject" object-name="address.region"
+                                                class="required" required>
+                                                <template>
+                                                    [[item.label]]
+                                                </template>
+                                            </aqa-combo-box>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <aqa-combo-box always-float-label label="ที่ตั้ง" items='{{regionList}}' value="{{address.region_id}}" item-label-path="label"
+                                                item-value-path="value" on-selected-item-changed="getObject" object-name="address.region">
+                                                <template>
+                                                    [[item.label]]
+                                                </template>
+                                            </aqa-combo-box>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </aqa-panel>
+                </div>
+                <!-- </nylon-panel-card> -->
+                <!-- <nylon-panel-card slot="content"> -->
+                <div slot="content">
+                    <aqa-panel id="basic">
+                        <app-toolbar slot="header">
+                            <div main-title>ที่ตั้งสถานศึกษา</div>
+                        </app-toolbar>
+
+                        <div slot="content">
+                            <page-address></page-address>
+                        </div>
+                    </aqa-panel>
+                </div>
+                <!-- </nylon-panel-card> -->
+        </div>
+        </nylon-panel-card>
+        </nylon-panel-right>
+
 
         </div>
         </div>
@@ -226,12 +306,32 @@
                         type: Object,
                         statePath: 'i18n'
                     },
+                    datas: {
+                        type: Array,
+                        value: [
+                            {
+                                name: 'test'
+                            }
+                        ]
+                    }
                 };
             }
             ready() {
                 super.ready();
             }
-
+            _detail(e) {
+                // if (e.currentTarget.getAttribute('action') == 'edit') {
+                //     this.set('data', e.model.item)
+                //     this.set('_index', e.model.index)
+                // } else {
+                // this.set('data', {})
+                // this.set('_index', undefined)
+                // }
+                this.$.panelRight.open();
+            }
+            _closePanelRight() {
+                this.$.panelRight.close();
+            }
         }
 
         window.customElements.define(PageHigherFaculty.is, PageHigherFaculty);
