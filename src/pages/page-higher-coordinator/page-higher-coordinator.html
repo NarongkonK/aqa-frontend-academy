@@ -175,55 +175,68 @@
             </aqa-panel>
 
             <nylon-panel-right id="panelRight" title="สาขาที่เชี่ยวชาญ" width="80%">
-                <nylon-panel-card slot="content">
-                    <div slot="content">
-                        <div class="row">
-                            <div class="col-md-offset-1  col-md-5">
-                                <aqa-combo-box always-float-label label=ตำแหน่งทางวิชาการ items='{{specialistgroup}}' value="{{data.group_specialist_id}}"
-                                    item-label-path="label" item-value-path="value" on-selected-item-changed="getObject" object-name="data.group_specialist">
-                                    <template>
-                                        [[item.label]]
-                                    </template>
-                                </aqa-combo-box>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-3">
-                                <aqa-input label=คำนำหน้าชื่อ value="{{data.prefix_th}}"></aqa-input>
-                                <!-- <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value"></aqa-combo-box> -->
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
-                                <aqa-input class="required" required label=ชื่อ value="{{data.firstname_th}}" auto-validate pattern="[a-zA-Zก-์. ]*" error-message="ตัวอักษรเท่านั้น"></aqa-input>
-                            </div>
-                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                                <aqa-input class="required" required label=นามสกุล value="{{data.lastname_th}}" auto-validate pattern="[a-zA-Zก-์. ]*" error-message="ตัวอักษรเท่านั้น"></aqa-input>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-offset-1 col-md-4">
-                                <aqa-input class="required" required label=ตำแหน่ง value="{{data.}}"></aqa-input>
-                            </div>
-                            <div class="col-md-3">
-                                <aqa-input label=โทรศัพท์ value="{{data.}}" type="phone"></aqa-input>
-                            </div>
-                            <div class="col-md-3">
-                                <aqa-input required label=อีเมล์ value="{{data.email}}"></aqa-input>
-                            </div>
-                        </div>
-                        <div class="row center-xs">
-                            <!-- <div class="col-lg-2">
+                <!-- <nylon-panel-card slot="content"> -->
+                <div slot="content">
+                    <aqa-panel id="basic">
+                        <!-- <app-toolbar slot="header">
+                            <div main-title>ข้อมูลพื้นฐาน</div>
+                        </app-toolbar> -->
+                        <div slot="content">
+                            <div class="row center-sm" style="text-align:left">
+                                <div class=" col-xs-12 col-lg-12">
+                                    <!-- <div style="margin:1rem"></div> -->
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-5">
+                                            <aqa-combo-box always-float-label label=ตำแหน่งทางวิชาการ items='{{specialistgroup}}' value="{{data.group_specialist_id}}"
+                                                item-label-path="label" item-value-path="value" on-selected-item-changed="getObject"
+                                                object-name="data.group_specialist">
+                                                <template>
+                                                    [[item.label]]
+                                                </template>
+                                            </aqa-combo-box>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="ccol-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <aqa-input label=คำนำหน้าชื่อ value="{{data.prefix_th}}"></aqa-input>
+                                            <!-- <aqa-combo-box class="form" label="คำนำหน้า (ไทย)" items="[[prefix]]" item-label-path="label_th" item-value-path="value"></aqa-combo-box> -->
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                                            <aqa-input class="required" required label=ชื่อ value="{{data.firstname_th}}" auto-validate pattern="[a-zA-Zก-์. ]*" error-message="ตัวอักษรเท่านั้น"></aqa-input>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                                            <aqa-input class="required" required label=นามสกุล value="{{data.lastname_th}}" auto-validate pattern="[a-zA-Zก-์. ]*" error-message="ตัวอักษรเท่านั้น"></aqa-input>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                                            <aqa-input class="required" required label=ตำแหน่ง value="{{data.}}"></aqa-input>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <aqa-input label=โทรศัพท์ value="{{data.}}" type="phone"></aqa-input>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <aqa-input required label=อีเมล์ value="{{data.email}}"></aqa-input>
+                                        </div>
+                                    </div>
+                                    <div class="row center-xs">
+                                        <!-- <div class="col-lg-2">
                                 <div style="padding:0rem 2rem;">
                                     <aqa-button type="success btn-full-width" on-tap="_save">[[i18n.button.save.label]]</aqa-button>
                                 </div>
                             </div> -->
-                            <div class="col-lg-2">
-                                <div style="padding:0rem 2rem;">
-                                    <aqa-button type="default btn-full-width" on-tap="_closePanelRight">[[i18n.button.close.label]]</aqa-button>
+                                        <div class="col-lg-2">
+                                            <div style="padding:0rem 2rem;">
+                                                <aqa-button type="default btn-full-width" on-tap="_closePanelRight">[[i18n.button.close.label]]</aqa-button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </nylon-panel-card>
+                    </aqa-panel>
+                </div>
+                <!-- </nylon-panel-card> -->
             </nylon-panel-right>
 
         </div>
