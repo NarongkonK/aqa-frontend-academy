@@ -1,1 +1,0 @@
-module.exports = "OnesqaAutomatedQA2byKMUTNB2018"
