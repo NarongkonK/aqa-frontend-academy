@@ -1,0 +1,56 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="./components/address-form.html">
+<link rel="import" href="./components/basic-form.html">
+<dom-module id="route-basic" topic="ข้อมูลพื้นฐาน" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="page-container">
+            <aqa-panel>
+                <app-toolbar slot="header">
+                    <div main-title>ข้อมูลพื้นฐาน</div>
+                </app-toolbar>
+                <div slot="content">
+                    <basic-form></basic-form>
+                </div>
+            </aqa-panel>
+            <div class="row-space"></div>
+            <aqa-panel>
+                <app-toolbar slot="header">
+                    <div main-title>ที่อยู่สถานศึกษา</div>
+                </app-toolbar>
+                <div slot="content">
+                    <address-form></address-form>
+                </div>
+            </aqa-panel>
+            <div class="row-space"></div>
+            <div class="row center-xs">
+                <div class="col-xs-12">
+                    <aqa-button type="success">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <aqa-button type="danger">ยกเลิก</aqa-button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+
+        class RouteฺBasic extends Polymer.Element {
+
+            static get is() {
+                return 'route-basic';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+        }
+
+        window.customElements.define(RouteฺBasic.is, RouteฺBasic);
+    </script>
+</dom-module>

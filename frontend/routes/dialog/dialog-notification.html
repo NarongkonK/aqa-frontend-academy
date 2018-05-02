@@ -1,0 +1,50 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../../../bower_components/paper-behaviors/demo/paper-radio-button.html">
+<link rel="import" href="../../../redux-mixin.html">
+<dom-module id="dialog-notification" topic="จัดการข้อมูล">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="modal-body">
+            <aqa-input label="รายละเอียด" disabled></aqa-input>
+            <paper-radio-group selected="[[active]]">
+                <paper-radio-button name="confirm">อนุมัติ</paper-radio-button>
+                <paper-radio-button name="notconfirm">ไม่อนุมัติ</paper-radio-button>
+            </paper-radio-group>
+            <aqa-input label="หมายเหตุ" disabled$="[[checkActive(active)]]"></aqa-input>
+        </div>
+        <div class="modal-footer">
+            <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
+            <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+        </div>
+
+    </template>
+
+    <script>
+        class DialogNotification extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'dialog-notification';
+            }
+
+            static get properties() {
+                return {
+                    active:{
+                        type:Boolean,
+                        value:false
+                    }
+                };
+            }
+            checkActive(val){
+                console.log(val)
+            }
+            closeDialog() {
+                Nylon.dialog.close()
+            }
+        }
+
+        window.customElements.define(DialogNotification.is, DialogNotification);
+    </script>
+</dom-module>

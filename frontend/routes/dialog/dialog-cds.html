@@ -1,0 +1,40 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../redux-mixin.html">
+<dom-module id="dialog-cds" topic="จัดการข้อมูล">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="modal-body">
+            <aqa-combo-box label="ปีการศึกษา"></aqa-combo-box>
+            <div class="row-space"></div>
+            <aqa-button type="primary">อัพโหลดไฟล์</aqa-button>
+        </div>
+        <div class="modal-footer">
+            <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
+            <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+        </div>
+
+    </template>
+
+    <script>
+        class DialogCds extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'dialog-cds';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+            closeDialog() {
+                Nylon.dialog.close()
+            }
+        }
+
+        window.customElements.define(DialogCds.is, DialogCds);
+    </script>
+</dom-module>

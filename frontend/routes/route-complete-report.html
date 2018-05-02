@@ -1,0 +1,49 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+<dom-module id="route-complete-report" topic="รายงานฉบับสมบูรณ์">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="page-container">
+            <aqa-advance-search></aqa-advance-search>
+            <aqa-panel>
+                <div slot="content">
+                    <aqa-table colunm="[[collumn]]" list="[1]"></aqa-table>
+                </div>
+            </aqa-panel>
+        </div>
+    </template>
+
+    <script>
+
+        class RouteCompleteReport extends Polymer.Element {
+
+            static get is() {
+                return 'route-complete-report';
+            }
+
+            static get properties() {
+                return {
+                    collumn: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'รอบการประเมิน',
+                                path: 'name'
+                            },
+                            {
+                                label: 'ปีที่ได้รับการประเมิน',
+                                path: 'position'
+                            }
+                        ]
+                    }
+                };
+            }
+        }
+
+        window.customElements.define(RouteCompleteReport.is, RouteCompleteReport);
+    </script>
+</dom-module>

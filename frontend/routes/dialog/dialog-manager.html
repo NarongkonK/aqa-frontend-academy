@@ -1,0 +1,45 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../redux-mixin.html">
+<dom-module id="dialog-manager" topic="จัดการข้อมูล">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="modal-body">
+            <aqa-input label="ตำแหน่งในองค์กร"></aqa-input>
+            <aqa-combo-box label="ตำแหน่งวิชาการ"></aqa-combo-box>
+            <aqa-input label="ยศ/ฐานันดรศักดิ์"></aqa-input>
+            <aqa-combo-box label="คำนำหน้า"></aqa-combo-box>
+            <aqa-input label="ชื่อ"></aqa-input>
+            <aqa-input label="นามสกุล"></aqa-input>
+            <aqa-input label="หมายเลขที่ติดต่อได้สะดวก"></aqa-input>
+            <aqa-input label="อีเมล"></aqa-input>
+        </div>
+        <div class="modal-footer">
+            <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
+            <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+        </div>
+
+    </template>
+
+    <script>
+        class DialogManager extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'dialog-manager';
+            }
+
+            static get properties() {
+                return {
+                   
+                };
+            }
+            closeDialog() {
+                Nylon.dialog.close()
+            }
+        }
+
+        window.customElements.define(DialogManager.is, DialogManager);
+    </script>
+</dom-module>

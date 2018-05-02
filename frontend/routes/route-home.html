@@ -1,0 +1,64 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+<link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
+<dom-module id="route-home" topic="รายชื่อสถานศึกษา">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="page-container">
+            <aqa-advance-search></aqa-advance-search>
+            <aqa-panel>
+                <div slot="content">
+                    <div class="row row-space">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <aqa-button type="primary" icon="add" on-click="openDailog">เพิ่ม</aqa-button>
+                            <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
+                        </div>
+                    </div>
+                    <aqa-table colunm="[[colunm]]" list="[1]"></aqa-table>
+                </div>
+            </aqa-panel>
+        </div>
+    </template>
+
+    <script>
+
+        class RouteHome extends Polymer.Element {
+
+            static get is() {
+                return 'route-home';
+            }
+
+            static get properties() {
+                return {
+                    colunm: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'รหัสสถานศึกษา',
+                                path: 'no'
+                            },
+                            {
+                                label: 'สถานศึกษา',
+                                path: 'name_th'
+                            },
+                            {
+                                label: 'อำเภอ / เขต',
+                                path: 'aumpher'
+                            },
+                            {
+                                label: 'จังหวัด',
+                                path: 'district'
+                            }
+                        ]
+                    }
+                };
+            }
+        }
+
+        window.customElements.define(RouteHome.is, RouteHome);
+    </script>
+</dom-module>

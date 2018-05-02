@@ -1,0 +1,41 @@
+<script>
+    Nylon.addReducer('app', function (state, action) {
+        state = state || {
+            name: 'ระบบสถานศึกษา',
+            menu: [
+                {
+                    label:'ข้อมูลสถานศึกษา',
+                    sub:[
+                        { icon: 'info', label: 'ข้อมูลพื้นฐาน', path: '/basic' },
+                        { icon: 'info', label: 'รายละเอียดสถานศึกษา', path: '/detail' },
+                        { icon: 'info', label: 'ข้อมูลผู้บริหาร', path: '/manager' },
+                        { icon: 'info', label: 'ผู้ประสานงาน', path: '/coordinator' },
+                        // { icon: 'info', label: 'SAR', path: '/sar' },
+                        // { icon: 'info', label: 'CDS', path: '/cds' },
+                        { icon: 'info', label: 'รายงานฉบับสมบูรณ์', path: '/complete/report' },
+                        // { icon: 'info', label: 'การแจ้งเตือน', path: '/notification' }
+                    ]
+                },
+                {
+                    label:'SAR',
+                    sub:[
+                        { icon: 'info', label: 'SAR ถานศึกษา', path: '/sar' }
+                    ]
+                },
+                {
+                    label:'CDS',
+                    sub:[
+                        { icon: 'info', label: 'CDS ถานศึกษา', path: '/cds' }
+                    ]
+                },
+                {
+                    label:'การแจ้งเตือน',
+                    sub:[
+                        { icon: 'info', label: 'การแจ้งเตือน', path: '/notification' }
+                    ]
+                },
+            ]
+        }
+        return state
+    })
+</script>

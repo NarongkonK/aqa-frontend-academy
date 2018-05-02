@@ -1,0 +1,168 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<dom-module id="route-detail" topic="รายละเอียดสถานศึกษา" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+            .row>div {
+                margin-bottom: 1rem;
+            }
+        </style>
+        <div class="page-container">
+            <aqa-panel>
+                <app-toolbar slot="header">
+                    <div main-title>รายละเอียดสถานศึกษา</div>
+                </app-toolbar>
+                <div slot="content">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <aqa-input label="รหัสสถานศึกษา" value="xxx-xxxx-xxx" disabled></aqa-input>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <aqa-input label="ชื่อสถานศึกษา" value="มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ" disabled></aqa-input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <aqa-combo-box label="สถานะภาพ"></aqa-combo-box>
+                        </div>
+                        <!-- <div class="col-xs-12 col-sm-6 col-md-4" style="margin:auto 0">
+                            <div>
+                                ระดับที่เปิดสอน
+                            </div>
+                            <template is="dom-repeat" items="[[level]]">
+                                <paper-checkbox checked>[[item.label]]</paper-checkbox>
+                            </template>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-4" style="margin:auto 0">
+                            <div>
+                                หลักสูตร
+                            </div>
+                            <template is="dom-repeat" items="[[sub_level]]">
+                                <paper-checkbox checked>[[item.label]]</paper-checkbox>
+                            </template>
+                        </div> -->
+                    </div>
+                    <div>
+                        ระดับที่เปิดสอน
+                    </div>
+                    <div class="row">
+                        <template is="dom-repeat" items="[[level]]">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <paper-checkbox checked>[[item.label]]</paper-checkbox>
+                            </div>
+                        </template>
+                    </div>
+                    <div>
+                        หลักสูตร
+                    </div>
+                    <div class="row">
+                        <template is="dom-repeat" items="[[sub_level]]">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <paper-checkbox checked>[[item.label]]</paper-checkbox>
+                            </div>
+                        </template>
+                    </div>
+                    <div>
+                        สาขาวิชา
+                    </div>
+                    <div class="row">
+                        <template is="dom-repeat" items="[[branch]]">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <paper-checkbox checked>[[item.label]]</paper-checkbox>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </aqa-panel>
+            <br>
+            <div class="row center-xs">
+                <div class="col-xs-12">
+                    <aqa-button type="success">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <aqa-button type="danger">ยกเลิก</aqa-button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script>
+
+        class RouteฺDetail extends Polymer.Element {
+
+            static get is() {
+                return 'route-detail';
+            }
+
+            static get properties() {
+                return {
+                    branch: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ประเภทวิชาอุตสหกรรม'
+                            },
+                            {
+                                label: 'ประเภทวิชาพาณิชยกรรม / บริหารธุรกิจ'
+                            },
+                            {
+                                label: 'ประเภทวิชาคหกรรม'
+                            },
+                            {
+                                label: 'ประเภทวิชาเกษตรกรรม'
+                            },
+                            {
+                                label: 'ประเภทวิชาประมง'
+                            },
+                            {
+                                label: 'ประเภทวิชาอุตสหกรรมท่องเที่ยว'
+                            },
+                            {
+                                label: 'ประเภทวิชาอุตสหกรรมสิ่งทอ'
+                            },
+                            {
+                                label: 'ประเภทวิชาเทคโนโลยีสารสนเทศและการสื่อสาร'
+                            }
+                        ]
+                    },
+                    sub_level: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ระยะสั่น'
+                            },
+                            {
+                                label: 'ระยะยาว'
+                            }
+                        ]
+                    },
+                    level: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ปวช.'
+                            },
+                            {
+                                label: 'ปวส.'
+                            },
+                            {
+                                label: 'ปริญญาตรี'
+                            },
+                            {
+                                label: 'ปริญญาโท'
+                            },
+                            {
+                                label: 'ปริญญาเอก'
+                            }
+                        ]
+                    }
+                };
+            }
+        }
+
+        window.customElements.define(RouteฺDetail.is, RouteฺDetail);
+    </script>
+</dom-module>

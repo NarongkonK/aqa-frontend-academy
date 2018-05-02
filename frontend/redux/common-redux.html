@@ -1,0 +1,25 @@
+<script>
+    Nylon.addReducer('commonData', function (state, action) {
+        state = state || {}
+
+        switch (action.type) {
+            case 'COMMON_ADD':
+                return Object.assign({}, state, { prefix: action.payload })
+            case 'COMMON_SELECT':
+                return Object.assign({}, state, { select: action.payload })
+            case 'COMMON_CLEAR':
+                return Object.assign({}, state, { select: action.payload })
+            default:
+                return state
+        }
+        return state
+    })
+
+    Nylon.addAction({
+        // selectCommon: function (data) {
+        //     return dispatch => {
+        //         dispatch({ type: 'COMMON_SELECT', payload: data })
+        //     }
+        // }
+    })
+</script>

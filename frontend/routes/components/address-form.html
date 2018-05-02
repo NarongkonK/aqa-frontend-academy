@@ -1,0 +1,78 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+<dom-module id="address-form">
+    <template>
+        <style include="aqa-styles">
+            .row>div {
+                margin-bottom: 1rem;
+            }
+        </style>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="เลขที่"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="หมู่ที่"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="หมู่บ้าน"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="อาคาร"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="ซอย"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="ถนน"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="รหัสไปรษณีย์"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="ภาค"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="ตำบล / แขวง"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="อำเภอ / เขต"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="จังหวัด"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="โทรศัพท์"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="โทรสาร"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="อีเมล"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="เว็บไซด์"></aqa-input>
+            </div>
+        </div>
+    </template>
+
+    <script>
+
+        class AddressForm extends Polymer.Element {
+
+            static get is() {
+                return 'address-form';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+        }
+
+        window.customElements.define(AddressForm.is, AddressForm);
+    </script>
+</dom-module>

@@ -1,0 +1,60 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+<dom-module id="basic-form">
+    <template>
+        <style include="aqa-styles">
+            .row>div{
+                margin-bottom: 1rem;
+            }
+        </style>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="ระดับ"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="ประเภทสถานศึกษา"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="สังกัด"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="ประเภทย่อย"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="รหัสสถานศึกษา สอศ. (5 หลัก)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="รหัสสถานศึกษา สป. (10 หลัก)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="ชื่อสถานศึกษา (ไทย)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-input label="ชื่อสถานศึกษา (อังกฤษ)"></aqa-input>
+            </div>
+        </div>
+    </template>
+
+    <script>
+
+        class BasicForm extends Polymer.Element {
+
+            static get is() {
+                return 'basic-form';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+        }
+
+        window.customElements.define(BasicForm.is, BasicForm);
+    </script>
+</dom-module>
