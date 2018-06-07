@@ -1,0 +1,149 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="./form/basic-education.html">
+<link rel="import" href="./form/non-formal-education.html">
+<link rel="import" href="./form/higher-eductaion.html">
+<link rel="import" href="./form/pre-school-education.html">
+<link rel="import" href="./form/teachnical-education.html">
+<!-- <link rel="import" href="./form/pre-elementary-education.html"> -->
+<link rel="import" href="./form/basic-special-education.html">
+<link rel="import" href="../../../redux-mixin.html">
+<link rel="import" href="../../redux/common-redux.html">
+<dom-module id="basic-form">
+    <template>
+        <style include="aqa-styles">
+            .row>div {
+                margin-bottom: 1rem;
+            }
+        </style>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-combo-box label="ระดับ" items="[[data]]" item-label-path="NameLevel" item-value-path="ID" on-change="getDataAcademy" value="{{page}}"></aqa-combo-box>
+            </div>
+        </div>
+        <div>
+            <iron-pages selected="{{page}}" attr-for-selected="name">
+                <div name="6f13af41-350f-4d7a-a645-f0dc9a3d3f5a">
+                    <!-- ระดับการศึกษาขั้นพื้นฐาน -->
+                    <basic-education></basic-education>
+                </div>
+                <div name="4f141cce-1764-4426-a77f-c180d68842fe">
+                     <!-- ปฐมวัย (ศูนย์พัฒนาเด็ก) -->
+                    <pre-school-education></pre-school-education>
+                </div>
+                <div name="8955b6cc-8b11-4824-bae3-0befd462f438">
+                    <!-- กศน. -->
+                    <non-formal-education></non-formal-education>
+                </div>
+                <div name="8b63074c-6d17-4ef4-b5bf-b9fe143f5a17">
+                    <!-- ด้านการอาชีวศึกษา -->
+                    <teachnical-education></teachnical-education>
+                </div>
+                <div name="ae467556-99eb-4bc1-bec6-367e3595c0a9">
+                    <!-- ระดับอุดมศึกษา -->
+                    <higher-education></higher-education>
+                </div>
+                <div name="78dc05b7-fa81-40c0-b7bf-22d37e9ed2f6">
+                    <!-- ระดับการศึกษาขั้นพื้นฐาน (วัตถุประสงค์พิเศษ) -->
+                    <basic-special-education></basic-special-education>
+                </div>
+                <!-- <div name="ae467556-99eb-4bc1-bec6-367e3595c0a9"> -->
+                    <!-- ปฐมวัย-อนุบาล -->
+                    <!-- <pre-elementary-education></pre-elementary-education> -->
+                <!-- </div> -->
+            </iron-pages>
+        </div>
+    </template>
+
+    <script>
+
+        class BasicForm extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'basic-form';
+            }
+
+            static get properties() {
+                return {
+                    data:{
+                        type:Array,
+                        statePath: 'commonData.AcademyLevel'
+                    },
+                    AffiliationLevel:{
+                        type:Array,
+                        statePath:"commonData.AffiliationLevel",
+                        observer:"setCommonDataAffiliation"
+                    },
+                    level: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ระดับการศึกษาขั้นพื้นฐาน',
+                                value: 'basic'
+                            },
+                            // {
+                            //     label: 'ปฐมวัย-อนุบาล',
+                            //     value: 'pre-elementary'
+                            // },
+                            {
+                                label: 'วัตถุประสงค์พิเศษ',
+                                value: 'basic-special'
+                            },
+                            {
+                                label: 'ปฐมวัย (ศูนย์พัฒนาเด็ก)',
+                                value: 'pre-school'
+                            },
+                            {
+                                label: 'กศน.',
+                                value: 'non-formal'
+                            },
+                            {
+                                label: 'ด้านการอาชีวศึกษา',
+                                value: 'teachnical'
+                            },
+                            {
+                                label: 'ระดับอุดมศึกษา',
+                                value: 'higher'
+                            }
+                        ]
+                    },
+                    page: {
+                        type: String,
+                        value: '6f13af41-350f-4d7a-a645-f0dc9a3d3f5a'
+                    }
+                };
+            }
+            ready(){
+                super.ready()
+                Nylon.dispatch("getBasic","AcademyLevel/get/",null,"AcademyLevel")
+                Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",this.page,"AcademyType")
+                Nylon.dispatch("getBasic","AffiliationLevel/get/",null,"AffiliationLevel")
+                Nylon.dispatch("getBasic","common/get/ManagementStyle",null,"ManagementStyle")
+                Nylon.dispatch("getBasic","AcademyStatus/get/",null,"AcademyStatus")
+            }
+            getDataAcademy(e){
+                Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",e.target.value,"AcademyType")
+            }
+            setCommonDataAffiliation(val){ 
+                // set ข้อมูลกระทรวง กรม กอง
+                if(val.length){
+                    const setStateName = function(val){
+                        if(val == "กรม") return "department"
+                        else if(val == "กระทรวง") return "ministry"
+                        else if(val == "กอง") return "pile"
+                    }
+                    for (let index = 0; index < val.length; index++) {
+                        var item = val[index]
+                        var stateName = setStateName(item.NameLevel)
+                        Nylon.dispatch("getBasic","affiliation/getBylevel/",item.ID,stateName)
+                    }
+                }
+            }
+        }
+
+        window.customElements.define(BasicForm.is, BasicForm);
+    </script>
+</dom-module>

@@ -14,7 +14,7 @@
                 <div slot="content">
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
-                            <aqa-button type="primary" icon="add" on-click="openDailog">เพิ่ม</aqa-button>
+                            <aqa-button type="primary" icon="add" on-click="toPage">เพิ่ม</aqa-button>
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
                     </div>
@@ -56,6 +56,9 @@
                         ]
                     }
                 };
+            }
+            toPage(){
+                Nylon.page("basic")
             }
         }
 

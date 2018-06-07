@@ -7,25 +7,23 @@
                     label:'ข้อมูลสถานศึกษา',
                     sub:[
                         { icon: 'info', label: 'ข้อมูลพื้นฐาน', path: '/basic' },
-                        { icon: 'info', label: 'รายละเอียดสถานศึกษา', path: '/detail' },
+                        { icon: 'info', label: 'ข้อมูลที่อยู่สถานศึกษา', path: '/address'},
+                        // { icon: 'info', label: 'รายละเอียดสถานศึกษา', path: '/detail' },
                         { icon: 'info', label: 'ข้อมูลผู้บริหาร', path: '/manager' },
                         { icon: 'info', label: 'ผู้ประสานงาน', path: '/coordinator' },
-                        // { icon: 'info', label: 'SAR', path: '/sar' },
-                        // { icon: 'info', label: 'CDS', path: '/cds' },
-                        { icon: 'info', label: 'รายงานฉบับสมบูรณ์', path: '/complete/report' },
-                        // { icon: 'info', label: 'การแจ้งเตือน', path: '/notification' }
+                        { icon: 'info', label: 'รายงานฉบับสมบูรณ์', path: '/complete/report' }
                     ]
                 },
                 {
                     label:'SAR',
                     sub:[
-                        { icon: 'info', label: 'SAR ถานศึกษา', path: '/sar' }
+                        { icon: 'info', label: 'SAR สถานศึกษา', path: '/sar' }
                     ]
                 },
                 {
                     label:'CDS',
                     sub:[
-                        { icon: 'info', label: 'CDS ถานศึกษา', path: '/cds' }
+                        { icon: 'info', label: 'CDS สถานศึกษา', path: '/cds' }
                     ]
                 },
                 {
@@ -33,7 +31,7 @@
                     sub:[
                         { icon: 'info', label: 'การแจ้งเตือน', path: '/notification' }
                     ]
-                },
+                }
             ]
         }
         return state

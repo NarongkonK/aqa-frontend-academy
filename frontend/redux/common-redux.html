@@ -1,14 +1,27 @@
 <script>
     Nylon.addReducer('commonData', function (state, action) {
-        state = state || {}
+        state = state || {
+            AcademyLevel: [],// ระดับสถานศึกษา
+            AcademyType:[],// ประเภทสถานศึกษา
+            ministry: [], // กระทรวง
+            department: [], // กรม
+            pile: [], // กอง
+            Affiliation: [], // ต้นสังกัด
+            AffiliationLevel:[], // ระดับต้นสังกัด
+            ManagementStyle: [], // รูปแบบการบริหาร
+            AcademyStatus: [], // สถานะสถานศึกษา
+            AcademyEducation: [], // ระดับที่เปิดสอน
+            AcademySize: [], // ขนาดสถานศึกษา
+            branch:[] // สาขาวิชา
+        }
 
         switch (action.type) {
-            case 'COMMON_ADD':
-                return Object.assign({}, state, { prefix: action.payload })
             case 'COMMON_SELECT':
                 return Object.assign({}, state, { select: action.payload })
             case 'COMMON_CLEAR':
                 return Object.assign({}, state, { select: action.payload })
+            case 'COMMON_GET':
+                return Object.assign({}, state, action.payload)
             default:
                 return state
         }
@@ -16,10 +29,28 @@
     })
 
     Nylon.addAction({
-        // selectCommon: function (data) {
-        //     return dispatch => {
-        //         dispatch({ type: 'COMMON_SELECT', payload: data })
-        //     }
-        // }
+        selectCommon: function (data) {
+            return dispatch => {
+                dispatch({ type: 'COMMON_SELECT', payload: data })
+            }
+        },
+        getBasic: function (path,params,table) {
+            return dispatch => {
+                var url = path;
+                if (params) {
+                    url += params
+                }
+                basic.get('./basic/' + url)
+                .then((response) => {
+                    var obj = {}
+                    obj[table] = response.data
+                    dispatch({ type: 'COMMON_GET', payload: obj })
+                })
+                .catch((error) => {
+                    console.log('error');
+                    console.log(error);
+                });
+            }
+        }
     })
 </script>

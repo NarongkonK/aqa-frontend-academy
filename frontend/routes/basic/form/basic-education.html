@@ -1,0 +1,119 @@
+<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../../../redux-mixin.html">
+<dom-module id="basic-education">
+    <template>
+        <style include="aqa-styles">
+            .row>div {
+                margin-bottom: 0.5rem;
+            }
+        </style>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="ประเภทสถานศึกษา" items="[[AcademyType]]" item-label-path="NameType" item-value-path="ID"></aqa-combo-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-input label="รหัสต้นสังกัด (5 หลัก)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)"></aqa-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="สังกัดกระทรวง" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="กรม" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="กอง" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID"></aqa-combo-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-combo-box label="รูปแบบการบริหาร" items="[[ManagementStyle]]" item-label-path="NameTh" item-value-path="ID"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="กลุ่ม"></aqa-combo-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="สถานะภาพ" items="[[AcademyStatus]]" item-label-path="NameStatus" item-value-path="ID"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="ระดับที่เปิดสอน"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-input label="จำนวนครู (คน)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-input label="จำนวนนักเรียน (คน)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-input label="ขนาดสถานศึกษา (คน)"></aqa-input>
+            </div>
+        </div>
+    </template>
+
+    <script>
+
+        class BasicEducation extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'basic-education';
+            }
+
+            static get properties() {
+                return {
+                    AcademyType: {
+                        type: Array,
+                        statePath: 'commonData.AcademyType'
+                    },
+                    ministry: {
+                        type: Array,
+                        statePath: 'commonData.ministry'
+                    },
+                    department:{
+                        type:Array,
+                        statePath: 'commonData.department'
+                    },
+                    pile:{
+                        type:Array,
+                        statePath: 'commonData.pile'
+                    },
+                    ManagementStyle:{
+                        type:Array,
+                        statePath: 'commonData.ManagementStyle'
+                    },
+                    AcademyStatus:{
+                        type:Array,
+                        statePath: 'commonData.AcademyStatus'
+                    }
+                };
+            }
+        }
+
+        window.customElements.define(BasicEducation.is, BasicEducation);
+    </script>
+</dom-module>

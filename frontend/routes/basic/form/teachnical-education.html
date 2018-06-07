@@ -1,0 +1,189 @@
+<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<dom-module id="teachnical-education">
+    <template>
+        <style include="aqa-styles">
+            .row>div {
+                margin-bottom: 0.5rem;
+            }
+        </style>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-combo-box label="ประเภทสถานศึกษา"></aqa-combo-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-input label="รหัสสถานศึกษา สอศ. (5 หลัก)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)"></aqa-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <aqa-input label="ชื่อสถานศึกษา (ภาษาไทย)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <aqa-input label="ชื่อสถานศึกษา (ภาษาอังกฤษ)"></aqa-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-combo-box label="สังกัดกระทรวง"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-combo-box label="กรม"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <aqa-combo-box label="กอง"></aqa-combo-box>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="สถานะภาพ"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-combo-box label="รูปแบบการบริหาร"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <aqa-combo-box label="ระดับที่เปิดสอน"></aqa-combo-box>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-input label="จำนวนครู (คน)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-input label="จำนวนนักเรียน (คน)"></aqa-input>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-2">
+                <aqa-input label="ขนาดสถานศึกษา (คน)"></aqa-input>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <aqa-combo-box label="สถานะภาพ"></aqa-combo-box>
+            </div>
+        </div> -->
+        <div>
+            ระดับที่เปิดสอน
+        </div>
+        <div class="row">
+            <template is="dom-repeat" items="[[level]]">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <paper-checkbox>[[item.label]]</paper-checkbox>
+                </div>
+            </template>
+        </div>
+        <div>
+            หลักสูตร
+        </div>
+        <div class="row">
+            <template is="dom-repeat" items="[[sub_level]]">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <paper-checkbox>[[item.label]]</paper-checkbox>
+                </div>
+            </template>
+        </div>
+        <div>
+            สาขาวิชา
+        </div>
+        <div class="row">
+            <template is="dom-repeat" items="[[branch]]">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <paper-checkbox>[[item.label]]</paper-checkbox>
+                </div>
+            </template>
+        </div>
+    </template>
+
+    <script>
+
+        class TeachnicalEducation extends Polymer.Element {
+
+            static get is() {
+                return 'teachnical-education';
+            }
+
+            static get properties() {
+                return {
+                    branch: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ประเภทวิชาอุตสหกรรม'
+                            },
+                            {
+                                label: 'ประเภทวิชาพาณิชยกรรม / บริหารธุรกิจ'
+                            },
+                            {
+                                label: 'ประเภทวิชาคหกรรม'
+                            },
+                            {
+                                label: 'ประเภทวิชาเกษตรกรรม'
+                            },
+                            {
+                                label: 'ประเภทวิชาประมง'
+                            },
+                            {
+                                label: 'ประเภทวิชาอุตสหกรรมท่องเที่ยว'
+                            },
+                            {
+                                label: 'ประเภทวิชาอุตสหกรรมสิ่งทอ'
+                            },
+                            {
+                                label: 'ประเภทวิชาเทคโนโลยีสารสนเทศและการสื่อสาร'
+                            }
+                        ]
+                    },
+                    sub_level: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ระยะสั่น'
+                            },
+                            {
+                                label: 'ระยะยาว'
+                            }
+                        ]
+                    },
+                    level: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ปวช.'
+                            },
+                            {
+                                label: 'ปวส.'
+                            },
+                            {
+                                label: 'ปริญญาตรี'
+                            },
+                            {
+                                label: 'ปริญญาโท'
+                            },
+                            {
+                                label: 'ปริญญาเอก'
+                            }
+                        ]
+                    }
+                };
+            }
+
+        }
+
+        window.customElements.define(TeachnicalEducation.is, TeachnicalEducation);
+    </script>
+</dom-module>
