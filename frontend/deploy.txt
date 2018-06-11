@@ -1,0 +1,8 @@
+# CMD :: docker build -t aqa/aqa-academy:0.0.1 .
+# CMD :: docker tag aqa/aqa-academy:0.0.1 deploy.onesqa.com:5000/aqa/aqa-academy:0.0.1
+# CMD :: docker push deploy.onesqa.com:5000/aqa/aqa-academy:0.0.1
+
+# Other
+# CMD :: docker rm -f $(docker ps -a -q)
+# CMD :: docker rmi -f $(docker images -a -q)
+# CMD :: docker run -p 8080:8080 aqa/aqa-academy:0.0.1

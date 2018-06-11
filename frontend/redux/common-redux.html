@@ -1,6 +1,7 @@
 <script>
     Nylon.addReducer('commonData', function (state, action) {
         state = state || {
+            Academy:[],
             AcademyLevel: [],// ระดับสถานศึกษา
             AcademyType:[],// ประเภทสถานศึกษา
             ministry: [], // กระทรวง
@@ -12,10 +13,14 @@
             AcademyStatus: [], // สถานะสถานศึกษา
             AcademyEducation: [], // ระดับที่เปิดสอน
             AcademySize: [], // ขนาดสถานศึกษา
-            branch:[] // สาขาวิชา
+            branch:[], // สาขาวิชา
+            AcademyGroup:[], // กลุ่มสถานศึกษา
+            AcademyArea:[] // เขตพื้นที่การศึกษา
         }
 
         switch (action.type) {
+            case 'ACADEMY_GET':
+                return Object.assign({}, state, { Academy: action.payload })
             case 'COMMON_SELECT':
                 return Object.assign({}, state, { select: action.payload })
             case 'COMMON_CLEAR':
@@ -34,19 +39,58 @@
                 dispatch({ type: 'COMMON_SELECT', payload: data })
             }
         },
-        getBasic: function (path,params,table) {
+        getBasic: function (path,params,table,label) {
             return dispatch => {
                 var url = path;
                 if (params) {
                     url += params
                 }
-                basic.get('./basic/' + url)
+                axios.get(Nylon.apiURL.basic+'/basic/' + url)
                 .then((response) => {
                     var obj = {}
-                    obj[table] = response.data
+                    if(label){
+                        var newData = response.data.map((item)=>{
+                            return {
+                                value : item.ID,
+                                label : item[label]
+                            }
+                        })
+                        obj[table] = newData
+                    }
+                    else {
+                        obj[table] = response.data
+                    }
                     dispatch({ type: 'COMMON_GET', payload: obj })
                 })
                 .catch((error) => {
+                    console.log('error');
+                    console.log(error);
+                });
+            }
+        },
+        getAcademy:function(){
+            return dispatch => {
+                axios.get(Nylon.apiURL.academy+'/academy/AcademyDataBasic/get/0/10')
+                .then((response)=>{
+                    dispatch({ type: 'ACADEMY_GET', payload: response.data})
+                })
+                .catch((error)=>{
+                    console.log('error');
+                    console.log(error);
+                });
+            }
+        },
+        insertAcademy:function(val){
+            return dispatch => {
+                axios.post(Nylon.apiURL.academy+'/academy/AcademyDataBasic/',val)
+                .then((response)=>{
+                    Nylon.swal({nylon:'success',title:'บันทึกสำเร็จ',text:'ระบบได้เพิ่มสถานศึกษาแล้ว'})
+                    Nylon.dispatch('getAcademy')
+                    console.log('success!!');
+                    console.log(response.data);
+                })
+                .catch((error)=>{
+                    Nylon.swal({nylon:'error',title:'เกิดข้อผิดพลาด',text:'กรุณาติดต่อผู้ดูแลระบบ'})
                     console.log('error');
                     console.log(error);
                 });

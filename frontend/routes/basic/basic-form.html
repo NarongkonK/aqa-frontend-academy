@@ -28,11 +28,11 @@
             <iron-pages selected="{{page}}" attr-for-selected="name">
                 <div name="6f13af41-350f-4d7a-a645-f0dc9a3d3f5a">
                     <!-- ระดับการศึกษาขั้นพื้นฐาน -->
-                    <basic-education></basic-education>
+                    <basic-education id="basicForm"></basic-education>
                 </div>
                 <div name="4f141cce-1764-4426-a77f-c180d68842fe">
                      <!-- ปฐมวัย (ศูนย์พัฒนาเด็ก) -->
-                    <pre-school-education></pre-school-education>
+                    <pre-school-education id="preScoolForm"></pre-school-education>
                 </div>
                 <div name="8955b6cc-8b11-4824-bae3-0befd462f438">
                     <!-- กศน. -->
@@ -112,20 +112,29 @@
                     },
                     page: {
                         type: String,
-                        value: '6f13af41-350f-4d7a-a645-f0dc9a3d3f5a'
+                        value: '4f141cce-1764-4426-a77f-c180d68842fe'
                     }
                 };
             }
             ready(){
                 super.ready()
+                // this.getData()
+                // Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",this.page,"AcademyType")
+                // Nylon.dispatch("getBasic","AcademyEducation/getAcademyEducationByAcademyLevel/",this.page,"AcademyEducation")
+                // Nylon.dispatch("getBasic","AcademySize/getAcademySizeByAcadenyLevel/",this.page,"AcademySize")
+            }
+            getData(){
                 Nylon.dispatch("getBasic","AcademyLevel/get/",null,"AcademyLevel")
                 Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",this.page,"AcademyType")
                 Nylon.dispatch("getBasic","AffiliationLevel/get/",null,"AffiliationLevel")
                 Nylon.dispatch("getBasic","common/get/ManagementStyle",null,"ManagementStyle")
                 Nylon.dispatch("getBasic","AcademyStatus/get/",null,"AcademyStatus")
+                Nylon.dispatch("getBasic","AcademyArea/get/",null,"AcademyArea")
             }
             getDataAcademy(e){
                 Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",e.target.value,"AcademyType")
+                Nylon.dispatch("getBasic","AcademySize/getAcademySizeByAcadenyLevel/",e.target.value,"AcademySize")
+                Nylon.dispatch("getBasic","AcademyEducation/getAcademyEducationByAcademyLevel/",e.target.value,"AcademyEducation")
             }
             setCommonDataAffiliation(val){ 
                 // set ข้อมูลกระทรวง กรม กอง
@@ -140,6 +149,17 @@
                         var stateName = setStateName(item.NameLevel)
                         Nylon.dispatch("getBasic","affiliation/getBylevel/",item.ID,stateName)
                     }
+                }
+            }
+            submit(){
+                var obj = {
+                    AcademyLevelID: this.page
+                }
+                if(this.page == "6f13af41-350f-4d7a-a645-f0dc9a3d3f5"){
+                    return Object.assign({},obj,this.$.basicForm.submit())
+                }
+                else if(this.page == "4f141cce-1764-4426-a77f-c180d68842fe"){
+                    return Object.assign({},obj,this.$.preScoolForm.submit())
                 }
             }
         }

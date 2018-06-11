@@ -4,7 +4,10 @@
 <link rel="import" href="../../../../../bower_components/aqa-form/aqa-combo-box.html">
 <link rel="import" href="../../../../../bower_components/paper-radio-group/paper-radio-group.html">
 <link rel="import" href="../../../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../../../../bower_components/nylon-form/nylon-form.html">
+<link rel="import" href="../../../../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../../../redux-mixin.html">
+<link rel="import" href="../../mixin/form-mixin.html">
 <dom-module id="basic-education">
     <template>
         <style include="aqa-styles">
@@ -12,105 +15,99 @@
                 margin-bottom: 0.5rem;
             }
         </style>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <aqa-combo-box label="ประเภทสถานศึกษา" items="[[AcademyType]]" item-label-path="NameType" item-value-path="ID"></aqa-combo-box>
+        <nylon-form id="myForm">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aqa-combo-box label="ประเภทสถานศึกษา" form-path="AcademyTypeID" items="[[AcademyType]]" item-label-path="NameType" item-value-path="ID"
+                        on-change="changeAcademyGroup"></aqa-combo-box>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)"></aqa-input>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <aqa-input label="รหัสต้นสังกัด (5 หลัก)" form-path="CodeByAffiliation"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe"></aqa-input>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <aqa-input label="รหัสต้นสังกัด (5 หลัก)"></aqa-input>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <aqa-input label="ชื่อสถานศึกษา" form-path="AcademyNameTh"></aqa-input>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)"></aqa-input>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-combo-box label="ระดับต้นสังกัต" items="[[AffiliationLevel]]" item-label-path="NameLevel" item-value-path="ID" value="{{selectAffilicationLevel}}"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <iron-pages selected="{{selectAffilicationLevel}}" attr-for-selected="name">
+                        <div name="5df3d771-1336-4aab-a0ca-a91be4403c0b">
+                            <aqa-combo-box label="กระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
+                        </div>
+                        <div name="05638c25-5b88-4cb3-88eb-8f7f309f0745">
+                            <aqa-combo-box label="กรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
+                        </div>
+                        <div name="7a993a84-7b81-4474-84cd-28ed5d7ff7b3">
+                            <aqa-combo-box label="กอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
+                        </div>
+                    </iron-pages>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-8">
-                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-2">
+                    <aqa-combo-box label="รูปแบบการบริหาร" form-path="ManagementStyleID" items="[[ManagementStyle]]" item-label-path="NameTh"
+                        item-value-path="ID"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <aqa-combo-box label="กลุ่ม" form-path="RelationAcademyGroupID" items="[[AcademyGroup]]" item-label-path="NameAcademyGroup" item-value-path="ID"></aqa-combo-box>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <aqa-combo-box label="สังกัดกระทรวง" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"></aqa-combo-box>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aqa-combo-box label="สถานะภาพ" form-path="AcademyStatusID" items="[[AcademyStatus]]" item-label-path="NameStatus" item-value-path="ID"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <aqa-combo-box label="กรม" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"></aqa-combo-box>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
+                        item-value-path="ID"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2">
+                    <aqa-input label="จำนวนครู (คน)" form-path="AmountTeacher"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2">
+                    <aqa-input label="จำนวนนักเรียน (คน)" form-path="AmountStudent" value="{{count}}"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-2">
+                    <!-- [[SizeAcademy.0.Size]] -->
+                    <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"></aqa-combo-box>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <aqa-combo-box label="กอง" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID"></aqa-combo-box>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-2">
-                <aqa-combo-box label="รูปแบบการบริหาร" items="[[ManagementStyle]]" item-label-path="NameTh" item-value-path="ID"></aqa-combo-box>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-combo-box label="กลุ่ม"></aqa-combo-box>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <aqa-combo-box label="สถานะภาพ" items="[[AcademyStatus]]" item-label-path="NameStatus" item-value-path="ID"></aqa-combo-box>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-8">
-                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <aqa-combo-box label="ระดับที่เปิดสอน"></aqa-combo-box>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-2">
-                <aqa-input label="จำนวนครู (คน)"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-2">
-                <aqa-input label="จำนวนนักเรียน (คน)"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-2">
-                <aqa-input label="ขนาดสถานศึกษา (คน)"></aqa-input>
-            </div>
-        </div>
+        </nylon-form>
     </template>
 
     <script>
 
-        class BasicEducation extends ReduxMixin(Polymer.Element) {
+        class BasicEducation extends FormMixin(Polymer.Element) {
 
             static get is() {
                 return 'basic-education';
             }
-
-            static get properties() {
-                return {
-                    AcademyType: {
-                        type: Array,
-                        statePath: 'commonData.AcademyType'
-                    },
-                    ministry: {
-                        type: Array,
-                        statePath: 'commonData.ministry'
-                    },
-                    department:{
-                        type:Array,
-                        statePath: 'commonData.department'
-                    },
-                    pile:{
-                        type:Array,
-                        statePath: 'commonData.pile'
-                    },
-                    ManagementStyle:{
-                        type:Array,
-                        statePath: 'commonData.ManagementStyle'
-                    },
-                    AcademyStatus:{
-                        type:Array,
-                        statePath: 'commonData.AcademyStatus'
-                    }
-                };
+           
+            submit() {
+                var data = this.$.myForm.submit()
+                var newData = Object.assign({},data,this.form)
+                newData.RelationAcademyEducationID = {ID:[newData.RelationAcademyEducationID]}
+                newData.RelationAcademyGroupID = {ID:[newData.RelationAcademyGroupID]}
+                newData.AmountTeacher = parseInt(newData.AmountTeacher)
+                newData.AmountStudent = parseInt(newData.AmountStudent)
+                return newData
             }
         }
 

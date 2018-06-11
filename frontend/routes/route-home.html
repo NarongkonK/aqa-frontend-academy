@@ -4,6 +4,8 @@
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
+<link rel="import" href="../../redux-mixin.html">
+<link rel="import" href="../redux/common-redux.html">
 <dom-module id="route-home" topic="รายชื่อสถานศึกษา">
     <template>
         <style include="aqa-styles">
@@ -18,7 +20,7 @@
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table colunm="[[colunm]]" list="[1]"></aqa-table>
+                    <aqa-table colunm="[[colunm]]" list="[[academy]]"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -26,7 +28,7 @@
 
     <script>
 
-        class RouteHome extends Polymer.Element {
+        class RouteHome extends ReduxMixin(Polymer.Element) {
 
             static get is() {
                 return 'route-home';
@@ -34,28 +36,50 @@
 
             static get properties() {
                 return {
+                    academy:{
+                        type:Array,
+                        statePath:'commonData.Academy'
+                    },
                     colunm: {
                         type: Array,
                         value: [
                             {
                                 label: 'รหัสสถานศึกษา',
-                                path: 'no'
+                                path: 'CodeByAqa',
+                                width: "200px",
+                                flex: "0"
                             },
                             {
                                 label: 'สถานศึกษา',
-                                path: 'name_th'
+                                path: 'AcademyNameTh',
+                                width: "500px",
+                                flex: "1"
+                            },
+                            {
+                                label: 'ระดับการศึกษา',
+                                path: 'AcademyLevel.NameLevel',
+                                width: "250px",
+                                flex: "0"
                             },
                             {
                                 label: 'อำเภอ / เขต',
-                                path: 'aumpher'
+                                path: 'aumpher',
+                                width: "200px",
+                                flex: "0"
                             },
                             {
                                 label: 'จังหวัด',
-                                path: 'district'
+                                path: 'district',
+                                width: "200px",
+                                flex: "0"
                             }
                         ]
                     }
                 };
+            }
+            ready(){
+                super.ready()
+                Nylon.dispatch("getAcademy")
             }
             toPage(){
                 Nylon.page("basic")

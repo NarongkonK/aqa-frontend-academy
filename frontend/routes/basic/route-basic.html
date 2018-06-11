@@ -4,6 +4,7 @@
 <link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../components/address-form.html">
 <link rel="import" href="../basic/basic-form.html">
+<link rel="import" href="../../../redux-mixin.html">
 <dom-module id="route-basic" topic="ข้อมูลพื้นฐาน" parent="route-home">
     <template>
         <style include="aqa-styles">
@@ -14,13 +15,13 @@
                     <div main-title>ข้อมูลพื้นฐาน</div>
                 </app-toolbar>
                 <div slot="content">
-                    <basic-form></basic-form>
+                    <basic-form id="form"></basic-form>
                 </div>
             </aqa-panel>
             <div class="row-space"></div>
             <div class="row center-xs">
                 <div class="col-xs-12">
-                    <aqa-button type="success">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
                     <aqa-button type="danger">ยกเลิก</aqa-button>
                 </div>
             </div>
@@ -29,7 +30,7 @@
 
     <script>
 
-        class RouteฺBasic extends Polymer.Element {
+        class RouteฺBasic extends ReduxMixin(Polymer.Element) {
 
             static get is() {
                 return 'route-basic';
@@ -39,6 +40,11 @@
                 return {
 
                 };
+            }
+            getForm(){
+                var data = this.$.form.submit()
+                console.log(data)
+                Nylon.dispatch("insertAcademy",data)
             }
         }
 

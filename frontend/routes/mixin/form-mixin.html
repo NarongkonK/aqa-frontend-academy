@@ -1,0 +1,100 @@
+<link rel="import" href="../../../redux-mixin.html">
+<script>
+    FormMixin = Parent => class FormMixin extends ReduxMixin(Parent) {
+        static get observers() {
+            return [
+                'mathStudent(count)'
+            ]
+        }
+        static get properties() {
+            return {
+                count: {
+                    type: Number,
+                    value: 0
+                },
+                form: {
+                    type: Object,
+                    value: {}
+                },
+                selectAffilicationLevel: {
+                    type: String,
+                    value: "",
+                    observer: "setAffilicationID"
+                },
+                AcademyType: {
+                    type: Array,
+                    statePath: 'commonData.AcademyType'
+                },
+                ministry: {
+                    type: Array,
+                    statePath: 'commonData.ministry'
+                },
+                department: {
+                    type: Array,
+                    statePath: 'commonData.department'
+                },
+                pile: {
+                    type: Array,
+                    statePath: 'commonData.pile'
+                },
+                ManagementStyle: {
+                    type: Array,
+                    statePath: 'commonData.ManagementStyle'
+                },
+                AcademyStatus: {
+                    type: Array,
+                    statePath: 'commonData.AcademyStatus'
+                },
+                AcademyEducation: {
+                    type: Array,
+                    statePath: 'commonData.AcademyEducation'
+                },
+                AcademySize: {
+                    type: Array,
+                    statePath: 'commonData.AcademySize'
+                },
+                AcademyGroup: {
+                    type: Array,
+                    statePath: 'commonData.AcademyGroup'
+                },
+                SizeAcademy: {
+                    type: Array,
+                    value: []
+                },
+                AffiliationLevel: {
+                    type: Array,
+                    statePath: 'commonData.AffiliationLevel'
+                },
+                AcademyArea:{
+                    type: Array,
+                    statePath: 'commonData.AcademyArea'
+                }
+            };
+        }
+        setAffilicationID(e) {
+            if (e.target)
+                this.form.AffiliationID = e.target.value
+        }
+        changeAcademyGroup(e) {
+            this.getGroup(e.target.value)
+        }
+        getGroup(val) {
+            Nylon.dispatch("getBasic", "AcademyGroup/getAcademyGroupByAcademyTypeID/", val, "AcademyGroup")
+        }
+        mathStudent(val) {
+            var data = 0
+            this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
+                Polymer.Async.timeOut.after(500),
+                () => {
+                    var num = parseInt(this.count)
+                    var size = this.AcademySize;
+                    var result = size.filter((item) => {
+                        return item.StudentAmountStart <= num && item.StudentAmountEnd >= num
+                    })
+                    this.set("SizeAcademy", result)
+                    return result
+                })
+        }
+
+    }
+</script>
