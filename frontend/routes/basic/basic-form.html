@@ -3,13 +3,13 @@
 <link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
 <link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
 <link rel="import" href="../../../../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="./form/basic-education.html">
-<link rel="import" href="./form/non-formal-education.html">
-<link rel="import" href="./form/higher-eductaion.html">
-<link rel="import" href="./form/pre-school-education.html">
-<link rel="import" href="./form/teachnical-education.html">
+<link rel="lazy-import" href="./form/basic-education.html">
+<link rel="lazy-import" href="./form/non-formal-education.html">
+<link rel="lazy-import" href="./form/higher-eductaion.html">
+<link rel="lazy-import" href="./form/pre-school-education.html">
+<link rel="lazy-import" href="./form/teachnical-education.html">
 <!-- <link rel="import" href="./form/pre-elementary-education.html"> -->
-<link rel="import" href="./form/basic-special-education.html">
+<link rel="lazy-import" href="./form/basic-special-education.html">
 <link rel="import" href="../../../redux-mixin.html">
 <link rel="import" href="../../redux/common-redux.html">
 <dom-module id="basic-form">
@@ -21,7 +21,8 @@
         </style>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <aqa-combo-box label="ระดับ" items="[[data]]" item-label-path="NameLevel" item-value-path="ID" on-change="getDataAcademy" value="{{page}}"></aqa-combo-box>
+                <aqa-combo-box label="ระดับ" items="[[data]]" item-label-path="NameLevel" item-value-path="ID" on-change="getDataAcademy"
+                    value="{{page}}"></aqa-combo-box>
             </div>
         </div>
         <div>
@@ -31,28 +32,28 @@
                     <basic-education id="basicForm"></basic-education>
                 </div>
                 <div name="4f141cce-1764-4426-a77f-c180d68842fe">
-                     <!-- ปฐมวัย (ศูนย์พัฒนาเด็ก) -->
+                    <!-- ปฐมวัย (ศูนย์พัฒนาเด็ก) -->
                     <pre-school-education id="preScoolForm"></pre-school-education>
                 </div>
                 <div name="8955b6cc-8b11-4824-bae3-0befd462f438">
                     <!-- กศน. -->
-                    <non-formal-education></non-formal-education>
+                    <non-formal-education id="nonFormalForm"></non-formal-education>
                 </div>
                 <div name="8b63074c-6d17-4ef4-b5bf-b9fe143f5a17">
                     <!-- ด้านการอาชีวศึกษา -->
-                    <teachnical-education></teachnical-education>
+                    <teachnical-education id="teachnicalForm"></teachnical-education>
                 </div>
                 <div name="ae467556-99eb-4bc1-bec6-367e3595c0a9">
                     <!-- ระดับอุดมศึกษา -->
-                    <higher-education></higher-education>
+                    <higher-education id="higherForm"></higher-education>
                 </div>
                 <div name="78dc05b7-fa81-40c0-b7bf-22d37e9ed2f6">
                     <!-- ระดับการศึกษาขั้นพื้นฐาน (วัตถุประสงค์พิเศษ) -->
-                    <basic-special-education></basic-special-education>
+                    <basic-special-education id="specialForm"></basic-special-education>
                 </div>
                 <!-- <div name="ae467556-99eb-4bc1-bec6-367e3595c0a9"> -->
-                    <!-- ปฐมวัย-อนุบาล -->
-                    <!-- <pre-elementary-education></pre-elementary-education> -->
+                <!-- ปฐมวัย-อนุบาล -->
+                <!-- <pre-elementary-education></pre-elementary-education> -->
                 <!-- </div> -->
             </iron-pages>
         </div>
@@ -68,14 +69,14 @@
 
             static get properties() {
                 return {
-                    data:{
-                        type:Array,
+                    data: {
+                        type: Array,
                         statePath: 'commonData.AcademyLevel'
                     },
-                    AffiliationLevel:{
-                        type:Array,
-                        statePath:"commonData.AffiliationLevel",
-                        observer:"setCommonDataAffiliation"
+                    AffiliationLevel: {
+                        type: Array,
+                        statePath: "commonData.AffiliationLevel",
+                        observer: "setCommonDataAffiliation"
                     },
                     level: {
                         type: Array,
@@ -112,54 +113,92 @@
                     },
                     page: {
                         type: String,
-                        value: '4f141cce-1764-4426-a77f-c180d68842fe'
+                        value: '',
+                        observer: 'importForm'
                     }
                 };
             }
-            ready(){
+            ready() {
                 super.ready()
-                // this.getData()
+                this.getData()
                 // Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",this.page,"AcademyType")
                 // Nylon.dispatch("getBasic","AcademyEducation/getAcademyEducationByAcademyLevel/",this.page,"AcademyEducation")
                 // Nylon.dispatch("getBasic","AcademySize/getAcademySizeByAcadenyLevel/",this.page,"AcademySize")
             }
-            getData(){
-                Nylon.dispatch("getBasic","AcademyLevel/get/",null,"AcademyLevel")
-                Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",this.page,"AcademyType")
-                Nylon.dispatch("getBasic","AffiliationLevel/get/",null,"AffiliationLevel")
-                Nylon.dispatch("getBasic","common/get/ManagementStyle",null,"ManagementStyle")
-                Nylon.dispatch("getBasic","AcademyStatus/get/",null,"AcademyStatus")
-                Nylon.dispatch("getBasic","AcademyArea/get/",null,"AcademyArea")
+            getData() {
+                Nylon.dispatch("getBasic", "AcademyLevel/get/", null, "AcademyLevel")
+                Nylon.dispatch("getBasic", "AffiliationLevel/get/", null, "AffiliationLevel")
+                Nylon.dispatch("getBasic", "common/get/ManagementStyle", null, "ManagementStyle")
+                Nylon.dispatch("getBasic", "AcademyStatus/get/", null, "AcademyStatus")
+                Nylon.dispatch("getBasic", "AcademyArea/get/", null, "AcademyArea")
             }
-            getDataAcademy(e){
-                Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",e.target.value,"AcademyType")
-                Nylon.dispatch("getBasic","AcademySize/getAcademySizeByAcadenyLevel/",e.target.value,"AcademySize")
-                Nylon.dispatch("getBasic","AcademyEducation/getAcademyEducationByAcademyLevel/",e.target.value,"AcademyEducation")
+            getDataAcademy(e) {
+                if (e.target.value) {
+                    Nylon.dispatch("getBasic", "AcademyType/getAcademyTypeByAcademyLevel/", e.target.value, "AcademyType")
+                    Nylon.dispatch("getBasic", "AcademySize/getAcademySizeByAcadenyLevel/", e.target.value, "AcademySize")
+                    Nylon.dispatch("getBasic", "AcademyEducation/getAcademyEducationByAcademyLevel/", e.target.value, "AcademyEducation")
+                }
             }
-            setCommonDataAffiliation(val){ 
+            importForm(val) {
+                const importPage = (path) => {
+                    Polymer.importHref(this.resolveUrl(path), null, function () { console.log("import error !!") }, true);
+                }
+                if (val == "6f13af41-350f-4d7a-a645-f0dc9a3d3f5a") {
+                    importPage("./form/basic-education.html")
+                }
+                else if (val == "4f141cce-1764-4426-a77f-c180d68842fe") {
+                    importPage("./form/pre-school-education.html")
+                }
+                else if (val == "78dc05b7-fa81-40c0-b7bf-22d37e9ed2f6") {
+                    importPage("./form/basic-special-education.html")
+                }
+                else if (val == "8955b6cc-8b11-4824-bae3-0befd462f438") {
+                    importPage("./form/non-formal-education.html")
+                }
+                else if (val == "8b63074c-6d17-4ef4-b5bf-b9fe143f5a17") {
+                    importPage("./form/teachnical-education.html")
+                }
+                else if (val == "ae467556-99eb-4bc1-bec6-367e3595c0a9") {
+                    importPage("./form/higher-eductaion.html")
+                }
+
+            }
+            setCommonDataAffiliation(val) {
                 // set ข้อมูลกระทรวง กรม กอง
-                if(val.length){
-                    const setStateName = function(val){
-                        if(val == "กรม") return "department"
-                        else if(val == "กระทรวง") return "ministry"
-                        else if(val == "กอง") return "pile"
+                if (val.length) {
+                    const setStateName = function (val) {
+                        if (val == "กรม") return "department"
+                        else if (val == "กระทรวง") return "ministry"
+                        else if (val == "กอง") return "pile"
                     }
                     for (let index = 0; index < val.length; index++) {
                         var item = val[index]
                         var stateName = setStateName(item.NameLevel)
-                        Nylon.dispatch("getBasic","affiliation/getBylevel/",item.ID,stateName)
+                        Nylon.dispatch("getBasic", "affiliation/getBylevel/", item.ID, stateName)
                     }
                 }
             }
-            submit(){
+            submit() {
                 var obj = {
                     AcademyLevelID: this.page
                 }
-                if(this.page == "6f13af41-350f-4d7a-a645-f0dc9a3d3f5"){
-                    return Object.assign({},obj,this.$.basicForm.submit())
+                if (this.page == "6f13af41-350f-4d7a-a645-f0dc9a3d3f5a") {
+                    return Object.assign({}, obj, this.$.basicForm.submit())
                 }
-                else if(this.page == "4f141cce-1764-4426-a77f-c180d68842fe"){
-                    return Object.assign({},obj,this.$.preScoolForm.submit())
+                else if (this.page == "4f141cce-1764-4426-a77f-c180d68842fe") {
+                    return Object.assign({}, obj, this.$.preScoolForm.submit())
+                }
+                else if (this.page == "78dc05b7-fa81-40c0-b7bf-22d37e9ed2f6") {
+                    return Object.assign({}, obj, this.$.specialForm.submit())
+                }
+                else if (this.page == "8955b6cc-8b11-4824-bae3-0befd462f438") {
+                    return Object.assign({}, obj, this.$.nonFormalForm.submit())
+                }
+                else if (this.page == "8b63074c-6d17-4ef4-b5bf-b9fe143f5a17") {
+                    return Object.assign({}, obj, this.$.teachnicalForm.submit())
+                }
+                else if (this.page == "ae467556-99eb-4bc1-bec6-367e3595c0a9") {
+                    return Object.assign({}, obj, this.$.higherForm.submit())
                 }
             }
         }
