@@ -20,7 +20,7 @@
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table colunm="[[colunm]]" list="[[academy]]"></aqa-table>
+                    <aqa-table colunm="[[colunm]]" list="[[academy]]" on-edit="editData"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -84,6 +84,11 @@
             toPage(){
                 Nylon.page("basic")
             }
+            editData(e){
+                var id = e.detail.ID
+                Nylon.dispatch("selectAcademy",id)
+                Nylon.page("basic?id="+id)
+            }   
         }
 
         window.customElements.define(RouteHome.is, RouteHome);

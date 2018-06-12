@@ -21,7 +21,7 @@
         </style>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                <aqa-combo-box label="ระดับ" items="[[data]]" item-label-path="NameLevel" item-value-path="ID" on-change="getDataAcademy"
+                <aqa-combo-box label="ระดับ" items="[[data]]" item-label-path="NameLevel" item-value-path="ID"
                     value="{{page}}"></aqa-combo-box>
             </div>
         </div>
@@ -66,7 +66,9 @@
             static get is() {
                 return 'basic-form';
             }
-
+            static get observers(){
+                return ['getDataAcademy(page,select.AcademyLevel.ID)']
+            }
             static get properties() {
                 return {
                     data: {
@@ -77,6 +79,10 @@
                         type: Array,
                         statePath: "commonData.AffiliationLevel",
                         observer: "setCommonDataAffiliation"
+                    },
+                    select:{
+                        type: Object,
+                        statePath:"commonData.AcademySelect"
                     },
                     level: {
                         type: Array,
@@ -131,12 +137,16 @@
                 Nylon.dispatch("getBasic", "common/get/ManagementStyle", null, "ManagementStyle")
                 Nylon.dispatch("getBasic", "AcademyStatus/get/", null, "AcademyStatus")
                 Nylon.dispatch("getBasic", "AcademyArea/get/", null, "AcademyArea")
+                Nylon.dispatch("getBasic", "branch/get/",null,"branch")
+                Nylon.dispatch("getBasic", "ResearchType/get/",null,"ResearchType")
+                Nylon.dispatch("getBasic", "AcademyQuality/get/",null,"AcademyQuality")
+                Nylon.dispatch("getBasic", "course/get/",null,"course")
             }
-            getDataAcademy(e) {
-                if (e.target.value) {
-                    Nylon.dispatch("getBasic", "AcademyType/getAcademyTypeByAcademyLevel/", e.target.value, "AcademyType")
-                    Nylon.dispatch("getBasic", "AcademySize/getAcademySizeByAcadenyLevel/", e.target.value, "AcademySize")
-                    Nylon.dispatch("getBasic", "AcademyEducation/getAcademyEducationByAcademyLevel/", e.target.value, "AcademyEducation")
+            getDataAcademy(val) {
+                if (val) {
+                    Nylon.dispatch("getBasic", "AcademyType/getAcademyTypeByAcademyLevel/", val, "AcademyType")
+                    Nylon.dispatch("getBasic", "AcademySize/getAcademySizeByAcadenyLevel/", val, "AcademySize")
+                    Nylon.dispatch("getBasic", "AcademyEducation/getAcademyEducationByAcademyLevel/", val, "AcademyEducation")
                 }
             }
             importForm(val) {
