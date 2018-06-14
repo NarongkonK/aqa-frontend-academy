@@ -14,12 +14,13 @@
                 },
                 form: {
                     type: Object,
-                    value: {}
+                    statePath: "commonData.AcademySelect",
+                    observer: "bindDatatoForm"
                 },
                 selectAffilicationLevel: {
                     type: String,
                     value: "",
-                    observer: "setAffilicationID"
+                    // observer: "setAffilicationID"
                 },
                 AcademyType: {
                     type: Array,
@@ -65,11 +66,18 @@
                     type: Array,
                     statePath: 'commonData.AffiliationLevel'
                 },
-                AcademyArea:{
+                AcademyArea: {
                     type: Array,
                     statePath: 'commonData.AcademyArea'
                 }
             };
+        }
+        bindDatatoForm(val) {
+            if (val.ID) {
+                this.selectAffilicationLevel = val.Affiliation.AffiliationLevelID
+                this.getGroup(val.AcademyTypeID)
+                this.count = val.AmountStudent
+            }
         }
         setAffilicationID(e) {
             if (e.target)
@@ -80,6 +88,15 @@
         }
         getGroup(val) {
             Nylon.dispatch("getBasic", "AcademyGroup/getAcademyGroupByAcademyTypeID/", val, "AcademyGroup")
+        }
+        ParseValueForFormGroup(val, key) {
+            if (val) {
+                return val.map((item) => {
+                    return item[key]
+                })
+            }
+            else return []
+
         }
         mathStudent(val) {
             var data = 0

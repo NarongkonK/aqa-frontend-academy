@@ -17,10 +17,10 @@
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <aqa-button type="primary" icon="add" on-click="toPage">เพิ่ม</aqa-button>
-                            <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
+                            <!-- <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button> -->
                         </div>
                     </div>
-                    <aqa-table colunm="[[colunm]]" list="[[academy]]" on-edit="editData"></aqa-table>
+                    <aqa-table colunm="[[colunm]]" list="[[academy]]" on-edit="editData" on-delete="deleteData"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -36,9 +36,9 @@
 
             static get properties() {
                 return {
-                    academy:{
-                        type:Array,
-                        statePath:'commonData.Academy'
+                    academy: {
+                        type: Array,
+                        statePath: 'commonData.Academy'
                     },
                     colunm: {
                         type: Array,
@@ -63,13 +63,13 @@
                             },
                             {
                                 label: 'อำเภอ / เขต',
-                                path: 'aumpher',
+                                path: 'AcademyAddress.Amphure.NameTh',
                                 width: "200px",
                                 flex: "0"
                             },
                             {
                                 label: 'จังหวัด',
-                                path: 'district',
+                                path: 'AcademyAddress.Province.NameTh',
                                 width: "200px",
                                 flex: "0"
                             }
@@ -77,18 +77,36 @@
                     }
                 };
             }
-            ready(){
+            ready() {
                 super.ready()
                 Nylon.dispatch("getAcademy")
             }
-            toPage(){
+            clearData(){
+                sessionStorage.removeItem("academy_id");
+                sessionStorage.removeItem("academy_name");
+                Nylon.dispatch("academyClear")
+                Nylon.dispatch("addressClear")
+            }
+            toPage() {
+                this.clearData()
                 Nylon.page("basic")
             }
-            editData(e){
-                var id = e.detail.ID
-                Nylon.dispatch("selectAcademy",id)
-                Nylon.page("basic?id="+id)
-            }   
+            editData(e) {
+                var id = e.detail.ID;
+                var name = e.detail.AcademyNameTh;
+                sessionStorage.setItem("academy_id", id);
+                sessionStorage.setItem("academy_name",name)
+                Nylon.dispatch("selectAcademy", id)
+                Nylon.dispatch("selectAddress", id)
+                Nylon.page("basic")
+            }
+            deleteData(e) {
+                Nylon.swal({ nylon: 'confirm' ,title:'อยากลบข้อมูลใช่ไหม ?',text:" " }).then((res) => {
+                    if(res){
+                        Nylon.dispatch("deleteAcademy",{ID:[e.detail.ID]})
+                    }
+                })
+            }
         }
 
         window.customElements.define(RouteHome.is, RouteHome);

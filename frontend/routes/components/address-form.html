@@ -2,6 +2,10 @@
 <link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
 <link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
 <link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../bower_components/nylon-form/nylon-form.html">
+<link rel="import" href="../../../redux-mixin.html">
+<link rel="import" href="../../redux/common-redux.html">
+
 <dom-module id="address-form">
     <template>
         <style include="aqa-styles">
@@ -9,58 +13,68 @@
                 margin-bottom: 1rem;
             }
         </style>
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="เลขที่"></aqa-input>
+        <nylon-form id="myForm">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="เลขที่" form-path="Number" value="[[form.Number]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="หมู่ที่" form-path="VillageNo" value="[[form.VillageNo]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <aqa-input label="หมู่บ้าน" form-path="Village" value="[[form.Village]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <aqa-input label="อาคาร" form-path="Building" value="[[form.Building]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="ซอย" form-path="Lane" value="[[form.Lane]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <aqa-input label="ถนน" form-path="Road" value="[[form.Road]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="รหัสไปรษณีย์" form-path="Zipcode" value="{{zipcode}}"></aqa-input>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="หมู่ที่"></aqa-input>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <aqa-combo-box label="ภาค" items="[[geography]]" item-label-path="Name" item-value-path="ID" form-path="GeographyID" value="[[form.GeographyID]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <aqa-combo-box label="ตำบล / แขวง" items="[[district]]" item-label-path="NameTh" item-value-path="Code" form-path="DistrictCode"
+                        value="[[form.DistrictCode]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <aqa-combo-box label="อำเภอ / เขต" items="[[amphure]]" item-label-path="NameTh" item-value-path="Code" form-path="AmphureCode"
+                        value="[[form.AmphureCode]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <aqa-combo-box label="จังหวัด" items="[[province]]" item-label-path="NameTh" item-value-path="Code" form-path="ProvinceCode"
+                        value="[[form.ProvinceCode]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                    <aqa-input label="โทรสาร" form-path="Fax" value="[[form.Fax]]"></aqa-input>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="หมู่บ้าน"></aqa-input>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]"></aqa-input>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <aqa-input label="เว็บไซด์" form-path="Website" value="[[form.Website]]"></aqa-input>
+                </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="อาคาร"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="ซอย"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="ถนน"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="รหัสไปรษณีย์"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-combo-box label="ภาค"></aqa-combo-box>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-combo-box label="ตำบล / แขวง"></aqa-combo-box>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-combo-box label="อำเภอ / เขต"></aqa-combo-box>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-combo-box label="จังหวัด"></aqa-combo-box>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="โทรศัพท์"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="โทรสาร"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="อีเมล"></aqa-input>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-                <aqa-input label="เว็บไซด์"></aqa-input>
-            </div>
-        </div>
+        </nylon-form>
     </template>
 
     <script>
 
-        class AddressForm extends Polymer.Element {
+        class AddressForm extends ReduxMixin(Polymer.Element) {
 
             static get is() {
                 return 'address-form';
@@ -68,8 +82,55 @@
 
             static get properties() {
                 return {
-
+                    amphure: {
+                        type: Array,
+                        statePath: 'commonData.Amphure'
+                    },
+                    district: {
+                        type: Array,
+                        statePath: 'commonData.District'
+                    },
+                    geography: {
+                        type: Array,
+                        statePath: 'commonData.Geography'
+                    },
+                    province: {
+                        type: Array,
+                        statePath: 'commonData.Province'
+                    },
+                    form: {
+                        type: Object,
+                        statePath: 'commonData.AddressSelect',
+                        observer: 'setData'
+                    },
+                    zipcode: {
+                        type: String,
+                        value: "",
+                        observer: "getAddress"
+                    }
                 };
+            }
+            ready() {
+                super.ready()
+                var id = sessionStorage.getItem("academy_id")
+                if (id) Nylon.dispatch("selectAddress", id)
+                // Nylon.dispatch("getAddressByZipcode", "96120")
+            }
+            setData(val) {
+                if (val.Zipcode)
+                    this.zipcode = val.Zipcode
+                // Nylon.dispatch("getAddressByZipcode",val.Zipcode)
+            }
+            getAddress(val) {
+                var zipcode = val
+                this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
+                    Polymer.Async.timeOut.after(500),
+                    () => {
+                        if (zipcode) Nylon.dispatch("getAddressByZipcode", zipcode)
+                    })
+            }
+            submit() {
+                return this.$.myForm.submit()
             }
         }
 

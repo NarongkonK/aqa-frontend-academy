@@ -3,6 +3,8 @@
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="./components/address-form.html">
+<link rel="import" href="../../redux-mixin.html">
+<link rel="import" href="../redux/common-redux.html">
 <dom-module id="route-address" topic="ข้อมูลที่อยู่สถานศึกษา" parent="route-home">
     <template>
         <style include="aqa-styles">
@@ -10,16 +12,16 @@
         <div class="page-container">
             <aqa-panel>
                 <app-toolbar slot="header">
-                    <div main-title>ที่อยู่สถานศึกษา</div>
+                    <div main-title>ที่อยู่สถานศึกษา : [[AcademyName]]</div>
                 </app-toolbar>
                 <div slot="content">
-                    <address-form></address-form>
+                    <address-form id="addressForm"></address-form>
                 </div>
             </aqa-panel>
             <div class="row-space"></div>
             <div class="row center-xs">
                 <div class="col-xs-12">
-                    <aqa-button type="success">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
                     <aqa-button type="danger">ยกเลิก</aqa-button>
                 </div>
             </div>
@@ -28,7 +30,7 @@
 
     <script>
 
-        class RouteAddress extends Polymer.Element {
+        class RouteAddress extends ReduxMixin(Polymer.Element) {
 
             static get is() {
                 return 'route-address';
@@ -36,9 +38,47 @@
 
             static get properties() {
                 return {
-
+                    AcademyName:{
+                        type:String,
+                        value:{}
+                    }
                 };
             }
+            nylonPagesActive(){
+                var id = sessionStorage.getItem("academy_id");
+                if(!id){
+                    Nylon.swal({ nylon: 'error', title: 'คุณยังไม่ได้เลือกสถานศึกษา', text: 'กรุณาเลือกสถานศึกษาก่อน !!' })
+                    .then((res)=>{
+                        Nylon.page("home")
+                    })
+                }
+                else {
+                    this.AcademyName = sessionStorage.getItem("academy_name")
+                }
+            }
+            getForm(){
+                var id = sessionStorage.getItem("academy_id");
+                if(id){
+                    var data = this.$.addressForm.submit()
+                    data.ID = id;
+                    console.log(data)
+                    Nylon.dispatch("insertAddress", data)
+                }
+                
+            }
+            // changePage(val){
+            //     if(val.ID){
+
+            //     }
+            //         // Nylon.page("address?id="+val.ID)
+            //     else {
+            //         Nylon.swal({ nylon: 'error', title: 'คุณยังไม่ได้เลือกสถานศึกษา', text: 'กรุณาเลือกสถานศึกษาก่อน !!' })
+            //         .then((res)=>{
+            //             // console.log("ss")
+            //             Nylon.page("home")
+            //         })
+            //     }
+            // }
         }
 
         window.customElements.define(RouteAddress.is, RouteAddress);

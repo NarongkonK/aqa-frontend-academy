@@ -67,7 +67,7 @@
                 return 'basic-form';
             }
             static get observers(){
-                return ['getDataAcademy(page,select.AcademyLevel.ID)']
+                return ['setPage(select.AcademyLevel.ID)','getDataAcademy(page)']
             }
             static get properties() {
                 return {
@@ -130,6 +130,11 @@
                 // Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",this.page,"AcademyType")
                 // Nylon.dispatch("getBasic","AcademyEducation/getAcademyEducationByAcademyLevel/",this.page,"AcademyEducation")
                 // Nylon.dispatch("getBasic","AcademySize/getAcademySizeByAcadenyLevel/",this.page,"AcademySize")
+            }
+            setPage(val){
+                if(val){
+                    this.page = val
+                }
             }
             getData() {
                 Nylon.dispatch("getBasic", "AcademyLevel/get/", null, "AcademyLevel")
