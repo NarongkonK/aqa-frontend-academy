@@ -1,7 +1,7 @@
 <script>
     Nylon.addReducer('commonData', function (state, action) {
         state = state || {
-            Academy: [],
+            Academy: [], // รายชื่อสถานศึกษา
             AcademyLevel: [],// ระดับสถานศึกษา
             AcademyType: [],// ประเภทสถานศึกษา
             ministry: [], // กระทรวง
@@ -19,12 +19,15 @@
             AcademyArea: [], // เขตพื้นที่การศึกษา
             ResearchType: [], // ลักษณะเด่นของมหาวิทยาลัย = ประเภทงานวิจัย
             course: [], //หลักสูตร
+            prefix: [], //คำนำหน้าชื่อ
             AcademySelect: {},
             AddressSelect: {},
+            CoordinatorSelect: {},
             Geography: [], // ภาค
             Province: [], // จังหวัด
             Amphure: [], // อำเภอ
-            District: [] // ตำบล
+            District: [], // ตำบล
+            Coordinator:[], //ผู้ประสานงาน
         }
 
         switch (action.type) {
@@ -38,10 +41,16 @@
             //     return Object.assign({}, state, { address: action.payload })
             case 'COMMON_SELECT':
                 return Object.assign({}, state, { select: action.payload })
+            case 'COORDINATOR_SELECT':
+                return Object.assign({}, state, { CoordinatorSelect: action.payload })
             case 'ACADEMY_CLEAR':
                 return Object.assign({}, state, { AcademySelect: action.payload })
             case 'ADDRESS_CLEAR':
                 return Object.assign({}, state, { AddressSelect: action.payload })
+            case 'COORDINATOR_CLEAR':
+                return Object.assign({}, state, { CoordinatorSelect: action.payload })
+            case 'COORDINATOR_GET':
+                return Object.assign({}, state, { Coordinator: action.payload })
             case 'COMMON_GET':
                 return Object.assign({}, state, action.payload)
             default:
@@ -66,6 +75,11 @@
                 dispatch({ type: 'ADDRESS_CLEAR', payload: {} })
             }
         },
+        coordinatorClear: function(){
+            return dispatch => {
+                dispatch({ type: 'COORDINATOR_CLEAR', payload: {}})
+            }
+        },  
         getAddressByZipcode: function (val) {
             return dispatch => {
                 axios.get(Nylon.apiURL.basic + '/basic/address/get/DistrictByZipCode/' + val)
@@ -81,7 +95,7 @@
                     });
             }
         },
-        getBasic: function (path, params, table, label) {
+        getBasic: function (path, params, table) {
             return dispatch => {
                 var url = path;
                 if (params) {
@@ -90,18 +104,7 @@
                 axios.get(Nylon.apiURL.basic + '/basic/' + url)
                     .then((response) => {
                         var obj = {}
-                        if (label) {
-                            var newData = response.data.map((item) => {
-                                return {
-                                    value: item.ID,
-                                    label: item[label]
-                                }
-                            })
-                            obj[table] = newData
-                        }
-                        else {
-                            obj[table] = response.data
-                        }
+                        obj[table] = response.data
                         dispatch({ type: 'COMMON_GET', payload: obj })
                     })
                     .catch((error) => {
@@ -211,6 +214,85 @@
                         console.log('error');
                         console.log(error);
                     });
+            }
+        },
+        getCoordinator:function(id){
+            return dispatch => {
+                axios.get(Nylon.apiURL.academy+"/academy/AcademyCoordinator/GetByAcademyID/"+id)
+                .then((response)=>{
+                    console.log('success!!');
+                    console.log(response.data);
+                    dispatch({ type: 'COORDINATOR_GET', payload: response.data })
+                })
+                .catch((error)=>{
+                    console.log('error');
+                    console.log(error);
+                });
+            }
+        },
+        selectCoordinator:function(val){
+            return dispatch => {
+                axios.get(Nylon.apiURL.academy+'/academy/AcademyCoordinator/select/'+val)
+                .then((response)=>{
+                    console.log('success!!');
+                    console.log(response.data);
+                    dispatch({ type: 'COORDINATOR_SELECT', payload: response.data })
+                })
+                .catch((error)=>{
+                    console.log('error');
+                    console.log(error);
+                });
+            }
+        },
+        insertCoordinator: function(val){
+            return dispatch => {
+                axios.post(Nylon.apiURL.academy+"/academy/AcademyCoordinator/",val)
+                .then((response)=>{
+                    Nylon.swal({ nylon: 'success', title: 'บันทึกสำเร็จ', text: 'ระบบได้เพิ่มผู้ประสานงานแล้ว' })
+                    console.log('success!!');
+                    console.log(response.data);
+                    Nylon.dispatch("coordinatorClear")
+                    Nylon.dispatch("getCoordinator",val.AcademyDataBasicID)
+                })
+                .catch((error)=>{
+                    Nylon.swal({ nylon: 'error', title: 'เกิดข้อผิดพลาด', text: 'กรุณาติดต่อผู้ดูแลระบบ' })
+                    console.log('error');
+                    console.log(error);
+                });
+            }
+        },
+        updateCoordinator: function(val){
+            return dispatch => {
+                axios.put(Nylon.apiURL.academy+"/academy/AcademyCoordinator/",val)
+                .then((response)=>{
+                    Nylon.swal({ nylon: 'success', title: 'บันทึกสำเร็จ', text: 'ระบบได้แก้ไขผู้ประสานงานแล้ว' })
+                    console.log('success!!');
+                    console.log(response.data);
+                    Nylon.dialog.close()
+                    Nylon.dispatch("coordinatorClear")
+                    Nylon.dispatch("getCoordinator",val.AcademyDataBasicID)
+                })
+                .catch((error)=>{
+                    Nylon.swal({ nylon: 'error', title: 'เกิดข้อผิดพลาด', text: 'กรุณาติดต่อผู้ดูแลระบบ' })
+                    console.log('error');
+                    console.log(error);
+                });
+            }
+        },
+        deleteCoordinator:function(val,id){
+            return dispatch => {
+                axios.put(Nylon.apiURL.academy+'/academy/AcademyCoordinator/delete',val)
+                .then((response)=>{
+                    console.log('success!!');
+                    console.log(response.data);
+                    Nylon.swal({ nylon: 'success', title: 'บันทึกสำเร็จ', text: 'ระบบได้ลบผู้ประสานงานแล้ว' })
+                    Nylon.dispatch("getCoordinator",id)
+                })
+                .catch((error)=>{
+                    console.log('error');
+                    console.log(error);
+                    Nylon.swal({ nylon: 'error', title: 'เกิดข้อผิดพลาด', text: 'กรุณาติดต่อผู้ดูแลระบบ' })
+                });
             }
         }
     })

@@ -98,6 +98,7 @@
                 sessionStorage.setItem("academy_name",name)
                 Nylon.dispatch("selectAcademy", id)
                 Nylon.dispatch("selectAddress", id)
+                Nylon.dispatch("getCoordinator",id)
                 Nylon.page("basic")
             }
             deleteData(e) {

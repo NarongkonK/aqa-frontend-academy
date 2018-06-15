@@ -4,21 +4,26 @@
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
-<dom-module id="route-coordinator" topic="ผู้ประสานงาน" parent="route-home">
+<link rel="import" href="../redux/common-redux.html">
+<link rel="import" href="../../redux-mixin.html">
+<dom-module id="route-coordinator" topic="ผู้ประสานงาน / ผู้บริหาร" parent="route-home">
     <template>
         <style include="aqa-styles">
         </style>
         <div class="page-container">
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
+                <app-toolbar slot="header">
+                    <div main-title>ผู้ประสานงาน / ผู้บริหาร : [[AcademyName]]</div>
+                </app-toolbar>
                 <div slot="content">
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <aqa-button type="primary" icon="add" on-click="openDailog">เพิ่ม</aqa-button>
-                            <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
+                            <!-- <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button> -->
                         </div>
                     </div>
-                    <aqa-table colunm="[[collumn]]" list="[1]"></aqa-table>
+                    <aqa-table colunm="[[collumn]]" list="[[coordinator]]" on-edit="editData" on-delete="deleteData"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -26,7 +31,7 @@
 
     <script>
 
-        class RouteCoordinator extends Polymer.Element {
+        class RouteCoordinator extends ReduxMixin(Polymer.Element) {
 
             static get is() {
                 return 'route-coordinator';
@@ -34,24 +39,34 @@
 
             static get properties() {
                 return {
+                    coordinator:{
+                        type:Array,
+                        statePath: 'commonData.Coordinator'
+                    },
                     collumn: {
                         type: Array,
                         value: [
                             {
-                                label: 'ชื่อ - สกุล',
-                                path: 'name',
+                                label: 'ชื่อ',
+                                path: 'FnameCoordinator',
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: 'สกุล',
+                                path: 'LnameCoordinator',
                                 width: "200px",
                                 flex: "1"
                             },
                             {
                                 label: 'ตำแหน่ง',
-                                path: 'position',
+                                path: 'PositionAcademic',
                                 width: "200px",
                                 flex: "1"
                             },
                             {
                                 label: 'หมายเลขที่ติดต่อได้สะดวก',
-                                path: 'phone',
+                                path: 'Telephone',
                                 width: "200px",
                                 flex: "0"
                             }
@@ -59,7 +74,39 @@
                     }
                 };
             }
-            openDailog(){
+            ready(){
+                super.ready()
+                var id = sessionStorage.getItem("academy_id"); 
+                if(id) Nylon.dispatch("getCoordinator",id)
+            }
+            nylonPagesActive(){
+                var id = sessionStorage.getItem("academy_id");
+                if(!id){
+                    Nylon.swal({ nylon: 'error', title: 'คุณยังไม่ได้เลือกสถานศึกษา', text: 'กรุณาเลือกสถานศึกษาก่อน !!' })
+                    .then((res)=>{
+                        Nylon.page("home")
+                    })
+                }
+                else {
+                    this.AcademyName = sessionStorage.getItem("academy_name")
+                }
+            }
+            editData(e){
+                console.log(e.detail.ID)
+                Nylon.dispatch("selectCoordinator",e.detail.ID)
+                Nylon.dialog.open('/coordinator')
+            }
+            deleteData(e){
+                var id = sessionStorage.getItem("academy_id");
+                Nylon.swal({nylon:'confirm',title:'ต้องการลบข้อมูลใช่ไหม ?',text:' '})
+                .then((res)=>{
+                    if(res){
+                        Nylon.dispatch("deleteCoordinator",{ID:[e.detail.ID]},id)
+                    }
+                })
+               
+            }
+            openDailog() {
                 Nylon.dialog.open('/coordinator')
             }
         }
