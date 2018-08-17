@@ -20,10 +20,10 @@
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <aqa-button type="primary" icon="add" on-click="openDailog">เพิ่ม</aqa-button>
-                            <!-- <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button> -->
+                            <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table colunm="[[collumn]]" list="[[coordinator]]" on-edit="editData" on-delete="deleteData"></aqa-table>
+                    <aqa-table checkbox colunm="[[collumn]]" list="[[coordinator]]" on-edit="editData" on-delete="deleteData"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -65,7 +65,7 @@
                                 flex: "1"
                             },
                             {
-                                label: 'หมายเลขที่ติดต่อได้สะดวก',
+                                label: 'เบอร์โทร',
                                 path: 'Telephone',
                                 width: "200px",
                                 flex: "0"

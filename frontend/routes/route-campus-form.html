@@ -1,0 +1,98 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../bower_components/nylon-form/nylon-form.html">
+<link rel="import" href="../../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-form/aqa-form.html">
+<link rel="import" href="./components/address-campus-form.html">
+<link rel="import" href="../../../redux-mixin.html">
+<link rel="import" href="../../redux/common-redux.html">
+
+<dom-module id="route-campus-form" topic="จัดการ" parent="route-campus" path="campus/form">
+    <template>
+        <style include="aqa-styles">
+            .section {
+                margin-bottom: 0.5rem;
+            }
+
+            .title {
+                font-size: 1rem;
+                font-weight: bold;
+            }
+        </style>
+        <div class="page-container">
+            <div class="section">
+                <aqa-panel>
+                    <div slot="content">
+                        <div class="row center-xs">
+                            <div class="col-xs-12 col-sm-2 col-md-2">
+                                <aqa-input label="รหัสสถานศึกษาหลัก"></aqa-input>
+                            </div>
+                            <div class="col-xs-12 col-sm-9 col-md-6">
+                                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+                            </div>
+                        </div>
+
+                        <div class="row center-xs">
+                            <div class="col-xs-12 col-sm-2 col-md-2">
+                                <aqa-input label="รหัสสวิทยาเขต"></aqa-input>
+                            </div>
+                            <div class="col-xs-12 col-sm-9 col-md-6">
+                                <aqa-input label="ชื่อชื่อวิทยาเขต"></aqa-input>
+                            </div>
+                        </div>
+
+                    </div>
+                </aqa-panel>
+            </div>
+
+            <div class="section">
+                <aqa-panel>
+                    <app-toolbar slot="header">
+                        <div main-title>สถานศึกษา</div>
+                    </app-toolbar>
+                    <div slot="content">
+                        <address-campus-form></address-campus-form>
+
+                        <div class="row center-xs" style="margin-top:1rem;">
+                            <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <aqa-button type="danger">ยกเลิก</aqa-button>
+                        </div>
+                    </div>
+                </aqa-panel>
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </template>
+
+    <script>
+
+        class RouteCampusForm extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'route-campus-form';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+
+
+        }
+
+        window.customElements.define(RouteCampusForm.is, RouteCampusForm);
+    </script>
+</dom-module>

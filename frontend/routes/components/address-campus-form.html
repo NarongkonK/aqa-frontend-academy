@@ -6,7 +6,7 @@
 <link rel="import" href="../../../redux-mixin.html">
 <link rel="import" href="../../redux/common-redux.html">
 
-<dom-module id="address-form">
+<dom-module id="address-campus-form">
     <template>
         <style include="aqa-styles">
             .row>div {
@@ -75,10 +75,10 @@
 
     <script>
 
-        class AddressForm extends ReduxMixin(Polymer.Element) {
+        class AddressCampusForm extends ReduxMixin(Polymer.Element) {
 
             static get is() {
-                return 'address-form';
+                return 'address-campus-form';
             }
 
             static get properties() {
@@ -111,12 +111,12 @@
                     }
                 };
             }
-            ready() {
-                super.ready()
-                var id = sessionStorage.getItem("academy_id")
-                if (id) Nylon.dispatch("selectAddress", id)
-                // Nylon.dispatch("getAddressByZipcode", "96120")
-            }
+            // ready() {
+            //     super.ready()
+            //     var id = sessionStorage.getItem("academy_id")
+            //     if (id) Nylon.dispatch("selectAddress", id)
+            //     // Nylon.dispatch("getAddressByZipcode", "96120")
+            // }
             setData(val) {
                 if (val.Zipcode)
                     this.zipcode = val.Zipcode
@@ -130,11 +130,11 @@
                         if (zipcode) Nylon.dispatch("getAddressByZipcode", zipcode)
                     })
             }
-            submit() {
-                return this.$.myForm.submit()
-            }
+            // submit() {
+            //     return this.$.myForm.submit()
+            // }
         }
 
-        window.customElements.define(AddressForm.is, AddressForm);
+        window.customElements.define(AddressCampusForm.is, AddressCampusForm);
     </script>
 </dom-module>

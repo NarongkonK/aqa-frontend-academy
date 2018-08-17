@@ -20,7 +20,7 @@
                             <!-- <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button> -->
                         </div>
                     </div>
-                    <aqa-table colunm="[[colunm]]" list="[[academy]]" on-edit="editData" on-delete="deleteData"></aqa-table>
+                    <aqa-table colunm="[[colunm]]" list="[[academy]]" tools="[[tools]]" on-edit="editData" on-delete="deleteData"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -55,12 +55,12 @@
                                 width: "500px",
                                 flex: "1"
                             },
-                            {
-                                label: 'ระดับการศึกษา',
-                                path: 'AcademyLevel.NameLevel',
-                                width: "250px",
-                                flex: "0"
-                            },
+                            // {
+                            //     label: 'ระดับการศึกษา',
+                            //     path: 'AcademyLevel.NameLevel',
+                            //     width: "250px",
+                            //     flex: "0"
+                            // },
                             {
                                 label: 'อำเภอ / เขต',
                                 path: 'AcademyAddress.Amphure.NameTh',
@@ -74,7 +74,28 @@
                                 flex: "0"
                             }
                         ]
+                    },
+                    tools: {
+                        type: Array,
+                        value: [
+                            // {
+                            //     label:'ดูรายละเอียด',
+                            //     event: 'detail',
+                            //     icon: 'icons:visibility'
+                            // },
+                            {
+                                label: 'แก้ไขข้อมูล',
+                                event: 'edit',
+                                icon: 'create'
+                            },
+                            {
+                                label: 'ลบ',
+                                event: 'delete',
+                                icon: 'aqa-tool:bin'
+                            },
+                        ]
                     }
+
                 };
             }
             ready() {

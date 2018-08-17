@@ -3,24 +3,56 @@
 <link rel="import" href="../../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../components/aqa-table/aqa-table.html">
+<link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../components/aqa-advance-search/aqa-advance-search.html">
-<dom-module id="route-cds" topic="CDS" parent="route-home">
+<dom-module id="route-cds" topic="CDS สถานศึกษา" parent="route-home">
     <template>
         <style include="aqa-styles">
+            .section {
+                margin-bottom: 1rem;
+            }
         </style>
         <div class="page-container">
-            <aqa-advance-search></aqa-advance-search>
-            <aqa-panel>
-                <div slot="content">
-                    <div class="row row-space">
+            <!-- <aqa-advance-search></aqa-advance-search> -->
+            <div class="section">
+                <aqa-panel>
+                    <app-toolbar slot="header">
+                        <div main-title>แบบฟอร์ม CDS</div>
+                    </app-toolbar>
+                    <div slot="content">
+                        <!-- <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <aqa-button type="primary" icon="add" on-click="openDailog">เพิ่ม</aqa-button>
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
+                    </div> -->
+
+                        <aqa-table colunm="[[collumn]]" list="[1]" tools="[[tools]]"></aqa-table>
+                        <div>จำนวน x รายการ</div>
                     </div>
-                    <aqa-table colunm="[[collumn]]" list="[1]"></aqa-table>
-                </div>
-            </aqa-panel>
+                </aqa-panel>
+            </div>
+
+            <div class="section">
+                <aqa-panel>
+                    <div slot="content">
+                        <div class="row row-space">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
+                                <aqa-button type="primary" on-click="">อัพโหลด</aqa-button>
+
+                            </div>
+                        </div>
+                        <aqa-table colunm="[[collumn2]]" list="[1]" tools="[[tools]]"></aqa-table>
+                        <div>จำนวน x รายการ</div>
+                        <div class="row row-space center-xs">
+                                <aqa-button type="success" on-click="">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <aqa-button type="primary">อัพโหลด</aqa-button>
+                            </div>
+                    </div>
+                </aqa-panel>
+            </div>
+
+
         </div>
     </template>
 
@@ -38,22 +70,43 @@
                         type: Array,
                         value: [
                             {
-                                label: 'ปีการศึกษา',
+                                label: 'ชื่อไฟล์',
+                                path: 'year',
+                                width: "200px",
+                                flex: "1"
+                            }
+                        ]
+                    },
+                    collumn2: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ชื่อไฟล์',
                                 path: 'year',
                                 width: "200px",
                                 flex: "1"
                             },
                             {
-                                label: 'ชื่อไฟล์',
-                                path: 'filename',
+                                label: 'วันที่อัพโหลด',
+                                path: 'year',
                                 width: "200px",
-                                flex: "1"
+                                flex: "0"
+                            }
+                        ]
+                    },
+                    tools: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'download',
+                                event: 'download',
+                                icon: 'get-app'
                             }
                         ]
                     }
                 };
             }
-            openDailog(){
+            openDailog() {
                 Nylon.dialog.open('/cds')
             }
         }

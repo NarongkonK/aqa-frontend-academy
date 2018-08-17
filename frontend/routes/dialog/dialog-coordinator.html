@@ -12,13 +12,13 @@
         <div class="modal-body">
             <nylon-form id="myForm">
                 <aqa-combo-box label="ประเภท" items="[[Kind]]" form-path="Kind" value="[[form.Kind]]"></aqa-combo-box>
-                <aqa-input label="ตำแหน่งภายในองค์กร" form-path="PositionOrganization" value="[[form.PositionOrganization]]"></aqa-input>
-                <aqa-input label="ตำแหน่งทางวิชาการ" form-path="PositionAcademic" value="[[form.PositionAcademic]]"></aqa-input>
-                <aqa-input label="ยศ/ฐานันดรศักดิ์" form-path="Rank" value="[[form.Rank]]"></aqa-input>
-                <aqa-combo-box label="คำนำหน้าชื่อ" items="[[prefix]]" item-label-path="NameTh" item-value-path="ID" form-path="PrefixID" value="[[form.PrefixID]]"></aqa-combo-box>
+                <!-- <aqa-input label="ตำแหน่งภายในองค์กร" form-path="PositionOrganization" value="[[form.PositionOrganization]]"></aqa-input> -->
+                <!-- <aqa-input label="ตำแหน่งทางวิชาการ" form-path="PositionAcademic" value="[[form.PositionAcademic]]"></aqa-input> -->
+                <aqa-input label="คำนำหน้าชื่อ"></aqa-input>
+                <!-- <aqa-combo-box label="คำนำหน้าชื่อ" items="[[prefix]]" item-label-path="NameTh" item-value-path="ID" form-path="PrefixID" value="[[form.PrefixID]]"></aqa-combo-box> -->
                 <aqa-input label="ชื่อ" form-path="FnameCoordinator" value="[[form.FnameCoordinator]]"></aqa-input>
                 <aqa-input label="สกุล" form-path="LnameCoordinator" value="[[form.LnameCoordinator]]"></aqa-input>
-                <aqa-input label="หมายเลขที่ติดต่อได้สะดวก" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
+                <aqa-input label="เบอร์โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
                 <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]"></aqa-input>
             </nylon-form>
         </div>
@@ -38,10 +38,10 @@
 
             static get properties() {
                 return {
-                    prefix:{
-                        type:Array,
-                        statePath:'commonData.prefix'
-                    },
+                    // prefix:{
+                    //     type:Array,
+                    //     statePath:'commonData.prefix'
+                    // },
                     form:{
                         type:Object,
                         statePath:'commonData.CoordinatorSelect'
@@ -63,7 +63,7 @@
             }
             ready(){
                 super.ready()
-                Nylon.dispatch("getBasic", "common/get/", "prefix", "prefix")
+                // Nylon.dispatch("getBasic", "common/get/", "prefix", "prefix")
             }
             getForm(){
                 var data = this.$.myForm.submit()

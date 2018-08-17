@@ -1,0 +1,95 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+<dom-module id="route-campus" topic="วิทยาเขต" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="page-container">
+            <aqa-advance-search></aqa-advance-search>
+            <aqa-panel>
+                <div slot="content">
+                    <div class="row row-space">
+                        <div class="col-xs-12 col-sm-6 col-md-4">
+                            <aqa-button type="primary" icon="add" on-click="_openPage">เพิ่ม</aqa-button>
+                            <aqa-button type="danger" icon="remove" on-click="">ลบ</aqa-button>
+                        </div>
+                    </div>
+                    <aqa-table tools="[[tools]]" colunm="[[collumn]]" list="[1]"></aqa-table>
+                </div>
+            </aqa-panel>
+        </div>
+    </template>
+
+    <script>
+
+        class RouteCampus extends Polymer.Element {
+
+            static get is() {
+                return 'route-campus';
+            }
+
+            static get properties() {
+                return {
+                    collumn: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'รหัสวิทยาเขต',
+                                path: 'name',
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: 'ชื่อวิทยาเขต',
+                                path: 'position',
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: 'เขต/อำเภอ',
+                                path: 'name',
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: 'จังหวัด',
+                                path: 'name',
+                                width: "200px",
+                                flex: "1"
+                            }
+                        ]
+                    },
+                    tools: {
+                        type: Array,
+                        value: [
+                            // {
+                            //     label:'ดูรายละเอียด',
+                            //     event: 'detail',
+                            //     icon: 'icons:visibility'
+                            // },
+                            {
+                                label: 'แก้ไขข้อมูล',
+                                event: 'edit',
+                                icon: 'create'
+                            }
+                            // {
+                            //     label: 'ลบ',
+                            //     event: 'delete',
+                            //     icon: 'aqa-tool:bin'
+                            // },
+                        ]
+                    }
+                };
+            }
+            _openPage(){
+                Nylon.page('campus/form')
+            }
+        }
+
+        window.customElements.define(RouteCampus.is, RouteCampus);
+    </script>
+</dom-module>
