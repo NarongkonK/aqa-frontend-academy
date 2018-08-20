@@ -1,0 +1,63 @@
+<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../../bower_components/aqa-button/aqa-button.html">
+
+<dom-module id="dialog-merge" topic="จัดการข้อมูล">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="modal-body">
+            <div class="row center-xs">
+                <div class="col-xs-6 start-xs">
+                    <aqa-combo-box label="ความสัมพันธ์" items="[[relation]]"></aqa-combo-box>
+                </div>
+            </div>
+
+            <!-- <div class="row center-xs" style="margin-top:1rem;">
+                <aqa-button type="success">บันทึก</aqa-button>
+            </div> -->
+
+
+
+        </div>
+        <div class="modal-footer">
+            <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
+          
+        </div>
+
+    </template>
+
+    <script>
+        class DialogMerge extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'dialog-merge';
+            }
+
+            static get properties() {
+                return {
+                    relation: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "ยุบรวม",
+                            },
+                            {
+                                label: "โรงเรียนสาขา"
+                            },
+                            {
+                                label: "เรียนร่วมกับสถานศึกษาอื่น"
+                            }
+                        ]
+                    }
+                };
+            }
+            closeDialog() {
+                Nylon.dialog.close()
+            }
+        }
+
+        window.customElements.define(DialogMerge.is, DialogMerge);
+    </script>
+</dom-module>

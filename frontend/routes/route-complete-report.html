@@ -11,7 +11,7 @@
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
                 <div slot="content">
-                    <aqa-table colunm="[[collumn]]" list="[1]" tools="[[tools]]"></aqa-table>
+                    <aqa-table colunm="[[column]]" list="[[data]]" tools="[[tools]]"></aqa-table>
                     <div>จำนวน x รายการ</div>
                 </div>
             </aqa-panel>
@@ -28,18 +28,18 @@
 
             static get properties() {
                 return {
-                    collumn: {
+                    column: {
                         type: Array,
                         value: [
                             {
                                 label: 'รอบ',
-                                path: 'name',
+                                path: 'round',
                                 width: "200px",
                                 flex: "1"
                             },
                             {
                                 label: 'ปีการประเมิน',
-                                path: 'position',
+                                path: 'year',
                                 width: "200px",
                                 flex: "1"
                             }
@@ -54,6 +54,15 @@
                                 icon: 'get-app'
                             }
                         ] 
+                    },
+                    data:{
+                        type:Array,
+                        value:[
+                            {
+                                round:"4",
+                                year:"2561"
+                            }
+                        ]
                     }
                 };
             }

@@ -1,0 +1,125 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+
+<dom-module id="route-qc100" topic="QC100" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+            .section {
+                margin-bottom: 0.5rem;
+            }
+        </style>
+        <div class="page-container">
+            <div class="section">
+                <aqa-panel>
+                    <app-toolbar slot="header">
+                        <div main-title>แบบฟอร์ม QC100</div>
+                    </app-toolbar>
+                    <div slot="content">
+                        <aqa-table tools="[[tools]]" colunm="[[colunm]]" list="[[data]]"></aqa-table>
+                        <div>จำนวน x รายการ</div>
+                    </div>
+                </aqa-panel>
+            </div>
+
+            <div class="section">
+                <aqa-panel>
+                    <div slot="content">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <aqa-button type="primary">อัพโหลด</aqa-button>
+                            </div>
+                        </div>
+                        <div class="row-space"></div>
+                        <aqa-table tools="[[tools]]" colunm="[[colunm2]]" list="[[data2]]"></aqa-table>
+                        <div>จำนวน x รายการ</div>
+
+                        <div class="row center-xs">
+                            <div class="col-xs-12">
+                                <aqa-button type="success">บันทึก</aqa-button>
+                                <aqa-button type="primary">อัพโหลด</aqa-button>
+                            </div>
+                        </div>
+                    </div>
+                </aqa-panel>
+            </div>
+        </div>
+
+    </template>
+
+    <script>
+
+        class RouteQc100 extends Polymer.Element {
+
+            static get is() {
+                return 'route-qc100';
+            }
+
+            static get properties() {
+                return {
+                    tools: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "download",
+                                event: "download",
+                                icon: "get-app"
+                            }
+                        ]
+                    },
+                    colunm: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "ชื่อไฟล์",
+                                path: "name",
+                                width: "100px",
+                                flex: "1"
+                            }
+                        ]
+                    },
+                    colunm2: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "ชื่อไฟล์",
+                                path: "name",
+                                width: "100px",
+                                flex: "1"
+                            },
+                            {
+                                label: "วันที่อัพโหลด",
+                                path: "date",
+                                width: "100px",
+                                flex: "1"
+                            }
+                        ]
+                    },
+                    data: {
+                        type: Array,
+                        value: [
+                            {
+                                name: "แบบฟอร์ม QC100"
+                            }
+                        ]
+                    },
+                    data2: {
+                        type: Array,
+                        value: [
+                            {
+                                name: "QC100",
+                                date: "31/02/2561"
+                            }
+                        ]
+                    }
+                };
+            }
+
+        }
+
+        window.customElements.define(RouteQc100.is, RouteQc100);
+    </script>
+</dom-module>
