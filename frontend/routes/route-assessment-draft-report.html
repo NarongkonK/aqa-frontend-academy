@@ -1,0 +1,135 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+
+<dom-module id="route-assessment-draft-report" topic="ประเมินคุณภาพรายงาน" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+           .section {
+                margin-bottom: 1rem;
+            }
+        </style>
+        <div class="page-container">
+            <div class="section">
+                <aqa-panel>
+                    <app-toolbar slot="header">
+                        <div main-title>แบบฟอร์มประเมินคุณภาพรายงาน</div>
+                    </app-toolbar>
+                    <div slot="content">
+                        <aqa-table colunm="[[colunm]]" tools="[[tools]]" list="[[data]]"></aqa-table>
+                        <div>จำนวน [[data.length]] รายการ</div>
+                    </div>
+                </aqa-panel>
+            </div>
+
+            <div class="section">
+                    <aqa-panel>
+                        <div slot="content">
+                            <div class="row row-space">
+                                <div class="col-xs-12">
+                                     <aqa-button type="primary">อัพโหลด</aqa-button>
+                                </div>
+                               
+                            </div>
+                            <aqa-table colunm="[[colunm2]]" tools="[[tools2]]" list="[[data2]]"></aqa-table>
+                            <div>จำนวน [[data2.length]] รายการ</div>
+                            <div class="row center-xs">
+                                <aqa-button type="success">ยืนยัน</aqa-button>
+                            </div>  
+                        </div>
+                    </aqa-panel>
+                </div>
+        </div>
+        
+
+    </template>
+
+    <script>
+      
+        class RouteAssessmentDraftReport extends Polymer.Element {
+            
+            static get is() {
+                return 'route-assessment-draft-report';
+            }
+
+            
+            static get properties() {
+                return {
+                    colunm:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"ชื่อไฟล์",
+                                path:"name",
+                                width:"100px",
+                                flex:"1"
+                            }
+                        ]
+                    },
+                    colunm2:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"ชื่อไฟล์",
+                                path:"name",
+                                width:"100px",
+                                flex:"1"
+                            },
+                            {
+                                label:"วันที่อัพโหลด",
+                                path:"date",
+                                width:"200px",
+                                flex:"0"
+                            }
+                        ]
+                    },
+                    tools:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"ดูรายละเอียด",
+                                event:"detail",
+                                icon:"icons:visibility"
+                            }
+                        ]
+                    },
+                    tools2:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"download",
+                                event:"download",
+                                icon:"get-app"
+                            }
+                        ]
+                    },
+                    data:{
+                        type:Array,
+                        value:[
+                            {
+                                name:"ฟอร์ม_คุณภาพรายงาน"
+                            }
+                        ]
+                    },
+                    data2:{
+                        type:Array,
+                        value:[
+                            {
+                                name:"คุณภาพรายงาน_จุฬาลงกรณ์วิทยาลัย",
+                                date:"31/02/2561"
+                            }
+                        ]
+                    }
+                };
+            }
+
+           
+
+        }
+
+        window.customElements.define(RouteAssessmentDraftReport.is, RouteAssessmentDraftReport);
+    </script>
+</dom-module>

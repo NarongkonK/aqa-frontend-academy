@@ -1,0 +1,153 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../../../bower_components/aqa-vaadin-grid/aqa-vaadin-grid.html">
+<link rel="import" href="../../../../bower_components/aqa-icons/aqa-icon-tool.html">
+<link rel="import" href="../../../../bower_components/aqa-tooltip/aqa-tooltip.html">
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
+<dom-module id="manage-academy-list">
+    <template>
+
+        <vaadin-grid id="grid" aria-label="Basic Binding Example" items="[[list]]">
+            <template is="dom-if" if="[[checkbox]]">
+                <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+            </template>
+            <vaadin-grid-column flex-grow="0">
+                <template class="header">
+                    <div style="text-align:center">
+                        ลำดับที่
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[count(index)]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+
+            <template is="dom-repeat" items="[[colunm]]" as="col" index-as="count">
+                <vaadin-grid-column width="[[col.width]]" flex-grow="[[col.flex]]">
+                    <template class="header">[[col.label]]</template>
+                    <template>
+                        <div>
+                            [[combileData(col,item,index)]]
+                        </div>
+
+                    </template>
+                </vaadin-grid-column>
+            </template>
+
+
+            <template is="dom-if" if="[[tools.length]] || [[toolsBtn.length]]">
+                <vaadin-grid-column width="250px" flex-grow="0">
+                    <template class="header">เครื่องมือ</template>
+                    <template>
+                        <div style="text-align: center;">
+                         
+                            <template is="dom-repeat" items="[[toolsBtn]]" as="btn">
+
+                                <aqa-button  type="[[btn.type]]" on-click="activeEventBtn" item="[[item]]" >[[btn.label]]</aqa-button>
+
+                            </template>
+                            <template is="dom-repeat" items="[[tools]]" as="tool">
+                                <aqa-tooltip label="[[tool.label]]">
+                                    <paper-icon-button class="btn-edit" item="[[item]]" icon="[[tool.icon]]" on-click="activeEvent"></paper-icon-button>
+                                </aqa-tooltip>
+                            </template>
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+            </template>
+        </vaadin-grid>
+
+    </template>
+
+    <script>
+
+        class ManageAcademyList extends Polymer.Element {
+
+            static get is() {
+                return 'manage-academy-list';
+            }
+            static get properties() {
+                return {
+                    list: Array,
+                    colunm: Array,
+                    form: {
+                        type: String,
+                        value: 'form'
+                    },
+                    checkbox: {
+                        type: Boolean,
+                        value: false
+                    },
+                    tools: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'ดูรายละเอียด',
+                                event: 'detail',
+                                icon: 'icons:visibility'
+                            },
+                            {
+                                label: 'แก้ไขข้อมูล',
+                                event: 'edit',
+                                icon: 'create'
+                            },
+                            {
+                                label: 'ลบ',
+                                event: 'delete',
+                                icon: 'aqa-tool:bin'
+                            },
+                        ]
+                    },
+                    toolsBtn: {
+                        type:Array,
+                        value:[
+                            {
+                                label:"ยืนยันสถานศึกษา",
+                                event:"action",
+                                type:"default"
+                            }
+                        ]
+                    }
+                }
+            }
+           
+            count(col) {
+                return col + 1;
+                
+            }
+            combileData(col, data, index) {
+                if (col && data) {
+                    return this.get("list." + index + "." + col.path)
+                }
+                // var path = col[count].path;
+                // if (row)
+                //     return row[path];
+            }
+            activeEvent(e) {
+                var item = e.model.item
+                var data = e.model.tool
+                this.dispatchEvent(new CustomEvent(data.event, { detail: item }))
+            }
+            activeEventBtn(e){
+                var item = e.model.item
+                var data = e.model.btn
+                this.dispatchEvent(new CustomEvent(data.event, { detail: item }))
+            }
+            // editDialog(e) {
+            //     this.dispatchEvent(new CustomEvent('edit', { detail: e.model.item }));
+            // }
+            // openDialog(e) {
+            //     this.dispatchEvent(new CustomEvent('view', { detail: e.model.item }));
+            // }
+            // confirmDelete(e) {
+            //     this.dispatchEvent(new CustomEvent('delete', { detail: e.model.item }));
+            // }
+
+        }
+
+        window.customElements.define(ManageAcademyList.is, ManageAcademyList);
+    </script>
+</dom-module>

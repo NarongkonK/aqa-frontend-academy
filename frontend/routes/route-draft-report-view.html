@@ -15,12 +15,24 @@
                 <div slot="content">
                     <div class="row">
                         <div class="col-xs-6">
-                            <aqa-button type="primary">ดาวน์โหลด</aqa-button>
+                            <div class="row row-space">
+                                <aqa-button type="primary">ดาวน์โหลด</aqa-button>
+                            </div>
+                            <div class="row row-space">
+                                <div class="col-xs-11">
+                                    <embed src="../../../images/register/บันทึกข้อตกลง.pdf" type="application/pdf" height="500px" width="100%">
+                                </div>
+
+                            </div>
                         </div>
+
+
                         <div class="col-xs-6">
                             <div class="row row-space">
-                                <aqa-button type="primary">อัพโหลดมีข้อแก้ไข</aqa-button>
-                                <aqa-button type="primary">ประเมินคุณภาพรายงาน</aqa-button>
+                                <div class="col-xs-12">
+                                    <aqa-button type="primary">อัพโหลดมีข้อแก้ไข</aqa-button>
+                                    <aqa-button type="primary">ประเมินคุณภาพรายงาน</aqa-button>
+                                </div>
                             </div>
                             <div class="row row-space">
                                 <paper-radio-group selected="agree">
@@ -31,10 +43,14 @@
 
                             </div>
                             <div class="row row-space">
-                                <iron-autogrow-textarea rows="8" placeholder="บันทึกข้อแก้ไข"></iron-autogrow-textarea>
+                                <div class="col-xs-12">
+                                    <iron-autogrow-textarea rows="10" placeholder="บันทึกข้อแก้ไข" style="width:100%"></iron-autogrow-textarea>
+                                </div>
                             </div>
-                            <div class="row row-space">
+                            <div class="row row-space center-xs">
+                                    <div class="col-xs-12">
                                 <aqa-button type="success">ยืนยัน</aqa-button>
+                                    </div>
                             </div>
                         </div>
                     </div>

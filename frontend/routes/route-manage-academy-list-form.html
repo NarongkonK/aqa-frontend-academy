@@ -1,0 +1,143 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-tabs/aqa-tabs.html">
+<link rel="import" href="../../../bower_components/aqa-tabs/aqa-tab.html">
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+
+<dom-module id="route-manage-academy-list-form" topic="Import" parent="route-manage-academy-list" path="/manage/academy-list/form">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="page-container">
+            <aqa-panel style="margin-bottom:1rem;">
+                <div slot="content">
+                    <div class="row center-xs">
+                        <div class="col-xs-12 col-md-6">
+                            <aqa-button type="primary">1.Download Template</aqa-button>
+                            <aqa-button type="primary">2.Upload Template</aqa-button>
+                        </div>
+                    </div>
+                </div>
+            </aqa-panel>
+
+            <aqa-panel>
+                <div slot="content">
+                    <aqa-tabs selected="/past">
+                        <aqa-tab name="/past" label="ผ่าน">
+                            <aqa-panel id="basic">
+                                <div slot="content">
+                                    <div class="row row-space">
+                                        <div class="col-xs-12">
+                                            <aqa-table colunm="[[colunm]]" tools="[]" list="[[data]]"></aqa-table>
+                                        </div>
+                                        <div>จำนวนทั้งหมด [[data.length]] รายงาน</div>
+                                    </div>
+                                    <div class="row center-xs">
+                                        <aqa-button type="success">บันทึก</aqa-button>
+                                        <aqa-button type="danger">ยกเลิก</aqa-button>
+                                    </div>
+                                </div>
+                            </aqa-panel>
+                        </aqa-tab>
+
+                        <aqa-tab name="/fail" label="ไม่ผ่าน">
+                            <aqa-panel id="basic">
+                                <div slot="content">
+                                    <div class="row row-space end-xs">
+                                        <div class="col-xs-12">
+                                             <aqa-button type="primary">Export</aqa-button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <aqa-table colunm="[[colunm]]" tools="[]" list="[[data]]"></aqa-table>
+                                        </div>
+                                        <div>จำนวนทั้งหมด [[data.length]] รายงาน</div>
+                                    </div>
+                                </div>
+                            </aqa-panel>
+                        </aqa-tab>
+                    </aqa-tabs>
+                </div>
+            </aqa-panel>
+        </div>
+
+
+    </template>
+
+    <script>
+
+        class RouteManageAcademyListForm extends Polymer.Element {
+
+            static get is() {
+                return 'route-manage-academy-list-form';
+            }
+
+
+            static get properties() {
+                return {
+                    colunm: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "รหัสสถานศึกษา",
+                                path: "id",
+                                width: "100px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ชื่อสถานศึกษา",
+                                path: "name",
+                                width: "400px",
+                                flex: "0"
+                            },
+                            {
+                                label: "เขต/อำเภอ",
+                                path: "amphure",
+                                width: "100px",
+                                flex: "1"
+                            },
+                            {
+                                label: "จังหวัด",
+                                path: "province",
+                                width: "100px",
+                                flex: "1"
+                            },
+                            {
+                                label: "สังกัด",
+                                path: "department",
+                                width: "100px",
+                                flex: "1"
+                            }
+                        ]
+                    },
+                    data: {
+                        type: Array,
+                        value: [
+                            {
+                                id: "H00100",
+                                name: "จุฬาลงกรณ์มหาวิทยาลัย",
+                                amphure: "เขตปทุมวัน",
+                                province: "กรุงเทพมหานคร",
+                                department: "สกอ"
+                            },
+                            {
+                                id: "H00300",
+                                name: "มหาวิทยาลัยขอนแก่น",
+                                amphure: "เมือง",
+                                province: "ขอนแก่น",
+                                department: "สกอ"
+                            }
+                        ]
+                    }
+                };
+            }
+
+
+        }
+
+        window.customElements.define(RouteManageAcademyListForm.is, RouteManageAcademyListForm);
+    </script>
+</dom-module>
