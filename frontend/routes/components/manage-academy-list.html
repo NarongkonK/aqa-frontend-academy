@@ -24,8 +24,58 @@
                     </div>
                 </template>
             </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
+                    <div style="text-align:center">
+                        ปีงบประมาณ
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[item.path1]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
+                    <div style="text-align:center">
+                        จำนวนสถานศึกษา
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[item.path2]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
+                    <div style="text-align:center">
+                        สถานศึกษาที่ยืนยันแล้ว
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[item.path3]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
 
-            <template is="dom-repeat" items="[[colunm]]" as="col" index-as="count">
+            <vaadin-grid-column width="250px" flex-grow="0">
+                <template class="header">
+                    <div style="text-align:center">
+                        เครื่องมือ
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        <aqa-button type="primary">ยืนยันสถานศึกษา</aqa-button>
+                        <paper-icon-button icon="create" on-click="toPage"></paper-icon-button>
+                    </div>
+                </template>
+            </vaadin-grid-column>
+
+            <!-- <template is="dom-repeat" items="[[colunm]]" as="col" index-as="count">
                 <vaadin-grid-column width="[[col.width]]" flex-grow="[[col.flex]]">
                     <template class="header">[[col.label]]</template>
                     <template>
@@ -35,10 +85,10 @@
 
                     </template>
                 </vaadin-grid-column>
-            </template>
+            </template> -->
 
 
-            <template is="dom-if" if="[[tools.length]] || [[toolsBtn.length]]">
+            <!-- <template is="dom-if" if="[[tools.length]] || [[toolsBtn.length]]">
                 <vaadin-grid-column width="250px" flex-grow="0">
                     <template class="header">เครื่องมือ</template>
                     <template>
@@ -57,7 +107,7 @@
                         </div>
                     </template>
                 </vaadin-grid-column>
-            </template>
+            </template> -->
         </vaadin-grid>
 
     </template>
@@ -71,80 +121,20 @@
             }
             static get properties() {
                 return {
-                    list: Array,
-                    colunm: Array,
-                    form: {
-                        type: String,
-                        value: 'form'
-                    },
-                    checkbox: {
-                        type: Boolean,
-                        value: false
-                    },
-                    tools: {
-                        type: Array,
-                        value: [
-                            {
-                                label: 'ดูรายละเอียด',
-                                event: 'detail',
-                                icon: 'icons:visibility'
-                            },
-                            {
-                                label: 'แก้ไขข้อมูล',
-                                event: 'edit',
-                                icon: 'create'
-                            },
-                            {
-                                label: 'ลบ',
-                                event: 'delete',
-                                icon: 'aqa-tool:bin'
-                            },
-                        ]
-                    },
-                    toolsBtn: {
+                    list: {
                         type:Array,
-                        value:[
-                            {
-                                label:"ยืนยันสถานศึกษา",
-                                event:"action",
-                                type:"default"
-                            }
-                        ]
+                        value:[]
                     }
                 }
             }
-           
+
             count(col) {
                 return col + 1;
-                
+
             }
-            combileData(col, data, index) {
-                if (col && data) {
-                    return this.get("list." + index + "." + col.path)
-                }
-                // var path = col[count].path;
-                // if (row)
-                //     return row[path];
+            toPage(){
+                Nylon.page("/manage/academy-list/form")
             }
-            activeEvent(e) {
-                var item = e.model.item
-                var data = e.model.tool
-                this.dispatchEvent(new CustomEvent(data.event, { detail: item }))
-            }
-            activeEventBtn(e){
-                var item = e.model.item
-                var data = e.model.btn
-                this.dispatchEvent(new CustomEvent(data.event, { detail: item }))
-            }
-            // editDialog(e) {
-            //     this.dispatchEvent(new CustomEvent('edit', { detail: e.model.item }));
-            // }
-            // openDialog(e) {
-            //     this.dispatchEvent(new CustomEvent('view', { detail: e.model.item }));
-            // }
-            // confirmDelete(e) {
-            //     this.dispatchEvent(new CustomEvent('delete', { detail: e.model.item }));
-            // }
 
         }
 

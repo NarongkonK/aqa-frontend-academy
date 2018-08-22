@@ -13,7 +13,7 @@
         <div class="page-container">
             <aqa-panel>
                 <div slot="content">
-                  <manage-academy-list colunm="[[colunm]]" tools="[[tools]]" list="[[data]]" toolsBtn="[[toolsBtn]]" on-edit="_openPage"></manage-academy-list>
+                  <manage-academy-list list="[[data]]" toolsBtn="[[toolsBtn]]"></manage-academy-list>
                 </div>
             </aqa-panel>
         </div>
@@ -34,70 +34,18 @@
 
             static get properties() {
                 return {
-                    colunm: {
-                        type: Array,
-                        value: [
-                            {
-                                label: "รอบที่",
-                                path: "round",
-                                width: "100px",
-                                flex: "0"
-                            },
-                            {
-                                label: "จำนวนสถานศึกษา",
-                                path: "amount",
-                                width: "100px",
-                                flex: "1"
-                            },
-                            {
-                                label: "สถานที่ที่ยืนยันแล้ว",
-                                path: "confirm",
-                                width: "100px",
-                                flex: "1"
-                            }
-                        ]
-                    },
                     data:{
                         type:Array,
                         value:[
                             {
-                                round:"4",
-                                amount:"500",
-                                confirm:"300"
-                            },
-                            {
-                                round:"3",
-                                amount:"700",
-                                confirm:"700"
-                            }
-                        ]
-                    },
-                    tools: {
-                        type: Array,
-                        value: [
-                            {
-                                label: 'แก้ไขข้อมูล',
-                                event: 'edit',
-                                icon: 'create'
-                            }
-                        ]
-                    },
-                    toolsBtn:{
-                        type:Array,
-                        value:[
-                            {
-                                label:"ยืนยันสถานศึกษา",
-                                event:"action",
-                                type:"denger"
+                                path1:"4",
+                                path2:"500",
+                                path3:"300"
                             }
                         ]
                     }
                 };
             }
-            _openPage(){
-                Nylon.page("/manage/academy-list/form")
-            }
-
 
         }
 
