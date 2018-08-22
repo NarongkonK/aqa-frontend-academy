@@ -2,7 +2,10 @@
 <link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
-<link rel="import" href="../../components/aqa-table/aqa-table.html">
+<!-- <link rel="import" href="../../components/aqa-table/aqa-table.html"> -->
+<link rel="import" href="../../components/aqa-advance-table/aqa-advance-table.html">
+
+
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
 <link rel="import" href="../redux/common-redux.html">
 <link rel="import" href="../../redux-mixin.html">
@@ -23,7 +26,20 @@
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table checkbox colunm="[[collumn]]" list="[[coordinator]]" on-edit="editData" on-delete="deleteData"></aqa-table>
+                    <!-- <aqa-table checkbox colunm="[[collumn]]" list="[[coordinator]]" on-edit="editData" on-delete="deleteData"></aqa-table> -->
+                    
+                    <aqa-advance-table table="[[table]]" items="[[coordinator]]" on-active-del="deleteData" on-active-edit="editData" on-active-link="_link" on-active-user="_inviceUser" checked></aqa-advance-table>
+
+
+                   
+
+
+              
+
+
+
+
+
                 </div>
             </aqa-panel>
         </div>
@@ -39,75 +55,124 @@
 
             static get properties() {
                 return {
-                    coordinator:{
-                        type:Array,
+                    coordinator: {
+                        type: Array,
                         statePath: 'commonData.Coordinator'
                     },
-                    collumn: {
-                        type: Array,
-                        value: [
-                            {
-                                label: 'ชื่อ',
-                                path: 'FnameCoordinator',
-                                width: "200px",
-                                flex: "1"
-                            },
-                            {
-                                label: 'สกุล',
-                                path: 'LnameCoordinator',
-                                width: "200px",
-                                flex: "1"
-                            },
-                            {
-                                label: 'ตำแหน่ง',
-                                path: 'PositionAcademic',
-                                width: "200px",
-                                flex: "1"
-                            },
-                            {
-                                label: 'เบอร์โทร',
-                                path: 'Telephone',
-                                width: "200px",
-                                flex: "0"
+                    // collumn: {
+                    //     type: Array,
+                    //     value: [
+                    //         {
+                    //             label: 'ชื่อ',
+                    //             path: 'FnameCoordinator',
+                    //             width: "200px",
+                    //             flex: "1"
+                    //         },
+                    //         {
+                    //             label: 'สกุล',
+                    //             path: 'LnameCoordinator',
+                    //             width: "200px",
+                    //             flex: "1"
+                    //         },
+                    //         {
+                    //             label: 'ตำแหน่ง',
+                    //             path: 'PositionAcademic',
+                    //             width: "200px",
+                    //             flex: "1"
+                    //         },
+                    //         {
+                    //             label: 'เบอร์โทร',
+                    //             path: 'Telephone',
+                    //             width: "200px",
+                    //             flex: "0"
+                    //         }
+                    //     ]
+                    // },
+                    table: {
+                        type: Object,
+                        value: function () {
+                            return {
+                                tool: [
+                                    {
+                                        name:"user",
+                                        label: "ส่งเทียบเชิญ จัดการข้อมูลโรงเรียน",
+                                        icon: "icons:assignment-ind"
+                                        
+                                    },
+                                    "view", "edit", "del"
+                                ],
+                                colunm: [
+                                    {
+                                        label: 'ชื่อ',
+                                        path: 'FnameCoordinator'
+                                    },
+                                    {
+                                        label: 'สกุล',
+                                        path: 'LnameCoordinator'
+                                    },
+                                    {
+                                        label: 'ตำแหน่ง',
+                                        path: 'PositionAcademic'
+                                    },
+                                    {
+                                        label: 'เบอร์โทร',
+                                        path: 'Telephone'
+                                    }
+                                ]
                             }
-                        ]
-                    }
+                        }
+                    },
                 };
             }
-            ready(){
+            ready() {
                 super.ready()
-                var id = sessionStorage.getItem("academy_id"); 
-                if(id) Nylon.dispatch("getCoordinator",id)
-            }
-            nylonPagesActive(){
                 var id = sessionStorage.getItem("academy_id");
-                if(!id){
+                if (id) Nylon.dispatch("getCoordinator", id)
+            }
+            nylonPagesActive() {
+                var id = sessionStorage.getItem("academy_id");
+                if (!id) {
                     Nylon.swal({ nylon: 'error', title: 'คุณยังไม่ได้เลือกสถานศึกษา', text: 'กรุณาเลือกสถานศึกษาก่อน !!' })
-                    .then((res)=>{
-                        Nylon.page("home")
-                    })
+                        .then((res) => {
+                            Nylon.page("home")
+                        })
                 }
                 else {
                     this.AcademyName = sessionStorage.getItem("academy_name")
                 }
             }
-            editData(e){
+            editData(e) {
                 console.log(e.detail.ID)
-                Nylon.dispatch("selectCoordinator",e.detail.ID)
+                Nylon.dispatch("selectCoordinator", e.detail.ID)
                 Nylon.dialog.open('/coordinator')
             }
-            deleteData(e){
+            deleteData(e) {
                 var id = sessionStorage.getItem("academy_id");
-                Nylon.swal({nylon:'confirm',title:'ต้องการลบข้อมูลใช่ไหม ?',text:' '})
-                .then((res)=>{
-                    if(res){
-                        Nylon.dispatch("deleteCoordinator",{ID:[e.detail.ID]},id)
-                    }
-                })
-               
+                Nylon.swal({ nylon: 'confirm', title: 'ต้องการลบข้อมูลใช่ไหม ?', text: ' ' })
+                    .then((res) => {
+                        if (res) {
+                            Nylon.dispatch("deleteCoordinator", { ID: [e.detail.ID] }, id)
+                        }
+                    })
+
             }
             openDailog() {
                 Nylon.dialog.open('/coordinator')
+            }
+
+            _inviceUser(e) {
+                Nylon.swal({ nylon: 'confirm', title: 'ยืนยันให้มีสิทธิ์จัดการสถานศึกษา', text: ' ' })
+                .then((res) => {
+                    if (res) {
+                        //console.log(e.detail.ID)
+                        axios.get(Nylon.apiURL.user+"/user/coordinator?id="+e.detail.ID)
+                        .then(()=>{
+                            Nylon.swal({nylon: 'success'})
+                        })
+                    }
+                })
+                
+                console.log(e.detail.ID)
             }
         }
 
