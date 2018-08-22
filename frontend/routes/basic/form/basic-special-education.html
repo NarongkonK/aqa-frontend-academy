@@ -30,7 +30,7 @@
                 <div class="col-xs-12 col-sm-1 col-md-1">
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                    <template is="dom-if" if="{{checkType}}">
+                    <template is="dom-if" if="{{checkType}}"> <!-- กลุ่มความพิการซ้ำซ้อน -->
                         <div class="row">
                             <div>กลุ่ม</div>
                         </div>
@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </template>
-                    <template is="dom-if" if="{{checkType1}}">
+                    <template is="dom-if" if="{{checkType1}}"> <!-- กลุ่มนานาชาติ -->
                         <div class="row">
                             <aqa-combo-box label="กลุ่ม" items="[]" item-label-path="NameAffiliation" item-value-path="ID" on-change="" value="[[form.group]]"></aqa-combo-box>
                         </div>
@@ -134,7 +134,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <aqa-input label="ปีที่ก่อตั้ง"></aqa-input>
                 </div>
-                <template is="dom-if" if="{{checkType1}}">
+                <template is="dom-if" if="{{checkType1}}"> <!-- กลุ่มนานาชาติ -->
                     <div class="col-xs-12 col-sm-6 col-md-3">
                         <aqa-combo-box label="องค์กรรับรองจากต่างประเทศ" items="[]" item-label-path="NameAffiliation" item-value-path="ID" on-change=""
                             value="[[form.group]]"></aqa-combo-box>
