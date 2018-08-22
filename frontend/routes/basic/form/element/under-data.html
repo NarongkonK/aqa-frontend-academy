@@ -1,0 +1,66 @@
+<link rel="import" href="../../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../../bower_components/aqa-styles/aqa-styles.html">
+
+<dom-module id="under-data">
+    <template>
+        <style include="aqa-styles">
+          .result {
+                background: rgb(207, 210, 211);
+            }
+        </style>
+
+        
+<div class="result">
+        <div class="row">
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                สถานะภาพการศึกษา
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                ยุบรวม (แห่ง)
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                โรงเรียนสาขา (แห่ง)
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                เรียนร่วม (แห่ง)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                ดำเนินการ
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                2
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                2
+            </div>
+            <div class="col-xs-12 col-sm-2 col-md-2">
+                2
+            </div>
+        </div>
+    </div>
+    </template>
+
+    <script>
+       
+        class UnderData extends Polymer.Element {
+        
+            static get is() {
+                return 'under-data';
+            }
+
+           
+            static get properties() {
+                return {
+                    
+                };
+            }
+
+            
+
+        }
+
+        window.customElements.define(UnderData.is, UnderData);
+    </script>
+</dom-module>

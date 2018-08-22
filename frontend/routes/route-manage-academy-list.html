@@ -1,0 +1,54 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="./components/manage-academy-list.html">
+
+<dom-module id="route-manage-academy-list" topic="กำหนดรายชื่อสถานศึกษา" parent="route-home" path="/manage/academy-list">
+    <template>
+      
+       
+        <style include="aqa-styles">
+        </style>
+        
+        <div class="page-container">
+            <aqa-panel>
+                <div slot="content">
+                  <manage-academy-list list="[[data]]" toolsBtn="[[toolsBtn]]"></manage-academy-list>
+                </div>
+            </aqa-panel>
+        </div>
+
+        
+        
+
+    </template>
+
+    <script>
+
+        class RouteManageAcademyList extends Polymer.Element {
+
+            static get is() {
+                return 'route-manage-academy-list';
+            }
+
+
+            static get properties() {
+                return {
+                    data:{
+                        type:Array,
+                        value:[
+                            {
+                                path1:"4",
+                                path2:"500",
+                                path3:"300"
+                            }
+                        ]
+                    }
+                };
+            }
+
+        }
+
+        window.customElements.define(RouteManageAcademyList.is, RouteManageAcademyList);
+    </script>
+</dom-module>

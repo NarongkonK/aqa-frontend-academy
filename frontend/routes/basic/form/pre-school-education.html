@@ -4,16 +4,19 @@
 <link rel="import" href="../../../../../bower_components/aqa-form/aqa-combo-box.html">
 <link rel="import" href="../../../../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../../../../bower_components/nylon-form/nylon-form.html">
+<link rel="import" href="../../../../../bower_components/paper-checkbox/paper-checkbox.html">
 
 <link rel="import" href="../../../../redux-mixin.html">
 <link rel="import" href="../../mixin/form-mixin.html">
 <dom-module id="pre-school-education">
+    <!-- ปฐมวัย -->
     <template>
         <style include="aqa-styles">
             .row>div {
                 margin-bottom: 0.5rem;
             }
-            .result{
+
+            .result {
                 background: rgb(207, 210, 211);
             }
         </style>
@@ -79,8 +82,23 @@
                     <aqa-input label="ปีที่ก่อตั้ง"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
-                    <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
-                        item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box>
+                    <template is="dom-if" if="{{checkAcademyType1}}"> <!--ศูนย์พัฒนาเด็ก-->
+                        <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
+                            item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box>
+                    </template>
+                    <template is="dom-if" if="{{!checkAcademyType1}}"><!--อนุบาล-->
+                        <!-- <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
+                                item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box> -->
+                        <div>
+                            ระดับที่เปิดสอน
+                        </div>
+                        <div>
+                            
+                            <paper-checkbox checked>อนุบาล1 - อนุบาล3</paper-checkbox>
+                            
+                        </div>
+                    </template>
+
                 </div>
                 <!-- <div class="col-xs-12 col-sm-6 col-md-2">
                         <aqa-combo-box label="รูปแบบการบริหาร" form-path="ManagementStyleID" items="[[ManagementStyle]]" item-label-path="NameTh" item-value-path="ID" value="[[form.ManagementStyleID]]"></aqa-combo-box>
@@ -152,6 +170,15 @@
                 return 'pre-school-education';
             }
 
+            static get properties() {
+                return {
+                    checkAcademyType1: {
+                        type: Boolean,
+                        value: true
+                    }
+                };
+            }
+
             submit() {
                 var data = this.$.myForm.submit()
                 var newData = Object.assign({}, data)
@@ -160,6 +187,19 @@
                 newData.AmountTeacher = parseInt(newData.AmountTeacher)
                 newData.AmountStudent = parseInt(newData.AmountStudent)
                 return newData
+            }
+
+            changeAcademyGroup(e) {
+                var data = e.target.value
+                console.log(data)
+                if (data == "afa50114-ad4f-4491-9972-cbac1d229ed4") {
+
+                    this.set("checkAcademyType1", true)
+                    console.log("true", this.checkAcademyType1)
+                } else {
+                    this.set("checkAcademyType1", false)
+                    console.log("false", this.checkAcademyType1)
+                }
             }
 
         }

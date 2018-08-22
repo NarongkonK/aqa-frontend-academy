@@ -1,0 +1,85 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../../bower_components/paper-radio-button/paper-radio-button.html">
+
+<dom-module id="route-draft-report-view" topic="อ่านร่างรายงาน" parent="route-draft-report">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="page-container">
+            <aqa-panel>
+                <div slot="content">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="row row-space">
+                                <aqa-button type="primary">ดาวน์โหลด</aqa-button>
+                            </div>
+                            <div class="row row-space">
+                                <div class="col-xs-11">
+                                    <embed src="../../../images/register/บันทึกข้อตกลง.pdf" type="application/pdf" height="500px" width="100%">
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-6">
+                            <div class="row row-space">
+                                <div class="col-xs-12">
+                                    <aqa-button type="primary">อัพโหลดมีข้อแก้ไข</aqa-button>
+                                    <aqa-button type="primary">ประเมินคุณภาพรายงาน</aqa-button>
+                                </div>
+                            </div>
+                            <div class="row row-space">
+                                <paper-radio-group selected="agree">
+                                    <paper-radio-button name="agree">ยอมรับ</paper-radio-button>
+                                    <paper-radio-button name="agreeHalf">ยอมรับมีข้อแก้ไข</paper-radio-button>
+                                    <paper-radio-button name="denail">ไม่ยอมรับ</paper-radio-button>
+                                </paper-radio-group>
+
+                            </div>
+                            <div class="row row-space">
+                                <div class="col-xs-12">
+                                    <iron-autogrow-textarea rows="10" placeholder="บันทึกข้อแก้ไข" style="width:100%"></iron-autogrow-textarea>
+                                </div>
+                            </div>
+                            <div class="row row-space center-xs">
+                                    <div class="col-xs-12">
+                                <aqa-button type="success">ยืนยัน</aqa-button>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </aqa-panel>
+        </div>
+
+
+    </template>
+
+    <script>
+
+        class RouteDraftReportView extends Polymer.Element {
+
+            static get is() {
+                return 'route-draft-report-view';
+            }
+
+            static get properties() {
+                return {
+
+                };
+            }
+
+
+
+        }
+
+        window.customElements.define(RouteDraftReportView.is, RouteDraftReportView);
+    </script>
+</dom-module>

@@ -4,16 +4,53 @@
 <link rel="import" href="../../../../../bower_components/aqa-form/aqa-combo-box.html">
 <link rel="import" href="../../../../../bower_components/nylon-form/nylon-form.html">
 <link rel="import" href="../../../../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../../../../bower_components/paper-checkbox/paper-checkbox.html">
 <link rel="import" href="../../../../redux-mixin.html">
 <link rel="import" href="../../mixin/form-mixin.html">
+
+<link rel="import" href="./element/under-data.html">
 <dom-module id="basic-special-education">
     <template>
         <style include="aqa-styles">
             .row>div {
                 margin-bottom: 0.5rem;
             }
+
+            paper-checkbox {
+                margin-right: 1rem;
+            }
         </style>
         <nylon-form id="myForm">
+            <!-- พื้นฐาน(วัตถุประสงค์พิเศษ) -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aqa-combo-box label="ประเภทสถานศึกษา" form-path="AcademyTypeID" items="[[academyType]]" item-label-path="NameType" item-value-path="ID"
+                        on-change="changeAcademyGroup" value="[[form.AcademyTypeID]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-1 col-md-1">
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <template is="dom-if" if="{{checkType}}"> <!-- กลุ่มความพิการซ้ำซ้อน -->
+                        <div class="row">
+                            <div>กลุ่ม</div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <paper-checkbox checked>การได้ยิน</paper-checkbox>
+                                <paper-checkbox>การมองเห็น</paper-checkbox>
+                                <paper-checkbox>ร่างกาย</paper-checkbox>
+                                <paper-checkbox>สติปัญญา</paper-checkbox>
+                            </div>
+                        </div>
+                    </template>
+                    <template is="dom-if" if="{{checkType1}}"> <!-- กลุ่มนานาชาติ -->
+                        <div class="row">
+                            <aqa-combo-box label="กลุ่ม" items="[]" item-label-path="NameAffiliation" item-value-path="ID" on-change="" value="[[form.group]]"></aqa-combo-box>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa" value="[[form.CodeByAqa]]"></aqa-input>
@@ -31,49 +68,81 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <aqa-combo-box label="กระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"
+                        on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <aqa-combo-box label="กรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"
+                        on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <aqa-combo-box label="กอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
+                        value="[[form.AffiliationID]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">
+                    <aqa-combo-box label="หน่วยงาน" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
+                        value="[[form.AffiliationID]]"></aqa-combo-box>
+                </div>
+            </div>
+            <!-- <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
                     <aqa-combo-box label="ระดับต้นสังกัต" items="[[AffiliationLevel]]" item-label-path="NameLevel" item-value-path="ID" value="{{selectAffilicationLevel}}"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <iron-pages selected="{{selectAffilicationLevel}}" attr-for-selected="name">
                         <div name="5df3d771-1336-4aab-a0ca-a91be4403c0b">
-                            <aqa-combo-box label="กระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                            <aqa-combo-box label="กระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"
+                                on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
                         </div>
                         <div name="05638c25-5b88-4cb3-88eb-8f7f309f0745">
-                            <aqa-combo-box label="กรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                            <aqa-combo-box label="กรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"
+                                on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
                         </div>
                         <div name="7a993a84-7b81-4474-84cd-28ed5d7ff7b3">
-                            <aqa-combo-box label="กอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                            <aqa-combo-box label="กอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
+                                value="[[form.AffiliationID]]"></aqa-combo-box>
                         </div>
                     </iron-pages>
                 </div>
-            </div>
-            <div class="row">
+            </div> -->
+            <!-- <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-2">
                     <aqa-combo-box label="รูปแบบการบริหาร" form-path="ManagementStyleID" items="[[ManagementStyle]]" item-label-path="NameTh"
-                    item-value-path="ID" value="[[form.ManagementStyleID]]"></aqa-combo-box>
+                        item-value-path="ID" value="[[form.ManagementStyleID]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <aqa-combo-box label="ประเภทสถานศึกษา" form-path="AcademyTypeID" items="[[AcademyType]]" item-label-path="NameType" item-value-path="ID"
-                    on-change="changeAcademyGroup" value="[[form.AcademyTypeID]]"></aqa-combo-box>
+                        on-change="changeAcademyGroup" value="[[form.AcademyTypeID]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <aqa-combo-box label="กลุ่ม" form-path="RelationAcademyGroupID" items="[[AcademyGroup]]" item-label-path="NameAcademyGroup" item-value-path="ID" value="[[form.RelationAcademyGroup.0.AcademyGroupID]]"></aqa-combo-box>
-                    <!-- <aqa-combo-box label="กอง"></aqa-combo-box> -->
-                </div>
+                    <aqa-combo-box label="กลุ่ม" form-path="RelationAcademyGroupID" items="[[AcademyGroup]]" item-label-path="NameAcademyGroup"
+                        item-value-path="ID" value="[[form.RelationAcademyGroup.0.AcademyGroupID]]"></aqa-combo-box> -->
+            <!-- <aqa-combo-box label="กอง"></aqa-combo-box> -->
+            <!-- </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3">
-                    <aqa-combo-box label="สถานะภาพ" form-path="AcademyStatusID" items="[[AcademyStatus]]" item-label-path="NameStatus" item-value-path="ID" value="[[form.AcademyStatusID]]"></aqa-combo-box>
+                    <aqa-combo-box label="สถานะภาพ" form-path="AcademyStatusID" items="[[AcademyStatus]]" item-label-path="NameStatus" item-value-path="ID"
+                        value="[[form.AcademyStatusID]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-8">
                     <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
                 </div>
-            </div>
+            </div> -->
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3">
+                    <aqa-input label="ปีที่ก่อตั้ง"></aqa-input>
+                </div>
+                <template is="dom-if" if="{{checkType1}}"> <!-- กลุ่มนานาชาติ -->
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <aqa-combo-box label="องค์กรรับรองจากต่างประเทศ" items="[]" item-label-path="NameAffiliation" item-value-path="ID" on-change=""
+                            value="[[form.group]]"></aqa-combo-box>
+                    </div>
+                </template>
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
-                    item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box>
+                        item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
                     <aqa-input label="จำนวนครู (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]"></aqa-input>
@@ -83,8 +152,15 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
                     <!-- [[SizeAcademy.0.Size]] -->
-                    <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID" value="[[form.AcademySizeID]]"></aqa-combo-box>
+                    <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"
+                        value="[[form.AcademySizeID]]"></aqa-combo-box>
                 </div>
+            </div>
+            <div class="row" style="margin-top:2rem;">
+                <div class="col-xs-12">
+                    <under-data></under-data>
+                </div>
+
             </div>
         </nylon-form>
     </template>
@@ -96,14 +172,55 @@
             static get is() {
                 return 'basic-special-education';
             }
+
+            static get properties() {
+                return {
+                    academyType: {
+                        type: Array,
+                        value: [
+                            {
+                                ID: "1",
+                                NameType: "รร.เฉพาะความพิการ"
+                            },
+                            {
+                                ID: "2",
+                                NameType: "รร.นานาชาติ"
+                            }
+                        ]
+                    },
+                    checkType: {
+                        type: Boolean,
+                        value: false
+                    },
+                    checkType1: {
+                        type: Boolean,
+                        value: false
+                    }
+
+                };
+            }
             submit() {
                 var data = this.$.myForm.submit()
-                var newData = Object.assign({},data)
-                newData.RelationAcademyEducationID = {ID:[newData.RelationAcademyEducationID]}
-                newData.RelationAcademyGroupID = {ID:[newData.RelationAcademyGroupID]}
+                var newData = Object.assign({}, data)
+                newData.RelationAcademyEducationID = { ID: [newData.RelationAcademyEducationID] }
+                newData.RelationAcademyGroupID = { ID: [newData.RelationAcademyGroupID] }
                 newData.AmountTeacher = parseInt(newData.AmountTeacher)
                 newData.AmountStudent = parseInt(newData.AmountStudent)
                 return newData
+            }
+            changeAcademyGroup(e) {
+                var data = e.target.value
+                console.log(data)
+                if (data == "1") {
+
+                    this.set("checkType", true)
+                    this.set("checkType1", false)
+                    // console.log("true", this.checkAcademyType1)
+                } else {
+                    this.set("checkType", false)
+                    this.set("checkType1", true)
+                    // console.log("false", this.checkAcademyType1)
+                }
             }
         }
 

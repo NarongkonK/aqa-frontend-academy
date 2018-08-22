@@ -3,6 +3,12 @@
         state = state || {
             name: 'ระบบสถานศึกษา',
             menu: [
+            {
+                    label:'รายชื่อสถานศึกษา',
+                    sub:[
+                        { icon: 'info', label: 'รายชื่อสถานศึกษา', path: '/home' },
+                    ]
+                },
                 {
                     label:'ข้อมูลสถานศึกษา',
                     sub:[
@@ -13,7 +19,13 @@
                         { icon: 'info', label: 'ข้อมูลผู้ประสานงาน / ข้อมูลผู้บริหาร', path: '/coordinator' },
                         { icon: 'info', label: 'วิทยาเขต', path: '/campus' },
                         { icon: 'info', label: 'คณะ', path: '/faculty' },
-                        { icon: 'info', label: 'รายงานฉบับสมบูรณ์', path: '/complete/report' }
+                        { icon: 'info', label: 'ข้อมูลสถานศึกษาที่ยุบรวม', path: '/merge' },
+                        { icon: 'info', label: 'รายงานฉบับสมบูรณ์', path: '/complete/report' },
+                        { icon: 'info', label: 'QC100', path: '/qc100' },
+                        { icon: 'info', label: 'ร่างรายงาน', path: '/draft/report' },
+                        { icon: 'info', label: 'ประเมินคุณภาพรายงาน', path: '/assessment/draft-report' },
+                        { icon: 'info', label: 'จัดการเอกสาร', path: '/manage/document' },
+                        { icon: 'info', label: 'กำหนดรายชื่อสถานศึกษา', path: '/manage/academy-list' }
                     ]
                 },
                 {

@@ -1,0 +1,131 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../bower_components/aqa-tabs/aqa-tabs.html">
+<link rel="import" href="../../../bower_components/aqa-tabs/aqa-tab.html">
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+
+
+
+<dom-module id="route-merge-form" topic="จัดการข้อมูลสถานศึกษาที่ยุบรวม" parent="route-merge">
+    <template>
+        <style include="aqa-styles">
+            .section {
+                margin-bottom: 1rem;
+            }
+
+            aqa-input {
+                text-align: left;
+            }
+        </style>
+
+        <div class="page-container">
+            <div class="section">
+                <aqa-panel>
+                    <div slot="content">
+                        <div class="row row-space center-xs">
+                            <div class="col-xs-12 col-md-2 col-xs-2">
+                                <aqa-input label="รหัสสถานศึกษา"></aqa-input>
+                            </div>
+                            <div class="col-xs-12 col-md-5 col-xs-4">
+                                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+                            </div>
+                            <div class="col-xs-12 col-md-2 col-xs-2">
+                                <aqa-input label="ประเภท"></aqa-input>
+                            </div>
+                        </div>
+                        <div class="row center-xs">
+                            <aqa-button type="primary">ค้นหา</aqa-button>
+                        </div>
+                    </div>
+                </aqa-panel>
+            </div>
+            <aqa-tabs selected="/academyList">
+                <aqa-tab name="/academyList" label="รายชื่อสถานศึกษา">
+                    <aqa-panel id="basic">
+                        <div slot="content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <aqa-button type="primary" on-click="_openDialog">ยุบรวม</aqa-button>
+                                    <div class="row-space"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <aqa-table colunm="[[colunm]]" tools="[]" list="[1]"></aqa-table>
+                                </div>
+                            </div>
+                        </div>
+                    </aqa-panel>
+                </aqa-tab>
+
+                <aqa-tab name="/academyMerge" label="สถานศึกษาที่ยุบรวม">
+                    <aqa-panel id="basic">
+                        <div slot="content">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <aqa-table colunm="[[colunm]]" tools="[]" list="[1]"></aqa-table>
+                                </div>
+                            </div>
+                        </div>
+                    </aqa-panel>
+                </aqa-tab>
+            </aqa-tabs>
+        </div>
+
+
+    </template>
+
+    <script>
+
+        class RouteMergeForm extends Polymer.Element {
+
+            static get is() {
+                return 'route-merge-form';
+            }
+
+            static get properties() {
+                return {
+                    colunm: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "รหัสสถานศึกษา",
+                                path: "",
+                                width: "150px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ชื่อสถานศึกษา",
+                                path: "",
+                                width: "500px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ประเภท",
+                                path: "",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ความสัมพันธ์",
+                                path: "",
+                                width: "200px",
+                                flex: "1"
+                            }
+                        ]
+                    }
+                };
+            }
+            _openDialog(){
+                Nylon.dialog.open("/merge")
+            }
+
+
+        }
+
+        window.customElements.define(RouteMergeForm.is, RouteMergeForm);
+    </script>
+</dom-module>

@@ -1,0 +1,143 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../../../bower_components/aqa-vaadin-grid/aqa-vaadin-grid.html">
+<link rel="import" href="../../../../bower_components/aqa-icons/aqa-icon-tool.html">
+<link rel="import" href="../../../../bower_components/aqa-tooltip/aqa-tooltip.html">
+<link rel="import" href="../../../../bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+<link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
+<dom-module id="manage-academy-list">
+    <template>
+
+        <vaadin-grid id="grid" aria-label="Basic Binding Example" items="[[list]]">
+            <template is="dom-if" if="[[checkbox]]">
+                <vaadin-grid-selection-column auto-select></vaadin-grid-selection-column>
+            </template>
+            <vaadin-grid-column flex-grow="0">
+                <template class="header">
+                    <div style="text-align:center">
+                        ลำดับที่
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[count(index)]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
+                    <div style="text-align:center">
+                        ปีงบประมาณ
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[item.path1]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
+                    <div style="text-align:center">
+                        จำนวนสถานศึกษา
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[item.path2]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+            <vaadin-grid-column>
+                <template class="header">
+                    <div style="text-align:center">
+                        สถานศึกษาที่ยืนยันแล้ว
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[item.path3]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column width="250px" flex-grow="0">
+                <template class="header">
+                    <div style="text-align:center">
+                        เครื่องมือ
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        <aqa-button type="primary">ยืนยันสถานศึกษา</aqa-button>
+                        <paper-icon-button icon="create" on-click="toPage"></paper-icon-button>
+                    </div>
+                </template>
+            </vaadin-grid-column>
+
+            <!-- <template is="dom-repeat" items="[[colunm]]" as="col" index-as="count">
+                <vaadin-grid-column width="[[col.width]]" flex-grow="[[col.flex]]">
+                    <template class="header">[[col.label]]</template>
+                    <template>
+                        <div>
+                            [[combileData(col,item,index)]]
+                        </div>
+
+                    </template>
+                </vaadin-grid-column>
+            </template> -->
+
+
+            <!-- <template is="dom-if" if="[[tools.length]] || [[toolsBtn.length]]">
+                <vaadin-grid-column width="250px" flex-grow="0">
+                    <template class="header">เครื่องมือ</template>
+                    <template>
+                        <div style="text-align: center;">
+                         
+                            <template is="dom-repeat" items="[[toolsBtn]]" as="btn">
+
+                                <aqa-button  type="[[btn.type]]" on-click="activeEventBtn" item="[[item]]" >[[btn.label]]</aqa-button>
+
+                            </template>
+                            <template is="dom-repeat" items="[[tools]]" as="tool">
+                                <aqa-tooltip label="[[tool.label]]">
+                                    <paper-icon-button class="btn-edit" item="[[item]]" icon="[[tool.icon]]" on-click="activeEvent"></paper-icon-button>
+                                </aqa-tooltip>
+                            </template>
+                        </div>
+                    </template>
+                </vaadin-grid-column>
+            </template> -->
+        </vaadin-grid>
+
+    </template>
+
+    <script>
+
+        class ManageAcademyList extends Polymer.Element {
+
+            static get is() {
+                return 'manage-academy-list';
+            }
+            static get properties() {
+                return {
+                    list: {
+                        type:Array,
+                        value:[]
+                    }
+                }
+            }
+
+            count(col) {
+                return col + 1;
+
+            }
+            toPage(){
+                Nylon.page("/manage/academy-list/form")
+            }
+
+        }
+
+        window.customElements.define(ManageAcademyList.is, ManageAcademyList);
+    </script>
+</dom-module>

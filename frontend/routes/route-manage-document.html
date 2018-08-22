@@ -1,0 +1,81 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+
+<dom-module id="route-manage-document" topic="จัดการเอกสาร" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+           
+        </style>
+        <aqa-panel>
+            <div slot="content">
+                <div class="row row-space">
+                    <div class="col-xs-12">
+                        <aqa-button type="primary">อัพโหลด</aqa-button>
+                    </div>
+                </div>
+                <aqa-table colunm="[[colunm]]" tools="[[tools]]" list="[[data]]"></aqa-table>
+                <div>จำนวน [[data.length]] รายการ</div>
+            </div>
+        </aqa-panel>
+        
+
+    </template>
+
+    <script>
+      
+        class RouteManageDocument extends Polymer.Element {
+   
+            static get is() {
+                return 'route-manage-document';
+            }
+
+            static get properties() {
+                return {
+                    colunm:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"ชื่อไฟล์",
+                                path:"name",
+                                width:"100px",
+                                flex:"1"
+                            },
+                            {
+                                label:"วันที่อัพโหลด",
+                                path:"date",
+                                width:"200px",
+                                flex:"0"
+                            }
+                        ]
+                    },
+                    tools:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"download",
+                                event:"download",
+                                icon:"get-app"                            }
+                        ]
+                    },
+                    data:{
+                        type:Array,
+                        value:[
+                            {
+                                name:"ไฟล์เอกสารอื่นๆ",
+                                date:"31/02/2561"
+                            }
+                        ]
+                    }
+                };
+            }
+
+
+        }
+
+        window.customElements.define(RouteManageDocument.is, RouteManageDocument);
+    </script>
+</dom-module>
