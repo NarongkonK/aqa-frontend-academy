@@ -12,13 +12,13 @@
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
                 <div slot="content">
-                    <div class="row row-space">
+                    <!-- <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <aqa-button type="primary" icon="add" on-click="test">เพิ่ม</aqa-button>
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
-                    </div>
-                    <aqa-table colunm="[[collumn]]" list="[1]"></aqa-table>
+                    </div> -->
+                    <aqa-table colunm="[[collumn]]" tools="[[tools]]" list="[1]"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -47,6 +47,16 @@
                                 path: 'filename',
                                 width: "200px",
                                 flex: "1"
+                            }
+                        ]
+                    },
+                    tools:{
+                        type:Array,
+                        value:[
+                            {
+                                label: 'แก้ไขข้อมูล',
+                                event: 'edit',
+                                icon: 'create'
                             }
                         ]
                     }

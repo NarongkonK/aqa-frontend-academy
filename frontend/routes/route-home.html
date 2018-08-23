@@ -11,7 +11,7 @@
         <style include="aqa-styles">
         </style>
         <div class="page-container">
-            <aqa-advance-search></aqa-advance-search>
+            <aqa-advance-search fields="[[data]]"></aqa-advance-search>
             <aqa-panel>
                 <div slot="content">
                     <div class="row row-space">
@@ -46,7 +46,7 @@
                             {
                                 label: 'รหัสสถานศึกษา',
                                 path: 'CodeByAqa',
-                                width: "200px",
+                                width: "100px",
                                 flex: "0"
                             },
                             {
@@ -62,15 +62,33 @@
                             //     flex: "0"
                             // },
                             {
+                                label: 'สังกัด(ระดับกรม)',
+                                path: 'BasicAffiliation',
+                                width: "150px",
+                                flex: "0"
+                            },
+                            {
+                                label: 'ประเภท',
+                                path: 'BasicAcademyType',
+                                width: "300px",
+                                flex: "0"
+                            },
+                            {
+                                label: 'ตำบล / แขวง',
+                                path: 'District',
+                                width: "150px",
+                                flex: "0"
+                            },
+                            {
                                 label: 'อำเภอ / เขต',
-                                path: 'AcademyAddress.Amphure.NameTh',
-                                width: "200px",
+                                path: 'Amphure',
+                                width: "150px",
                                 flex: "0"
                             },
                             {
                                 label: 'จังหวัด',
-                                path: 'AcademyAddress.Province.NameTh',
-                                width: "200px",
+                                path: 'Province',
+                                width: "150px",
                                 flex: "0"
                             }
                         ]
@@ -93,6 +111,16 @@
                                 event: 'delete',
                                 icon: 'aqa-tool:bin'
                             },
+                        ]
+                    },
+                    data:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"test",
+                                type:"text",
+                                name:"test"
+                            }
                         ]
                     }
 

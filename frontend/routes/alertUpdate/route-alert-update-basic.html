@@ -1,0 +1,58 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/aqa-panel/aqa-panel.html">
+
+
+
+<link rel="import" href="./components/alert-update-basic-table.html">
+
+<dom-module id="route-alert-update-basic" topic="ข้อมูลการแจ้งปรับปรุงสถานศึกษา" path="alert/update/basic">
+    <template>
+        <style include="aqa-styles">
+           
+        </style>
+        <div class="page-container">
+            <aqa-panel id="basic">
+                <div slot="content">
+                 <alert-update-basic-table list="[[data]]"></alert-update-basic-table>
+                 div{จำนวน [[data.length]] รายการ}
+            </div>
+            </aqa-panel>
+        </div>
+
+        
+
+    </template>
+
+    <script>
+        
+        class RouteAlertUpdateBasic extends Polymer.Element {
+            
+            static get is() {
+                return 'route-alert-update-basic';
+            }
+
+            
+            static get properties() {
+                return {
+                    data:{
+                        type:Array,
+                        value:[
+                            {
+                                path1:"B01837",
+                                path2:"โรงเรียนเทพศิรินทร์",
+                                path3:"ป้อมปราบศัตรูพ่าย",
+                                path4:"กรุงเทพมหานคร",
+                                path5:"รร.ทั่วไป",
+                                path6:"สพน.เขต1 (กรุงเทพฯ) 02/05/2560",
+                            }
+                        ]
+                    }
+                };
+            }
+
+        }
+
+        window.customElements.define(RouteAlertUpdateBasic.is, RouteAlertUpdateBasic);
+    </script>
+</dom-module>

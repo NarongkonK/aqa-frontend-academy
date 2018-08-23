@@ -143,6 +143,9 @@
                         <template is="dom-repeat" items="[[branch]]">
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <paper-checkbox form-group value="[[item.ID]]">[[item.NameTh]]</paper-checkbox>
+                                <template is="dom-if" if="{{_checkETC(item.ID)}}">
+                                         <input type="">
+                                </template>
                             </div>
                         </template>
                     </div>
@@ -201,7 +204,14 @@
                 newData.AmountStudent = parseInt(newData.AmountStudent)
                 return newData
             }
+            _checkETC(e){
+                if(e == '8b1a7e1a-cb03-401f-b92e-e853973cdbe5'){
+                    return true
+                }else{
+                    return false
+                }
 
+            }
         }
 
         window.customElements.define(TeachnicalEducation.is, TeachnicalEducation);

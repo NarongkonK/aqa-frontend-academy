@@ -8,6 +8,8 @@
 
 <link rel="import" href="../../../../redux-mixin.html">
 <link rel="import" href="../../mixin/form-mixin.html">
+
+<link rel="import" href="./element/under-data.html">
 <dom-module id="pre-school-education">
     <!-- ปฐมวัย -->
     <template>
@@ -82,22 +84,24 @@
                     <aqa-input label="ปีที่ก่อตั้ง"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
-                    <template is="dom-if" if="{{checkAcademyType1}}"> <!--ศูนย์พัฒนาเด็ก-->
+                    <!-- <template is="dom-if" if="{{checkAcademyType1}}"> -->
+                        <!--ศูนย์พัฒนาเด็ก-->
                         <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
                             item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box>
-                    </template>
-                    <template is="dom-if" if="{{!checkAcademyType1}}"><!--อนุบาล-->
+                    <!-- </template> -->
+                    <!-- <template is="dom-if" if="{{!checkAcademyType1}}"> -->
+                        <!--อนุบาล-->
                         <!-- <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
                                 item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box> -->
-                        <div>
+                        <!-- <div>
                             ระดับที่เปิดสอน
                         </div>
                         <div>
-                            
+
                             <paper-checkbox checked>อนุบาล1 - อนุบาล3</paper-checkbox>
-                            
+
                         </div>
-                    </template>
+                    </template> -->
 
                 </div>
                 <!-- <div class="col-xs-12 col-sm-6 col-md-2">
@@ -131,31 +135,8 @@
 
             <div class="result">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        สถานะภาพการศึกษา
-                    </div>
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        ยุบรวม (แห่ง)
-                    </div>
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        โรงเรียนสาขา (แห่ง)
-                    </div>
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        เรียนร่วม (แห่ง)
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        ดำเนินการ
-                    </div>
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        2
-                    </div>
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        2
-                    </div>
-                    <div class="col-xs-12 col-sm-2 col-md-2">
-                        2
+                    <div class="col-xs-12">
+                         <under-data></under-data>
                     </div>
                 </div>
             </div>

@@ -31,7 +31,7 @@
                             <div class="row row-space">
                                 <div class="col-xs-12">
                                     <aqa-button type="primary">อัพโหลดมีข้อแก้ไข</aqa-button>
-                                    <aqa-button type="primary">ประเมินคุณภาพรายงาน</aqa-button>
+                                    <aqa-button type="primary" on-click="_toPage">ประเมินคุณภาพรายงาน</aqa-button>
                                 </div>
                             </div>
                             <div class="row row-space">
@@ -75,7 +75,9 @@
 
                 };
             }
-
+            _toPage(){
+                Nylon.page("/assessment/draft-report")
+            }
 
 
         }

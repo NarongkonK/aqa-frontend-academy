@@ -28,7 +28,7 @@
                     <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa" value="[[form.CodeByAqa]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสต้นสังกัด (5 หลัก)" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]"></aqa-input>
+                    <aqa-input label="[[labelType]]" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe" value="[[form.CodeByOpsmoe]]"></aqa-input>
@@ -136,6 +136,15 @@
             static get is() {
                 return 'basic-education';
             }
+
+            static get properties() {
+                return {
+                    labelType:{
+                        type:String,
+                        value:"รหัสต้นสังกัด (5 หลัก)"
+                    }
+                };
+            }
             submit() {
                 var data = this.$.myForm.submit()
                 var newData = Object.assign({}, data)
@@ -145,7 +154,15 @@
                 newData.AmountStudent = parseInt(newData.AmountStudent)
                 return newData
             }
+            changeAcademyGroup(e){
+                var data = e.target.value
+                if (data == "14b31f90-8997-40a4-ab7f-250e77bd1695"){
+                    this.set("labelType","รหัส สกอ.(5 หลัก)")
+                }else{
+                    this.set("labelType","รหัสต้นสังกัด (5 หลัก)")
+                }
 
+            }
         }
 
         window.customElements.define(BasicEducation.is, BasicEducation);

@@ -1,0 +1,137 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
+
+<link rel="import" href="./components/update-feild.html">
+
+<dom-module id="route-alert-update-basic-form" topic="แก้ไขข้อมูลพื้้นฐาน" parent="route-alert-update-basic" path="alert/update/basic/form">
+    <template>
+        <style include="aqa-styles">
+             .section {
+                margin-bottom: 1rem;
+            }
+        </style>
+        <div class="page-container">
+            <div class="section">
+                <aqa-panel>
+                        <app-toolbar slot="header">
+                                <div main-title class="center-xs">รายละเอียด</div>
+                            </app-toolbar>
+                    <div slot="content">
+                        <div class="row center-xs">
+                            <div class="col-xs-12 col-md-3 col-sm-2 start-xs">
+                                <aqa-input label="รหัสสถานศึกษา" disabled></aqa-input>
+                            </div>
+
+                            <div class="col-xs-12 col-md-3 col-sm-2 start-xs">
+                                <aqa-input label="ชื่อสถานศึกษา" disabled></aqa-input>
+                            </div>
+                        </div>
+
+                        <div class="row center-xs">
+                                <div class="col-xs-12 col-md-3 col-sm-2 start-xs">
+                                    <aqa-input label="อำเภอ/เขต" disabled></aqa-input>
+                                </div>
+    
+                                <div class="col-xs-12 col-md-3 col-sm-2 start-xs">
+                                    <aqa-input label="จังหวัด" disabled></aqa-input>
+                                </div>
+                            </div>
+                    </div>
+                </aqa-panel>
+            </div>
+
+            <div class="section">
+                    <aqa-panel>
+                            <app-toolbar slot="header">
+                                    <div main-title class="center-xs">ข้อมูลพื้นฐาน</div>
+                                </app-toolbar>
+                        <div slot="content">
+                            <update-feild list="[[list]]"></update-feild>
+                            <div class="row center-xs" style="margin-top:2rem;">
+                                <div class="col-xs-12">
+                                    <aqa-button type="success">ยืนยันการแก้ไข</aqa-button>
+                                    <aqa-button type="danger">ยกเลิกการแก้ไข</aqa-button>
+                                    <aqa-button type="primary">กลับ</aqa-button>
+                                </div>
+                            </div>
+                        </div>
+                    </aqa-panel>
+                </div>
+        </div>
+
+
+    </template>
+
+    <script>
+
+        class RouteAlertUpdateBasicForm extends Polymer.Element {
+
+            static get is() {
+                return 'route-alert-update-basic-form';
+            }
+
+            static get properties() {
+                return {
+                    list:{
+                        type:Array,
+                        value:[
+                            {
+                                label:"ชื่อสถานศึกษา",
+                                path1:"โรงเรียนเทพศิรินทร์",
+                                path2:"โรงเรียนเทพศิรินทร์ (ทดสอบ)"
+                               
+                            },
+                            {
+                                label:"ประเภท",
+                                path1:"สำนักงานศึกษาระดับการศึกษาขั้นพื้นฐาน",
+                                path2:"โรงเรียนสาธิตมหาวิทยาลัย"
+                            
+                            }, 
+                            {
+                                label:"สังกัด",
+                                path1:"สำนักงานคณะกรรมการการศึกษา",
+                                path2:"สำนักงานคณะกรรมการส่งเสริมการศึกษาเอกชน"
+                            },
+                            {
+                                label:"ปีที่ก่อตั้ง",
+                                path1:"",
+                                path2:""
+                            },
+                            {
+                                label:"ระดับชั้นที่เปิดสอน",
+                                path1:"",
+                                path2:""
+                            }, 
+                            {
+                                label:"สถานภาพ",
+                                path1:"",
+                                path2:""
+                            },
+                            {
+                                label:"จำนวนนักเรียนทั้งหมด",
+                                path1:"",
+                                path2:""
+                            },
+                            {
+                                label:"จำนวนครูทั้งหมด",
+                                path1:"",
+                                path2:""
+                            }, 
+                            {
+                                label:"เลขที่",
+                                path1:"",
+                                path2:""
+                            }
+                        ]
+                    }
+                };
+
+
+            }
+        }
+
+        window.customElements.define(RouteAlertUpdateBasicForm.is, RouteAlertUpdateBasicForm);
+    </script>
+</dom-module>

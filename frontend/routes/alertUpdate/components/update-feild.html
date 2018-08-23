@@ -1,0 +1,62 @@
+<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../../../../bower_components/aqa-form/aqa-combo-box.html">
+<link rel="import" href="../../../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../../../bower_components/aqa-button/aqa-button.html">
+
+<dom-module id="update-feild">
+    <template>
+        <style include="aqa-styles">
+            paper-checkbox {
+                margin-top: 2.5rem;
+            }
+
+            .btn-center {
+                margin-top: 1.5rem;
+            }
+        </style>
+        <template is="dom-repeat" items="{{list}}">
+            <div class="row">
+                <div class="col-xs-1">
+                    <paper-checkbox></paper-checkbox>
+                </div>
+                <div class="col-xs-4">
+                    <aqa-input label="[[item.label]]" value="[[item.path1]]"></aqa-input>
+                </div>
+                <div class="col-xs-1 btn-center">
+                    <aqa-button type="primary">แก้ไข</aqa-button>
+                </div>
+                <div class="col-xs-4">
+                    <aqa-input label="[[item.label]]" value="[[item.path1]]"></aqa-input>
+                </div>
+                <div class="col-xs-1 btn-center">
+                    <aqa-button type="primary">ยกเลิก</aqa-button>
+                </div>
+            </div>
+            <div class="row-space"></div>
+        </template>
+
+
+
+    </template>
+
+    <script>
+
+        class UpdateFeild extends Polymer.Element {
+
+            static get is() {
+                return 'update-feild';
+            }
+
+            static get properties() {
+                return {
+                    list: Array
+                };
+            }
+
+        }
+
+        window.customElements.define(UpdateFeild.is, UpdateFeild);
+    </script>
+</dom-module>

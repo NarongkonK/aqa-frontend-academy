@@ -1,0 +1,104 @@
+<link rel="import" href="../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="../../../../../bower_components/vaadin-grid/vaadin-grid-selection-column.html">
+
+<dom-module id="alert-update-basic-table">
+    <template>
+        <style>
+        </style>
+
+        <vaadin-grid aria-label="Basic Binding Example" items="[[list]]">
+
+            <vaadin-grid-column flex-grow="0">
+                <template class="header">
+                    <div style="text-align:center">
+                        ลำดับที่
+                    </div>
+                </template>
+                <template>
+                    <div style="text-align:center">
+                        [[count(index)]]
+                    </div>
+                </template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="0" width="130px">
+                <template class="header">รหัสสถานศึกษา</template>
+                <template>[[item.path1]]</template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="0" width="280px">
+                <template class="header">ชื่อสถานศึกษา</template>
+                <template>[[item.path2]]</template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="1" width="150px">
+                <template class="header">อำเภอ/เขต</template>
+                <template>[[item.path3]]</template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="1">
+                <template class="header">จังหวัด</template>
+                <template>[[item.path4]]</template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="1">
+                <template class="header">ประเภท</template>
+                <template>[[item.path5]]</template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="1" width="250px">
+                <template class="header">ผู้แจ้งข้อมูล</template>
+                <template>[[item.path6]]</template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="1">
+                <template>
+                    <div on-click="_toPage"  onmouseover="this.style.cursor='pointer';">
+                        รายละเอียด
+                    </div></template>
+            </vaadin-grid-column>
+
+            <vaadin-grid-column flex-grow="1">
+                <template>
+                    <div on-click="_toPage"  onmouseover="this.style.cursor='pointer';">
+                        รอพิจารณา
+                    </div>
+                </template>
+            </vaadin-grid-column>
+
+
+
+        </vaadin-grid>
+    </template>
+
+    <script>
+
+        class AlertUpdateBasicTable extends Polymer.Element {
+
+            static get is() {
+                return 'alert-update-basic-table';
+            }
+
+
+            static get properties() {
+                return {
+                    list: {
+                        type: Array,
+                        value: []
+                    }
+                };
+            }
+            count(col) {
+                return col + 1;
+
+            }
+            _toPage(){
+                Nylon.page("alert/update/basic/form")
+            }
+
+        }
+
+        window.customElements.define(AlertUpdateBasicTable.is, AlertUpdateBasicTable);
+    </script>
+</dom-module>

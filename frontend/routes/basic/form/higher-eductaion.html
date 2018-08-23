@@ -8,6 +8,8 @@
 <link rel="import" href="../../../../../bower_components/nylon-form/nylon-form-group.html">
 <link rel="import" href="../../../../redux-mixin.html">
 <link rel="import" href="../../mixin/form-mixin.html">
+
+<link rel="import" href="./element/under-data.html">
 <dom-module id="higher-education">
     <template>
         <style include="aqa-styles">
@@ -103,7 +105,7 @@
                     <template is="dom-repeat" items="[[AcademyEducation]]">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <!-- <input type="checkbox" form-group value="[[item.ID]]">[[item.ShortNote]] -->
-                            <paper-checkbox checked="{{item.checked}}" form-group value="[[item.ID]]">[[item.ShortNote]]</paper-checkbox>
+                            <paper-checkbox checked="{{item.checked}}" form-group value="[[item.ID]]">[[item.Note]]</paper-checkbox>
                         </div>
                     </template>
                 </div>
@@ -116,6 +118,9 @@
                     <template is="dom-repeat" items="[[ResearchType]]">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <paper-checkbox form-group value="[[item.ID]]">[[item.NameType]]</paper-checkbox>
+                            <template is="dom-if" if="{{_checkETC(item.ID)}}">
+                                    <input type="">
+                           </template>
                         </div>
                     </template>
                 </div>
@@ -128,6 +133,9 @@
                     <template is="dom-repeat" items="[[AcademyQuality]]">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <paper-checkbox form-group value="[[item.ID]]">[[item.NameQuality]]</paper-checkbox>
+                            <template is="dom-if" if="{{_checkETC2(item.ID)}}">
+                                    <input type="">
+                           </template>
                         </div>
                     </template>
                 </div>
@@ -144,6 +152,11 @@
                 </div>
             </div>
         </nylon-form>
+        <div class="row">
+            <div class="col-xs-12">
+                <under-data></under-data>
+            </div>
+        </div>
     </template>
 
     <script>
@@ -179,7 +192,22 @@
                 console.log(newData)
                 return newData
             }
+            _checkETC(e){
+                if(e == '066DD3E4-BDBD-497C-AE98-BCB02068A76F'){
+                    return true
+                }else{
+                    return false
+                }
 
+            }
+            _checkETC2(e){
+                if(e == '242D9870-5022-476C-ADBE-F860254BC74B'){
+                    return true
+                }else{
+                    return false
+                }
+
+            }
         }
 
         window.customElements.define(HigherEducation.is, HigherEducation);
