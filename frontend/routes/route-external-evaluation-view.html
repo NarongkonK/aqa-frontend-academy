@@ -1,0 +1,36 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+
+<dom-module id="route-external-evaluation-view" topic="รายละเอียด" parent="route-external-evaluation">
+    <template>
+        <style>
+          
+        </style>
+        <aqa-panel>
+            <div slot="content">
+                    <embed src="../../../images/register/บันทึกข้อตกลง.pdf" type="application/pdf" height="700px" width="100%">
+            </div>
+        </aqa-panel>
+        
+
+    </template>
+
+    <script>
+       
+        class RouteExternalEvaluationView extends Polymer.Element {
+         
+            static get is() {
+                return 'route-external-evaluation-view';
+            }
+
+            static get properties() {
+                return {
+                    
+                };
+            }
+
+        }
+
+        window.customElements.define(RouteExternalEvaluationView.is, RouteExternalEvaluationView);
+    </script>
+</dom-module>

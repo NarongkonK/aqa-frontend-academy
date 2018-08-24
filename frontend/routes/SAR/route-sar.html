@@ -18,7 +18,7 @@
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table colunm="[[collumn]]" list="[1]"></aqa-table>
+                    <aqa-table colunm="[[column]]" list="[[list]]"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -34,7 +34,7 @@
 
             static get properties() {
                 return {
-                    collumn: {
+                    column: {
                         type: Array,
                         value: [
                             {
@@ -48,6 +48,15 @@
                                 path: 'filename',
                                 width: "200px",
                                 flex: "1"
+                            }
+                        ]
+                    },
+                    list:{
+                        type:Array,
+                        value:[
+                            {
+                                filename:"SAR-โรงเรียนเทพศิรินทร์.pdf",
+                                year:"2559"
                             }
                         ]
                     }

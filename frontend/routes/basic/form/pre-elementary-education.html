@@ -26,7 +26,7 @@
                     <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสต้นสังกัด (5 หลัก)" form-path="CodeByAffiliation"></aqa-input>
+                    <aqa-input label="รหัสต้นสังกัด" form-path="CodeByAffiliation"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe"></aqa-input>
@@ -44,13 +44,13 @@
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <iron-pages selected="{{selectAffilicationLevel}}" attr-for-selected="name">
                         <div name="5df3d771-1336-4aab-a0ca-a91be4403c0b">
-                            <aqa-combo-box label="กระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
+                            <aqa-combo-box label="สังกัดกระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
                         </div>
                         <div name="05638c25-5b88-4cb3-88eb-8f7f309f0745">
-                            <aqa-combo-box label="กรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
+                            <aqa-combo-box label="สังกัดกรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
                         </div>
                         <div name="7a993a84-7b81-4474-84cd-28ed5d7ff7b3">
-                            <aqa-combo-box label="กอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
+                            <aqa-combo-box label="สังกัดกอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"></aqa-combo-box>
                         </div>
                     </iron-pages>
                 </div>

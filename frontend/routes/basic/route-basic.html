@@ -2,6 +2,10 @@
 <link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
 <link rel="import" href="../../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../../bower_components/aqa-tooltip/aqa-tooltip.html">
+<link rel="import" href="../../../../bower_components/aqa-icons/aqa-icon-tool.html">
+<link rel="import" href="../../../../bower_components/paper-button/paper-button.html">
+
 <link rel="import" href="../components/address-form.html">
 <link rel="import" href="../basic/basic-form.html">
 <link rel="import" href="../../../redux-mixin.html">
@@ -13,18 +17,27 @@
             <aqa-panel>
                 <app-toolbar slot="header">
                     <div main-title>ข้อมูลพื้นฐาน : [[select.AcademyNameTh]]</div>
+                    <div style="align-content: flex-end">
+                        <aqa-tooltip label="แก้ไขข้อมูล">
+                            <paper-icon-button icon="create" on-click="_isEdit"></paper-icon-button>
+                        </aqa-tooltip>
+                    </div>
                 </app-toolbar>
+
                 <div slot="content">
-                    <basic-form id="form"></basic-form>
+                    <basic-form id="form" isEdit="[[isEdit]]"></basic-form>
                 </div>
             </aqa-panel>
             <div class="row-space"></div>
-            <div class="row center-xs">
-                <div class="col-xs-12">
-                    <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <aqa-button type="danger">ยกเลิก</aqa-button>
+            <template is="dom-if" if="[[!isEdit]]">
+                <div class="row center-xs">
+                    <div class="col-xs-12">
+                        <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <aqa-button type="danger">ยกเลิก</aqa-button>
+                    </div>
                 </div>
-            </div>
+            </template>
+
         </div>
     </template>
 
@@ -41,6 +54,10 @@
                     select: {
                         type: Object,
                         statePath: "commonData.AcademySelect"
+                    },
+                    isEdit: {
+                        type: Boolean,
+                        value: false
                     }
                 };
             }
@@ -61,11 +78,14 @@
             getForm() {
                 var data = this.$.form.submit()
                 // console.log(data)
-                if(this.select.ID){
+                if (this.select.ID) {
                     data.ID = this.select.ID;
-                    Nylon.dispatch("updateAcademy",data)
+                    Nylon.dispatch("updateAcademy", data)
                 }
                 else Nylon.dispatch("insertAcademy", data)
+            }
+            _isEdit() {
+                console.log(this.isEdit)
             }
         }
 

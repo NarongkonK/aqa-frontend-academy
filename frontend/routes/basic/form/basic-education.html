@@ -20,28 +20,28 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <aqa-combo-box label="ประเภทสถานศึกษา" form-path="AcademyTypeID" items="[[AcademyType]]" item-label-path="NameType" item-value-path="ID"
-                        on-change="changeAcademyGroup" value="[[form.AcademyTypeID]]"></aqa-combo-box>
+                        on-change="changeAcademyGroup" value="[[form.AcademyTypeID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa" value="[[form.CodeByAqa]]"></aqa-input>
+                    <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa" value="[[form.CodeByAqa]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="[[labelType]]" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]"></aqa-input>
+                    <aqa-input label="[[labelType]]" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe" value="[[form.CodeByOpsmoe]]"></aqa-input>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-8">
-                    <aqa-input label="ชื่อสถานศึกษา(ภาษาไทย)" form-path="AcademyNameTh" value="[[form.AcademyNameTh]]"></aqa-input>
+                    <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe" value="[[form.CodeByOpsmoe]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-8">
-                    <aqa-input label="ชื่อสถานศึกษา(ภาษาอังกฤษ)" form-path="AcademyNameEn" value="[[form.AcademyNameEn]]"></aqa-input>
+                    <aqa-input label="ชื่อสถานศึกษา(ภาษาไทย)" form-path="AcademyNameTh" value="[[form.AcademyNameTh]]" disabled="[[isEdit]]"></aqa-input>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <aqa-input label="ชื่อสถานศึกษา(ภาษาอังกฤษ)" form-path="AcademyNameEn" value="[[form.AcademyNameEn]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
             </div>
             <div class="row">
@@ -67,20 +67,20 @@
                 </div> -->
 
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="กระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"
-                        on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                    <aqa-combo-box label="สังกัดกระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"
+                         value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="กรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"
-                        on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                    <aqa-combo-box label="สังกัดกรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"
+                         value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="กอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
-                        value="[[form.AffiliationID]]"></aqa-combo-box>
+                    <aqa-combo-box label="สังกัดกอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" 
+                        value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="หน่วยงาน" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
-                        value="[[form.AffiliationID]]"></aqa-combo-box>
+                    <aqa-combo-box label="สังกัดหน่วยงาน" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" 
+                        value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
 
 
@@ -106,22 +106,23 @@
             </div> -->
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-3">
-                   <aqa-input label="ปีที่ก่อตั้ง"></aqa-input>
+                    <aqa-input label="ปีที่ก่อตั้ง" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <aqa-combo-box label="ระดับที่เปิดสอน" form-path="RelationAcademyEducationID" items="[[AcademyEducation]]" item-label-path="ShortNote"
-                        item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]"></aqa-combo-box>
+                        item-value-path="ID" value="[[form.RelationAcademyEducation.0.AcademyEducationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="จำนวนครู (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]"></aqa-input>
+                    <aqa-input label="จำนวนครู (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="จำนวนนักเรียน (คน)" form-path="AmountStudent" value="{{count}}"></aqa-input>
+                    <aqa-input label="จำนวนนักเรียน (คน)" form-path="AmountStudent" value="[[form.AmountStudent]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
                     <!-- [[SizeAcademy.0.Size]] -->
-                    <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"
-                        value="[[form.AcademySizeID]]"></aqa-combo-box>
+                    <!-- <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"
+                        value="[[form.AcademySizeID]]"></aqa-combo-box> -->
+                    <aqa-input label="ขนาดสถานศึกษา (คน)" value="[[form.BasicAcademySize.Size]]" disabled></aqa-input>
                 </div>
             </div>
             <div class="row-space" style="margin-bottom:2rem;"></div>
@@ -139,10 +140,15 @@
 
             static get properties() {
                 return {
-                    labelType:{
-                        type:String,
-                        value:"รหัสต้นสังกัด (5 หลัก)"
+                    labelType: {
+                        type: String,
+                        value: "รหัสต้นสังกัด"
+                    },
+                    isEdit: {
+                        type: Boolean,
+                        value: true
                     }
+
                 };
             }
             submit() {
@@ -154,15 +160,16 @@
                 newData.AmountStudent = parseInt(newData.AmountStudent)
                 return newData
             }
-            changeAcademyGroup(e){
+            changeAcademyGroup(e) {
                 var data = e.target.value
-                if (data == "14b31f90-8997-40a4-ab7f-250e77bd1695"){
-                    this.set("labelType","รหัส สกอ.(5 หลัก)")
-                }else{
-                    this.set("labelType","รหัสต้นสังกัด (5 หลัก)")
+                if (data == "14b31f90-8997-40a4-ab7f-250e77bd1695") {
+                    this.set("labelType", "รหัส สกอ.")
+                } else {
+                    this.set("labelType", "รหัสต้นสังกัด")
                 }
 
             }
+
         }
 
         window.customElements.define(BasicEducation.is, BasicEducation);

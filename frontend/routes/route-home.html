@@ -13,6 +13,9 @@
         <div class="page-container">
             <aqa-advance-search fields="[[data]]"></aqa-advance-search>
             <aqa-panel>
+                <app-toolbar slot="header">
+                    <div main-title>ข้อมูลสถานศึกษาระดับ : xxxxx</div>
+                </app-toolbar>
                 <div slot="content">
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
@@ -90,6 +93,12 @@
                                 path: 'Province',
                                 width: "150px",
                                 flex: "0"
+                            },
+                            {
+                                label: 'ผู้ปรับปรุงข้อมูล/วันที่ปรับปรุงข้อมูล',
+                                path: 'UpdatedAt',
+                                width: "150px",
+                                flex: "0"
                             }
                         ]
                     },
@@ -113,13 +122,13 @@
                             },
                         ]
                     },
-                    data:{
-                        type:Array,
-                        value:[
+                    data: {
+                        type: Array,
+                        value: [
                             {
-                                label:"test",
-                                type:"text",
-                                name:"test"
+                                label: "ประเภท",
+                                type: "select",
+                                name: "test"
                             }
                         ]
                     }
@@ -130,7 +139,7 @@
                 super.ready()
                 Nylon.dispatch("getAcademy")
             }
-            clearData(){
+            clearData() {
                 sessionStorage.removeItem("academy_id");
                 sessionStorage.removeItem("academy_name");
                 Nylon.dispatch("academyClear")
@@ -144,16 +153,16 @@
                 var id = e.detail.ID;
                 var name = e.detail.AcademyNameTh;
                 sessionStorage.setItem("academy_id", id);
-                sessionStorage.setItem("academy_name",name)
+                sessionStorage.setItem("academy_name", name)
                 Nylon.dispatch("selectAcademy", id)
                 Nylon.dispatch("selectAddress", id)
-                Nylon.dispatch("getCoordinator",id)
+                Nylon.dispatch("getCoordinator", id)
                 Nylon.page("basic")
             }
             deleteData(e) {
-                Nylon.swal({ nylon: 'confirm' ,title:'อยากลบข้อมูลใช่ไหม ?',text:" " }).then((res) => {
-                    if(res){
-                        Nylon.dispatch("deleteAcademy",{ID:[e.detail.ID]})
+                Nylon.swal({ nylon: 'confirm', title: 'อยากลบข้อมูลใช่ไหม ?', text: " " }).then((res) => {
+                    if (res) {
+                        Nylon.dispatch("deleteAcademy", { ID: [e.detail.ID] })
                     }
                 })
             }

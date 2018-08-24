@@ -30,7 +30,7 @@
                     <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa" value="[[form.CodeByAqa]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสต้นสังกัด (5 หลัก)" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]"></aqa-input>
+                    <aqa-input label="รหัสต้นสังกัด" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe" value="[[form.CodeByOpsmoe]]"></aqa-input>
@@ -64,19 +64,19 @@
                     </iron-pages>
                 </div> -->
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="กระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"
+                    <aqa-combo-box label="สังกัดกระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"
                         on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="กรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"
+                    <aqa-combo-box label="สังกัดกรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"
                         on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="กอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
+                    <aqa-combo-box label="สังกัดกอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
                         value="[[form.AffiliationID]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
-                    <aqa-combo-box label="หน่วยงาน" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
+                    <aqa-combo-box label="สังกัดหน่วยงาน" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
                         value="[[form.AffiliationID]]"></aqa-combo-box>
                 </div>
             </div>
@@ -142,10 +142,10 @@
             </nylon-form-group>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="จำนวนครู (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]"></aqa-input>
+                    <aqa-input label="จำนวนอาจารย์ประจำ (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="จำนวนนักเรียน (คน)" form-path="AmountStudent" value="[[form.AmountStudent]]"></aqa-input>
+                    <aqa-input label="จำนวนนักศึกษา (คน)" form-path="AmountStudent" value="[[form.AmountStudent]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
                     <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"></aqa-combo-box>

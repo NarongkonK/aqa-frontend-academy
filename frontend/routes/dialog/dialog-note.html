@@ -1,40 +1,44 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
-<link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
-<link rel="import" href="../../../redux-mixin.html">
-<dom-module id="dialog-sar" topic="ข้อมูลรายงานประเมิมตนเอง (SAR)">
+
+<dom-module id="dialog-note" topic="หมายเหตุ" parent="route-note">
     <template>
         <style include="aqa-styles">
         </style>
         <div class="modal-body">
-            <aqa-combo-box label="ปีการศึกษา"></aqa-combo-box>
-            <div class="row-space"></div>
-            <aqa-button type="primary">อัพโหลดไฟล์</aqa-button>
+                รายละเอียด : <iron-autogrow-textarea rows="4" ></iron-autogrow-textarea>
         </div>
         <div class="modal-footer">
             <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
             <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
         </div>
+        <!-- <div class="modal-body">
+               
+        </div> -->
 
     </template>
 
     <script>
-        class DialogSar extends ReduxMixin(Polymer.Element) {
+
+        class DialogNote extends Polymer.Element {
 
             static get is() {
-                return 'dialog-sar';
+                return 'dialog-note';
             }
+
 
             static get properties() {
                 return {
-                   
+
                 };
             }
-            closeDialog() {
-                Nylon.dialog.close()
-            }
+
+
+
         }
 
-        window.customElements.define(DialogSar.is, DialogSar);
+        window.customElements.define(DialogNote.is, DialogNote);
     </script>
 </dom-module>

@@ -22,14 +22,14 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                 <aqa-combo-box label="ระดับ" items="[[data]]" item-label-path="NameLevel" item-value-path="ID"
-                    value="{{page}}"></aqa-combo-box>
+                    value="{{page}}" disabled="[[isEdit]]" on-click="_isEdit"></aqa-combo-box>
             </div>
         </div>
         <div>
             <iron-pages selected="{{page}}" attr-for-selected="name">
                 <div name="6f13af41-350f-4d7a-a645-f0dc9a3d3f5a">
                     <!-- ระดับการศึกษาขั้นพื้นฐาน -->
-                    <basic-education id="basicForm"></basic-education>
+                    <basic-education id="basicForm" ></basic-education>
                 </div>
                 <div name="4f141cce-1764-4426-a77f-c180d68842fe">
                     <!-- ปฐมวัย (ศูนย์พัฒนาเด็ก) -->
@@ -121,11 +121,16 @@
                         type: String,
                         value: '',
                         observer: 'importForm'
+                    },
+                    isEdit:{
+                        type:Boolean,
+                        value:true,
                     }
                 };
             }
             ready() {
                 super.ready()
+                console.log(this.isEdit)
                 this.getData()
                 // Nylon.dispatch("getBasic","AcademyType/getAcademyTypeByAcademyLevel/",this.page,"AcademyType")
                 // Nylon.dispatch("getBasic","AcademyEducation/getAcademyEducationByAcademyLevel/",this.page,"AcademyEducation")
@@ -215,6 +220,9 @@
                 else if (this.page == "ae467556-99eb-4bc1-bec6-367e3595c0a9") {
                     return Object.assign({}, obj, this.$.higherForm.submit())
                 }
+            }
+            _isEdit(){
+                console.log(this.isEdit)
             }
         }
 

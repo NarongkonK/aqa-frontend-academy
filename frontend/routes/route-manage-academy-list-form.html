@@ -13,7 +13,7 @@
         <div class="page-container">
            
 
-            <aqa-panel>
+            <aqa-panel style="margin-bottom:1rem;">
                 <div slot="content">
                     <div class="row row-space start-xs">
                         <div class="col-xs-12 col-md-6">
@@ -29,7 +29,11 @@
                                 <div slot="content">
                                     <div class="row row-space">
                                         <div class="col-xs-12">
-                                            <aqa-table colunm="[[colunm]]" tools="[]" list="[[data]]"></aqa-table>
+                                            <aqa-button type="danger">ลบ</aqa-button>
+                                            <div class="row-space"></div>
+                                        </div>
+                                        <div class="col-xs-12">
+                                            <aqa-table checkbox colunm="[[colunm]]" tools="[]" list="[[data]]"></aqa-table>
                                         </div>
                                         <div>จำนวนทั้งหมด [[data.length]] รายงาน</div>
                                     </div>

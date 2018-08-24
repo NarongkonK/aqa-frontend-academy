@@ -3,7 +3,7 @@
 <link rel="import" href="../../../../bower_components/aqa-panel/aqa-panel.html">
 
 
-
+<link rel="import" href="../../../components/aqa-table/aqa-table.html">
 <link rel="import" href="./components/alert-update-basic-table.html">
 
 <dom-module id="route-alert-update-basic" topic="ข้อมูลการแจ้งปรับปรุงสถานศึกษา" path="alert/update/basic">
@@ -14,8 +14,9 @@
         <div class="page-container">
             <aqa-panel id="basic">
                 <div slot="content">
-                 <alert-update-basic-table list="[[data]]"></alert-update-basic-table>
-                 div{จำนวน [[data.length]] รายการ}
+                 <!-- <alert-update-basic-table list="[[data]]"></alert-update-basic-table> -->
+                    <aqa-table colunm="[[colunm]]" list="[[list]]" tools="[[tools]]" on-detail="_toPage"></aqa-table>
+                 <div>จำนวน [[list.length]] รายการ</div>
             </div>
             </aqa-panel>
         </div>
@@ -35,7 +36,49 @@
             
             static get properties() {
                 return {
-                    data:{
+                    colunm: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'รหัสสถานศึกษา',
+                                path: 'path1',
+                                width: "100px",
+                                flex: 1
+                            },
+                            {
+                                label: 'ชื่อสถานศึกษา',
+                                path: 'path2',
+                                width: "250px",
+                                flex: 0
+                            },
+                            {
+                                label: 'เขต/อำเภอ',
+                                path: 'path3',
+                                width: "100px",
+                                flex: 1
+                            },
+                            {
+                                label: 'จังหวัด',
+                                path: 'path4',
+                                width: "100px",
+                                flex: 1
+                            },
+                            {
+                                label: 'ประเภท',
+                                path: 'path5',
+                                width: "100px",
+                                flex: 1
+                            },
+                            {
+                                label: 'ผู้แจ้งข้อมูล',
+                                path: 'path6',
+                                width: "100px",
+                                flex: 1
+                            },
+                            
+                        ]
+                    },
+                    list:{
                         type:Array,
                         value:[
                             {
@@ -47,8 +90,21 @@
                                 path6:"สพน.เขต1 (กรุงเทพฯ) 02/05/2560",
                             }
                         ]
+                    },
+                    tools: {
+                        type: Array,
+                        value: [
+                            {
+                                label:'ดูรายละเอียด',
+                                event: 'detail',
+                                icon: 'icons:visibility'
+                            }
+                        ]
                     }
                 };
+            }
+            _toPage(){
+                Nylon.page("alert/update/basic/form")
             }
 
         }

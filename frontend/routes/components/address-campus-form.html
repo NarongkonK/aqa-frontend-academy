@@ -36,6 +36,9 @@
                
             </div>
             <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+                            <aqa-input label="รหัสไปรษณีย์" form-path="Zipcode" value="{{zipcode}}"></aqa-input>
+                        </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
                     <aqa-combo-box label="ภาค" items="[[geography]]" item-label-path="Name" item-value-path="ID" form-path="GeographyID" value="[[form.GeographyID]]"></aqa-combo-box>
                 </div>
@@ -51,9 +54,7 @@
                     <aqa-combo-box label="ตำบล / แขวง" items="[[district]]" item-label-path="NameTh" item-value-path="Code" form-path="DistrictCode"
                         value="[[form.DistrictCode]]"></aqa-combo-box>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                    <aqa-input label="รหัสไปรษณีย์" form-path="Zipcode" value="{{zipcode}}"></aqa-input>
-                </div>
+               
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
                     <aqa-input label="โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
                 </div>

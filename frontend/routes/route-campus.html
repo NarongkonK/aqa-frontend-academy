@@ -18,7 +18,7 @@
                             <aqa-button type="danger" icon="remove" on-click="">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table tools="[[tools]]" colunm="[[collumn]]" list="[1]"></aqa-table>
+                    <aqa-table checkbox colunm="[[collumn]]" list="[1]"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -63,26 +63,26 @@
                             }
                         ]
                     },
-                    tools: {
-                        type: Array,
-                        value: [
-                            // {
-                            //     label:'ดูรายละเอียด',
-                            //     event: 'detail',
-                            //     icon: 'icons:visibility'
-                            // },
-                            {
-                                label: 'แก้ไขข้อมูล',
-                                event: 'edit',
-                                icon: 'create'
-                            }
-                            // {
-                            //     label: 'ลบ',
-                            //     event: 'delete',
-                            //     icon: 'aqa-tool:bin'
-                            // },
-                        ]
-                    }
+                    // tools: {
+                    //     type: Array,
+                    //     value: [
+                    //         {
+                    //             label:'ดูรายละเอียด',
+                    //             event: 'detail',
+                    //             icon: 'icons:visibility'
+                    //         },
+                    //         {
+                    //             label: 'แก้ไขข้อมูล',
+                    //             event: 'edit',
+                    //             icon: 'create'
+                    //         },
+                    //         {
+                    //             label: 'ลบ',
+                    //             event: 'delete',
+                    //             icon: 'aqa-tool:bin'
+                    //         },
+                    //     ]
+                    // }
                 };
             }
             _openPage(){

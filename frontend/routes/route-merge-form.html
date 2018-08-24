@@ -32,9 +32,9 @@
                             <div class="col-xs-12 col-md-5 col-xs-4">
                                 <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
                             </div>
-                            <div class="col-xs-12 col-md-2 col-xs-2">
+                            <!-- <div class="col-xs-12 col-md-2 col-xs-2">
                                 <aqa-input label="ประเภท"></aqa-input>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row center-xs">
                             <aqa-button type="primary">ค้นหา</aqa-button>
@@ -42,23 +42,24 @@
                     </div>
                 </aqa-panel>
             </div>
-            <aqa-tabs selected="/academyList">
+            <aqa-tabs selected="/academyMerge">
                 <aqa-tab name="/academyList" label="รายชื่อสถานศึกษา">
                     <aqa-panel id="basic">
                         <div slot="content">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <aqa-button type="primary" on-click="_openDialog">ยุบรวม</aqa-button>
-                                    <div class="row-space"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <aqa-table colunm="[[colunm]]" tools="[]" list="[1]"></aqa-table>
+                                    <aqa-table checkbox colunm="[[colunm]]" tools="[]" list="[[list]]"></aqa-table>
                                 </div>
                             </div>
                         </div>
                     </aqa-panel>
+                    <div class="row-space"></div>
+                    <div class="row center-xs">
+                        <div class="col-xs-12">
+                            <aqa-button type="primary" on-click="_openDialog">ยุบรวม</aqa-button>
+                            <div class="row-space"></div>
+                        </div>
+                    </div>
                 </aqa-tab>
 
                 <aqa-tab name="/academyMerge" label="สถานศึกษาที่ยุบรวม">
@@ -66,7 +67,9 @@
                         <div slot="content">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <aqa-table colunm="[[colunm]]" tools="[]" list="[1]"></aqa-table>
+                                    <aqa-button type="danger">ลบ</aqa-button>
+                                    <div class="row-space"></div>
+                                    <aqa-table checkbox colunm="[[colunm2]]" tools="[[tools]]" list="[[list]]"></aqa-table>
                                 </div>
                             </div>
                         </div>
@@ -88,30 +91,133 @@
 
             static get properties() {
                 return {
+                    tools: {
+                        type: Array,
+                        value: [
+                            {
+                                label: 'อัพโหลด',
+                                event: 'upload',
+                                icon: 'icons:file-upload'
+                            },
+                            // {
+                            //     label: 'ดาว์โหลด',
+                            //     event: 'download',
+                            //     icon: 'icons:get-app'
+                            // },
+                            {
+                                label: 'ลบ',
+                                event: 'delete',
+                                icon: 'aqa-tool:bin'
+                            },
+                           
+                        ]
+                    },
+                    list: {
+                        type: Array,
+                        value: [
+                            {
+                                ID: "9a3ca716-af78-4d3f-9537-307a66722057",
+                                CodeByAqa: "B00001",
+                                AcademyNameTh: "โรงเรียนเทศบาล 3 (ชาญวิทยา)",
+                                UpdatedAt: "2018-06-14",
+                                BasicAcademyType: "สถานศึกษาขั้นพื้นฐาน(ทั่วไป)",
+                                BasicAffiliation: "",
+                                District: "ในเมือง",
+                                Amphure: "เมืองเพชรบูรณ์",
+                                Province: "เพชรบูรณ์",
+                                relationship: "ยุบรวม"
+                            }
+                        ]
+                    },
                     colunm: {
                         type: Array,
                         value: [
                             {
                                 label: "รหัสสถานศึกษา",
-                                path: "",
+                                path: "CodeByAqa",
                                 width: "150px",
                                 flex: "1"
                             },
                             {
                                 label: "ชื่อสถานศึกษา",
-                                path: "",
+                                path: "AcademyNameTh",
                                 width: "500px",
                                 flex: "1"
                             },
                             {
                                 label: "ประเภท",
+                                path: "BasicAcademyType",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ตำบล / แขวง",
+                                path: "District",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "อำเภอ / เขต",
+                                path: "Amphure",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "จังหวัด",
+                                path: "Province",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "แนบไฟล์",
                                 path: "",
+                                width: "200px",
+                                flex: "1"
+                            }
+                        ]
+                    },
+                    colunm2: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "รหัสสถานศึกษา",
+                                path: "CodeByAqa",
+                                width: "150px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ชื่อสถานศึกษา",
+                                path: "AcademyNameTh",
+                                width: "500px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ประเภท",
+                                path: "BasicAcademyType",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "ตำบล / แขวง",
+                                path: "District",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "อำเภอ / เขต",
+                                path: "Amphure",
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: "จังหวัด",
+                                path: "Province",
                                 width: "200px",
                                 flex: "1"
                             },
                             {
                                 label: "ความสัมพันธ์",
-                                path: "",
+                                path: "relationship",
                                 width: "200px",
                                 flex: "1"
                             }
@@ -119,7 +225,7 @@
                     }
                 };
             }
-            _openDialog(){
+            _openDialog() {
                 Nylon.dialog.open("/merge")
             }
 

@@ -1,64 +1,66 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
-<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
 
-<link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
-
-<dom-module id="route-faculty" topic="คณะ" parent="route-home">
+<dom-module id="route-note" topic="หมายเหตุ" parent="route-home">
     <template>
         <style include="aqa-styles">
         </style>
+
         <div class="page-container">
-            <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
                 <div slot="content">
                     <div class="row row-space">
-                        <div class="col-xs-12 col-sm-6 col-md-4">
-                            <aqa-button type="primary" icon="add" on-click="_openDialog">เพิ่ม</aqa-button>
-                            <aqa-button type="danger" icon="remove" on-click="">ลบ</aqa-button>
+                        <div class="col-xs-12">
+                            <aqa-button type="primary" on-click="_toPage">เพิ่ม</aqa-button>
                         </div>
                     </div>
-                    <aqa-table checkbox colunm="[[collumn]]" list="[1]" on-edit="_editData"></aqa-table>
+                    <aqa-table colunm="[[colunm]]" list="[[list]]" tools="[[tools]]" on-edit="_toPage"></aqa-table>
                 </div>
-            </aqa-panel>
-        </div>
 
+            </aqa-panel>
+
+        </div>
 
     </template>
 
     <script>
 
-        class RouteFaculty extends Polymer.Element {
+        class RouteNote extends Polymer.Element {
 
             static get is() {
-                return 'route-faculty';
+                return 'route-note';
             }
 
 
             static get properties() {
                 return {
-                    collumn: {
+                    colunm: {
                         type: Array,
                         value: [
                             {
-                                label: 'รหัสคณะ',
-                                path: '',
-                                width: "200px",
+                                label: 'รายละเอียด',
+                                path: 'note',
+                                width: "700px",
                                 flex: "1"
                             },
                             {
-                                label: 'ชื่อคณะ',
-                                path: 'position',
+                                label: 'ผู้ปรับปรุงข้อมูล/วันที่ปรับปรุงข้อมูล',
+                                path: 'UpdatedAt',
                                 width: "200px",
                                 flex: "1"
-                            },
+                            }
+                        ]
+                    },
+                    list: {
+                        type: Array,
+                        value: [
                             {
-                                label: 'วิทยาเขต',
-                                path: 'name',
-                                width: "200px",
-                                flex: "1"
+                                UpdatedAt: "นาย ธนภัทร สัมพันธ์รัตนชัย 24/8/2561",
+                                note: "ทดสอบหมายุเหตุ"
                             }
                         ]
                     },
@@ -75,23 +77,22 @@
                                 event: 'edit',
                                 icon: 'create'
                             },
-                            {
-                                label: 'ลบ',
-                                event: 'delete',
-                                icon: 'aqa-tool:bin'
-                            }
+                            // {
+                            //     label: 'ลบ',
+                            //     event: 'delete',
+                            //     icon: 'aqa-tool:bin'
+                            // },
                         ]
                     }
                 };
             }
-            _openDialog(){
-                Nylon.dialog.open("/faculty")
+            _toPage() {
+                Nylon.dialog.open('/note')
             }
-            _editData(){
-                Nylon.dialog.open("/faculty")
-            }
+
+
         }
 
-        window.customElements.define(RouteFaculty.is, RouteFaculty);
+        window.customElements.define(RouteNote.is, RouteNote);
     </script>
 </dom-module>

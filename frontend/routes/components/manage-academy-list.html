@@ -61,7 +61,7 @@
                 </template>
             </vaadin-grid-column>
 
-            <vaadin-grid-column width="250px" flex-grow="0">
+            <vaadin-grid-column >
                 <template class="header">
                     <div style="text-align:center">
                         เครื่องมือ
@@ -70,7 +70,8 @@
                 <template>
                     <div style="text-align:center">
                         <aqa-button type="primary">ยืนยันสถานศึกษา</aqa-button>
-                        <paper-icon-button icon="create" on-click="toPage"></paper-icon-button>
+                        <!-- <paper-icon-button icon="create" on-click="toPage"></paper-icon-button> -->
+                        <aqa-button type="primary" on-click="toPage">import</aqa-button>
                     </div>
                 </template>
             </vaadin-grid-column>

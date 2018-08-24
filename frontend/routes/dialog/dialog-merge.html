@@ -8,9 +8,14 @@
         <style include="aqa-styles">
         </style>
         <div class="modal-body">
-            <div class="row center-xs">
-                <div class="col-xs-6 start-xs">
+            <div class="row">
+                <div class="col-xs-12">
                     <aqa-combo-box label="ความสัมพันธ์" items="[[relation]]"></aqa-combo-box>
+                </div>
+                <div class="col-xs-12">
+                    <div class="row-space"></div>
+                    <!-- <div>แนบไฟล์</div>
+                    <aqa-button type="primary">upload</aqa-button> -->
                 </div>
             </div>
 
@@ -23,7 +28,7 @@
         </div>
         <div class="modal-footer">
             <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
-          
+
         </div>
 
     </template>

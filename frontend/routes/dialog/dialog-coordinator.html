@@ -11,15 +11,38 @@
         </style>
         <div class="modal-body">
             <nylon-form id="myForm">
-                <aqa-combo-box label="ประเภท" items="[[Kind]]" form-path="Kind" value="[[form.Kind]]"></aqa-combo-box>
+                <div class="row row-space">
+                    <div class="col-xs-6">
+                         <aqa-combo-box label="ประเภท" items="[[Kind]]" form-path="Kind" value="[[form.Kind]]"></aqa-combo-box>
+                    </div>
+                    <div class="col-xs-6">
+                            <aqa-input label="ตำแหน่ง"></aqa-input>
+                       </div>
+                </div>
+                <div class="row row-space">
+                    <div class="col-xs-3">
+                        <aqa-input label="คำนำหน้าชื่อ"></aqa-input>
+                    </div>
+                    <div class="col-xs-9">
+                        <aqa-input label="ชื่อ-นามสกุล" form-path="FnameCoordinator" value="[[form.FnameCoordinator]]"></aqa-input>
+                    </div>
+                </div>
+                <div class="row row-space">
+                        <div class="col-xs-4">
+                             <aqa-input label="เบอร์โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
+                        </div>
+                        <div class="col-xs-8">
+                         <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]"></aqa-input>
+                        </div>
+                    </div>
                 <!-- <aqa-input label="ตำแหน่งภายในองค์กร" form-path="PositionOrganization" value="[[form.PositionOrganization]]"></aqa-input> -->
                 <!-- <aqa-input label="ตำแหน่งทางวิชาการ" form-path="PositionAcademic" value="[[form.PositionAcademic]]"></aqa-input> -->
-                <aqa-input label="คำนำหน้าชื่อ"></aqa-input>
+
                 <!-- <aqa-combo-box label="คำนำหน้าชื่อ" items="[[prefix]]" item-label-path="NameTh" item-value-path="ID" form-path="PrefixID" value="[[form.PrefixID]]"></aqa-combo-box> -->
-                <aqa-input label="ชื่อ" form-path="FnameCoordinator" value="[[form.FnameCoordinator]]"></aqa-input>
-                <aqa-input label="สกุล" form-path="LnameCoordinator" value="[[form.LnameCoordinator]]"></aqa-input>
-                <aqa-input label="เบอร์โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
-                <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]"></aqa-input>
+
+                <!-- <aqa-input label="สกุล" form-path="LnameCoordinator" value="[[form.LnameCoordinator]]"></aqa-input> -->
+              
+                
             </nylon-form>
         </div>
         <div class="modal-footer">
@@ -42,38 +65,38 @@
                     //     type:Array,
                     //     statePath:'commonData.prefix'
                     // },
-                    form:{
-                        type:Object,
-                        statePath:'commonData.CoordinatorSelect'
+                    form: {
+                        type: Object,
+                        statePath: 'commonData.CoordinatorSelect'
                     },
-                    Kind:{
-                        type:Array,
-                        value:[
+                    Kind: {
+                        type: Array,
+                        value: [
                             {
-                                label:'ผู้บริหาร',
-                                value:'Manager'
+                                label: 'ผู้บริหาร',
+                                value: 'Manager'
                             },
                             {
-                                label:'ผู้ประสานงาน',
-                                value:'Coordinator'
+                                label: 'ผู้ประสานงาน',
+                                value: 'Coordinator'
                             }
                         ]
                     }
                 };
             }
-            ready(){
+            ready() {
                 super.ready()
                 // Nylon.dispatch("getBasic", "common/get/", "prefix", "prefix")
             }
-            getForm(){
+            getForm() {
                 var data = this.$.myForm.submit()
                 data.AcademyDataBasicID = sessionStorage.getItem("academy_id");
                 // data.Kind = "Coordinator"
-                if(this.form.ID){
+                if (this.form.ID) {
                     data.ID = this.form.ID;
-                    Nylon.dispatch("updateCoordinator",data)
-                } 
-                else Nylon.dispatch("insertCoordinator",data)
+                    Nylon.dispatch("updateCoordinator", data)
+                }
+                else Nylon.dispatch("insertCoordinator", data)
             }
             closeDialog() {
                 Nylon.dialog.close()

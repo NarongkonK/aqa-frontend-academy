@@ -1,0 +1,110 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+
+<link rel="import" href="../../components/aqa-table/aqa-table.html">
+
+<dom-module id="route-external-evaluation" topic="ผลประเมินคุณภาพภายนอก" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+          
+        </style>
+    <div class="page-container">
+        <aqa-panel>
+            <div slot="content">
+                <aqa-table colunm="[[colunm]]" list="[[list]]" tools="[[tools]]" on-detail="_toPage"></aqa-table>
+            </div>
+            
+        </aqa-panel>
+        
+    </div>
+        
+
+    </template>
+
+    <script>
+     
+        class RouteExternalEvaluation extends Polymer.Element {
+     
+            static get is() {
+                return 'route-external-evaluation';
+            }
+
+          
+            static get properties() {
+                return {
+                    colunm:{
+                        type:Array,
+                        value:[
+                            {
+                                label: 'รอบประเมิน',
+                                path: 'round',
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: 'ปีที่ได้รับการประเมิน',
+                                path: 'year',
+                                width: "200px",
+                                flex: "1"
+                            },
+                            {
+                                label: 'หมายเหตุ',
+                                path: 'note',
+                                width: "200px",
+                                flex: "1"
+                            }
+                        ]
+                    },
+                    list:{
+                        type:Array,
+                        value:[
+                            {
+                                round:"รอบ 3",
+                                year:"2554",
+                                note:""
+                            },
+                            {
+                                round:"รอบ 2",
+                                year:"2549",
+                                note:""
+                            },
+                            {
+                                round:"รอบ 1",
+                                year:"2545",
+                                note:""
+                            }
+                        ]
+                    },
+                    tools: {
+                        type: Array,
+                        value: [
+                            {
+                                label:'ดูรายละเอียด',
+                                event: 'detail',
+                                icon: 'icons:visibility'
+                            },
+                            // {
+                            //     label: 'แก้ไขข้อมูล',
+                            //     event: 'edit',
+                            //     icon: 'create'
+                            // },
+                            // {
+                            //     label: 'ลบ',
+                            //     event: 'delete',
+                            //     icon: 'aqa-tool:bin'
+                            // },
+                        ]
+                    }
+                };
+            }
+
+           _toPage(){
+               Nylon.page("/external/evaluation-view")
+           }
+
+        }
+
+        window.customElements.define(RouteExternalEvaluation.is, RouteExternalEvaluation);
+    </script>
+</dom-module>

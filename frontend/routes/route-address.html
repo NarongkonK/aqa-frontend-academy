@@ -2,6 +2,10 @@
 <link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-tooltip/aqa-tooltip.html">
+<link rel="import" href="../../../bower_components/aqa-icons/aqa-icon-tool.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+
 <link rel="import" href="./components/address-form.html">
 <link rel="import" href="../../redux-mixin.html">
 <link rel="import" href="../redux/common-redux.html">
@@ -13,7 +17,13 @@
             <aqa-panel>
                 <app-toolbar slot="header">
                     <div main-title>ที่อยู่สถานศึกษา : [[AcademyName]]</div>
+                    <div style="align-content: flex-end">
+                        <aqa-tooltip label="แก้ไขข้อมูล">
+                            <paper-icon-button icon="create" ></paper-icon-button>
+                        </aqa-tooltip>
+                    </div>
                 </app-toolbar>
+
                 <div slot="content">
                     <address-form id="addressForm"></address-form>
                 </div>
@@ -38,33 +48,33 @@
 
             static get properties() {
                 return {
-                    AcademyName:{
-                        type:String,
-                        value:{}
+                    AcademyName: {
+                        type: String,
+                        value: {}
                     }
                 };
             }
-            nylonPagesActive(){
+            nylonPagesActive() {
                 var id = sessionStorage.getItem("academy_id");
-                if(!id){
+                if (!id) {
                     Nylon.swal({ nylon: 'error', title: 'คุณยังไม่ได้เลือกสถานศึกษา', text: 'กรุณาเลือกสถานศึกษาก่อน !!' })
-                    .then((res)=>{
-                        Nylon.page("home")
-                    })
+                        .then((res) => {
+                            Nylon.page("home")
+                        })
                 }
                 else {
                     this.AcademyName = sessionStorage.getItem("academy_name")
                 }
             }
-            getForm(){
+            getForm() {
                 var id = sessionStorage.getItem("academy_id");
-                if(id){
+                if (id) {
                     var data = this.$.addressForm.submit()
                     data.ID = id;
                     console.log(data)
                     Nylon.dispatch("insertAddress", data)
                 }
-                
+
             }
             // changePage(val){
             //     if(val.ID){
