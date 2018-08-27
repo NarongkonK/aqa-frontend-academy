@@ -5,7 +5,7 @@
 <!-- <link rel="import" href="../../components/aqa-table/aqa-table.html"> -->
 <link rel="import" href="../../components/aqa-advance-table/aqa-advance-table.html">
 
-
+<link rel="import" href="./components/name-self.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
 <link rel="import" href="../redux/common-redux.html">
 <link rel="import" href="../../redux-mixin.html">
@@ -17,7 +17,7 @@
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
                 <app-toolbar slot="header">
-                    <div main-title>ผู้ประสานงาน / ผู้บริหาร : [[AcademyName]]</div>
+                    <div main-title><name-self></name-self></div>
                 </app-toolbar>
                 <div slot="content">
                     <div class="row row-space">

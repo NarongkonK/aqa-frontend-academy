@@ -8,11 +8,26 @@
         <style include="aqa-styles">
         </style>
         <div class="modal-body">
-                รายละเอียด : <iron-autogrow-textarea rows="4" ></iron-autogrow-textarea>
+            <!-- <template is="dom-if" if="{{isEdit}}">
+                <div class="row">
+                    <div class="col-xs-12 end-xs">
+                        <paper-icon-button icon="create" on-click="_isEdit"></paper-icon-button>
+                    </div>
+                </div>
+            </template> -->
+            <div class="row">
+                <div class="col-xs-12">
+                        รายละเอียด : <iron-autogrow-textarea rows="4" style="width:100%" disabled="[[isEdit]]"></iron-autogrow-textarea>
+                </div>
+            </div>
+           
         </div>
         <div class="modal-footer">
-            <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
-            <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+            <!-- <template is="dom-if" if="{{!isEdit}}"> -->
+                <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
+                <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+            <!-- </template> -->
+
         </div>
         <!-- <div class="modal-body">
                
@@ -31,12 +46,20 @@
 
             static get properties() {
                 return {
-
+                    isEdit: {
+                        type: Boolean,
+                        value: true
+                    }
                 };
             }
 
 
-
+            closeDialog() {
+                Nylon.dialog.close()
+            }
+            _isEdit(){
+                this.set("isEdit",false)
+            }
         }
 
         window.customElements.define(DialogNote.is, DialogNote);

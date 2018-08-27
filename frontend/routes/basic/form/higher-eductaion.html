@@ -22,26 +22,26 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <aqa-combo-box label="ประเภทสถานศึกษา" form-path="AcademyTypeID" items="[[AcademyType]]" item-label-path="NameType" item-value-path="ID"
-                        on-change="changeAcademyGroup" value="[[form.AcademyTypeID]]"></aqa-combo-box>
+                        on-change="changeAcademyGroup" value="[[form.AcademyTypeID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa" value="[[form.CodeByAqa]]"></aqa-input>
+                    <aqa-input label="รหัสสถานศึกษา สมศ. (6 หลัก)" form-path="CodeByAqa" value="[[form.CodeByAqa]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสต้นสังกัด" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]"></aqa-input>
+                    <aqa-input label="รหัสต้นสังกัด" form-path="CodeByAffiliation" value="[[form.CodeByAffiliation]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe" value="[[form.CodeByOpsmoe]]"></aqa-input>
+                    <aqa-input label="รหัสสถานศึกษา สป (10 หลัก)" form-path="CodeByOpsmoe" value="[[form.CodeByOpsmoe]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-8">
-                    <aqa-input label="ชื่อสถานศึกษา (ภาษาไทย)" form-path="AcademyNameTh" value="[[form.AcademyNameTh]]"></aqa-input>
+                    <aqa-input label="ชื่อสถานศึกษา (ภาษาไทย)" form-path="AcademyNameTh" value="[[form.AcademyNameTh]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-8">
-                    <aqa-input label="ชื่อสถานศึกษา (ภาษาอังกฤษ)" form-path="AcademyNameEn" value="[[form.AcademyNameEn]]"></aqa-input>
+                    <aqa-input label="ชื่อสถานศึกษา (ภาษาอังกฤษ)" form-path="AcademyNameEn" value="[[form.AcademyNameEn]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
             </div>
             <div class="row">
@@ -65,19 +65,19 @@
                 </div> -->
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <aqa-combo-box label="สังกัดกระทรวง" id="ministry" items="[[ministry]]" item-label-path="NameAffiliation" item-value-path="ID"
-                        on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                        on-change="setAffilicationID" value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <aqa-combo-box label="สังกัดกรม" id="department" items="[[department]]" item-label-path="NameAffiliation" item-value-path="ID"
-                        on-change="setAffilicationID" value="[[form.AffiliationID]]"></aqa-combo-box>
+                        on-change="setAffilicationID" value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <aqa-combo-box label="สังกัดกอง" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
-                        value="[[form.AffiliationID]]"></aqa-combo-box>
+                        value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">
                     <aqa-combo-box label="สังกัดหน่วยงาน" id="pile" items="[[pile]]" item-label-path="NameAffiliation" item-value-path="ID" on-change="setAffilicationID"
-                        value="[[form.AffiliationID]]"></aqa-combo-box>
+                        value="[[form.AffiliationID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
             </div>
             <!-- <div class="row">
@@ -94,7 +94,7 @@
                     <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
                 </div> -->
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="ปีที่ก่อตั้ง"></aqa-input>
+                    <aqa-input label="ปีที่ก่อตั้ง" disabled="[[isEdit]]"></aqa-input>
                 </div>
             </div>
             <div>
@@ -105,7 +105,7 @@
                     <template is="dom-repeat" items="[[AcademyEducation]]">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <!-- <input type="checkbox" form-group value="[[item.ID]]">[[item.ShortNote]] -->
-                            <paper-checkbox checked="{{item.checked}}" form-group value="[[item.ID]]">[[item.Note]]</paper-checkbox>
+                            <paper-checkbox checked="{{item.checked}}" form-group value="[[item.ID]]" disabled="[[isEdit]]">[[item.Note]]</paper-checkbox>
                         </div>
                     </template>
                 </div>
@@ -117,9 +117,9 @@
                 <div class="row">
                     <template is="dom-repeat" items="[[ResearchType]]">
                         <div class="col-xs-12 col-sm-6 col-md-4">
-                            <paper-checkbox form-group value="[[item.ID]]">[[item.NameType]]</paper-checkbox>
+                            <paper-checkbox form-group value="[[item.ID]]" disabled="[[isEdit]]">[[item.NameType]]</paper-checkbox>
                             <template is="dom-if" if="{{_checkETC(item.ID)}}">
-                                    <input type="">
+                                    <input type="" disabled="[[isEdit]]">
                            </template>
                         </div>
                     </template>
@@ -132,9 +132,9 @@
                 <div class="row">
                     <template is="dom-repeat" items="[[AcademyQuality]]">
                         <div class="col-xs-12 col-sm-6 col-md-4">
-                            <paper-checkbox form-group value="[[item.ID]]">[[item.NameQuality]]</paper-checkbox>
+                            <paper-checkbox form-group value="[[item.ID]]" disabled="[[isEdit]]">[[item.NameQuality]]</paper-checkbox>
                             <template is="dom-if" if="{{_checkETC2(item.ID)}}">
-                                    <input type="">
+                                    <input type="" disabled="[[isEdit]]">
                            </template>
                         </div>
                     </template>
@@ -142,13 +142,14 @@
             </nylon-form-group>
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="จำนวนอาจารย์ประจำ (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]"></aqa-input>
+                    <aqa-input label="จำนวนอาจารย์ประจำ (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="จำนวนนักศึกษา (คน)" form-path="AmountStudent" value="[[form.AmountStudent]]"></aqa-input>
+                    <aqa-input label="จำนวนนักศึกษา (คน)" form-path="AmountStudent" value="{{form.AmountStudent}}" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"></aqa-combo-box>
+                    <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" 
+                    item-label-path="Size" item-value-path="ID" disabled></aqa-combo-box>
                 </div>
             </div>
         </nylon-form>
@@ -177,6 +178,10 @@
                         type: Array,
                         statePath: 'commonData.ResearchType'
                     },
+                    isEdit:{
+                        type:Boolean,
+                        value : false
+                    }
                 };
             }
             submit() {

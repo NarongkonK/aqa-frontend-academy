@@ -11,43 +11,53 @@
         </style>
         <div class="modal-body">
             <nylon-form id="myForm">
+                <template is="dom-if" if="{{isEdit}}">
+                    <div class="row end-xs">
+
+                        <paper-icon-button icon="create" on-click="_isEdit"></paper-icon-button>
+
+                    </div>
+                </template>
                 <div class="row row-space">
                     <div class="col-xs-6">
-                         <aqa-combo-box label="ประเภท" items="[[Kind]]" form-path="Kind" value="[[form.Kind]]"></aqa-combo-box>
+                        <aqa-combo-box label="ประเภท" items="[[Kind]]" form-path="Kind" value="[[form.Kind]]" disabled="[[isEdit]]"></aqa-combo-box>
                     </div>
                     <div class="col-xs-6">
-                            <aqa-input label="ตำแหน่ง"></aqa-input>
-                       </div>
+                        <aqa-input label="ตำแหน่ง" disabled="[[isEdit]]"></aqa-input>
+                    </div>
                 </div>
                 <div class="row row-space">
                     <div class="col-xs-3">
-                        <aqa-input label="คำนำหน้าชื่อ"></aqa-input>
+                        <aqa-input label="คำนำหน้าชื่อ" disabled="[[isEdit]]"></aqa-input>
                     </div>
                     <div class="col-xs-9">
-                        <aqa-input label="ชื่อ-นามสกุล" form-path="FnameCoordinator" value="[[form.FnameCoordinator]]"></aqa-input>
+                        <aqa-input label="ชื่อ-นามสกุล" form-path="FnameCoordinator" value="[[form.FnameCoordinator]]" disabled="[[isEdit]]"></aqa-input>
                     </div>
                 </div>
                 <div class="row row-space">
-                        <div class="col-xs-4">
-                             <aqa-input label="เบอร์โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
-                        </div>
-                        <div class="col-xs-8">
-                         <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]"></aqa-input>
-                        </div>
+                    <div class="col-xs-4">
+                        <aqa-input label="เบอร์โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]" disabled="[[isEdit]]"></aqa-input>
                     </div>
+                    <div class="col-xs-8">
+                        <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]" disabled="[[isEdit]]"></aqa-input>
+                    </div>
+                </div>
                 <!-- <aqa-input label="ตำแหน่งภายในองค์กร" form-path="PositionOrganization" value="[[form.PositionOrganization]]"></aqa-input> -->
                 <!-- <aqa-input label="ตำแหน่งทางวิชาการ" form-path="PositionAcademic" value="[[form.PositionAcademic]]"></aqa-input> -->
 
                 <!-- <aqa-combo-box label="คำนำหน้าชื่อ" items="[[prefix]]" item-label-path="NameTh" item-value-path="ID" form-path="PrefixID" value="[[form.PrefixID]]"></aqa-combo-box> -->
 
                 <!-- <aqa-input label="สกุล" form-path="LnameCoordinator" value="[[form.LnameCoordinator]]"></aqa-input> -->
-              
-                
+
+
             </nylon-form>
         </div>
         <div class="modal-footer">
-            <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>
+            <template is="dom-if" if="{{!isEdit}}">
+             <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>
             <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+            </template>
+           
         </div>
 
     </template>
@@ -81,6 +91,10 @@
                                 value: 'Coordinator'
                             }
                         ]
+                    },
+                    isEdit: {
+                        type: Boolean,
+                        value: true
                     }
                 };
             }
@@ -100,6 +114,9 @@
             }
             closeDialog() {
                 Nylon.dialog.close()
+            }
+            _isEdit(){
+                this.set("isEdit", false)
             }
         }
 

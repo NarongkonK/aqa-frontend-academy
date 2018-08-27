@@ -4,6 +4,7 @@
 <link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../components/aqa-table/aqa-table.html">
 <link rel="import" href="../../../components/aqa-advance-search/aqa-advance-search.html">
+<link rel="import" href="../components/name-self.html">
 <dom-module id="route-sar" topic="SAR ประจำปีการศึกษา" parent="route-home">
     <template>
         <style include="aqa-styles">
@@ -11,6 +12,10 @@
         <div class="page-container">
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
+                    <app-toolbar slot="header">
+                        <name-self></name-self>
+                    </app-toolbar>
+
                 <div slot="content">
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
@@ -18,7 +23,7 @@
                             <aqa-button type="danger" icon="remove" on-click="confirmDelete">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table colunm="[[column]]" list="[[list]]"></aqa-table>
+                    <aqa-table colunm="[[column]]" tools="[[tools]]" list="[[list]]"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -55,9 +60,29 @@
                         type:Array,
                         value:[
                             {
-                                filename:"SAR-โรงเรียนเทพศิรินทร์.pdf",
+                                filename:"SAR-โรงเรียนเทศบาล3(ชาญวิทยา).pdf",
                                 year:"2559"
                             }
+                        ]
+                    },
+                    tools:{
+                        type:Array,
+                        value: [
+                            {
+                                label:'download',
+                                event: 'download',
+                                icon: 'get-app'
+                            },
+                            {
+                                label: 'แก้ไขข้อมูล',
+                                event: 'edit',
+                                icon: 'create'
+                            },
+                            {
+                                label: 'ลบ',
+                                event: 'delete',
+                                icon: 'aqa-tool:bin'
+                            },
                         ]
                     }
                 }

@@ -6,6 +6,8 @@
 <link rel="import" href="../../../bower_components/aqa-icons/aqa-icon-tool.html">
 <link rel="import" href="../../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="./components/name-self.html">
+
 <link rel="import" href="./components/address-form.html">
 <link rel="import" href="../../redux-mixin.html">
 <link rel="import" href="../redux/common-redux.html">
@@ -16,25 +18,33 @@
         <div class="page-container">
             <aqa-panel>
                 <app-toolbar slot="header">
-                    <div main-title>ที่อยู่สถานศึกษา : [[AcademyName]]</div>
-                    <div style="align-content: flex-end">
-                        <aqa-tooltip label="แก้ไขข้อมูล">
-                            <paper-icon-button icon="create" ></paper-icon-button>
-                        </aqa-tooltip>
+                    <div main-title>
+                        <name-self></name-self>
                     </div>
+                    <template is="dom-if" if="{{isEdit}}">
+                        <div style="align-content: flex-end">
+                            <aqa-tooltip label="แก้ไขข้อมูล">
+                                <paper-icon-button icon="create" on-click="_isEdit"></paper-icon-button>
+                            </aqa-tooltip>
+                        </div>
+                    </template>
+
                 </app-toolbar>
 
                 <div slot="content">
-                    <address-form id="addressForm"></address-form>
+                    <address-form id="addressForm" isEdit="[[isEdit]]"></address-form>
                 </div>
             </aqa-panel>
             <div class="row-space"></div>
-            <div class="row center-xs">
-                <div class="col-xs-12">
-                    <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <aqa-button type="danger">ยกเลิก</aqa-button>
+            <template is="dom-if" if="{{!isEdit}}">
+                <div class="row center-xs">
+                    <div class="col-xs-12">
+                        <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <aqa-button type="danger">ยกเลิก</aqa-button>
+                    </div>
                 </div>
-            </div>
+            </template>
+
         </div>
     </template>
 
@@ -51,6 +61,10 @@
                     AcademyName: {
                         type: String,
                         value: {}
+                    },
+                    isEdit: {
+                        type: Boolean,
+                        value: true
                     }
                 };
             }
@@ -75,6 +89,9 @@
                     Nylon.dispatch("insertAddress", data)
                 }
 
+            }
+            _isEdit(){
+                this.set("isEdit",false)
             }
             // changePage(val){
             //     if(val.ID){

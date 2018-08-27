@@ -2,85 +2,91 @@
 <link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 
-
+<link rel="import" href="./components/name-self.html">
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
 
 <dom-module id="route-merge" topic="ข้อมูลสถานศึกษาที่ยุบรวม" parent="route-home">
     <template>
         <style include="aqa-styles">
-         
         </style>
         <div class="page-container">
             <aqa-advance-search></aqa-advance-search>
 
             <aqa-panel id="basic">
+                <app-toolbar slot="header">
+                    <div main-title><name-self></name-self></div>
+                </app-toolbar>
                 <div slot="content">
-                <div class="row row-space">
-                    <div class="col-xs-12 col-md-6 col-xs-4">
-                        <aqa-button type="primary" icon="add" on-click="_addForm">เพิ่ม</aqa-button>
+                    <div class="row row-space">
+                        <div class="col-xs-12 col-md-6 col-xs-4">
+                            <aqa-button type="primary" icon="add" on-click="_addForm">เพิ่ม</aqa-button>
+                        </div>
                     </div>
-                </div>
 
-                <aqa-table checkbox colunm="[[colunm]]" list="[1]" on-detail="_onDetail" on-edit="_onDetail"></aqa-table>
-                <div>จำนวน x รายการ</div>
-            </div>
+                    <aqa-table checkbox colunm="[[colunm]]" list="[1]" on-detail="_onDetail" on-edit="_onDetail"></aqa-table>
+                    <div>จำนวน x รายการ</div>
+                </div>
             </aqa-panel>
-            
+
         </div>
-        
+
 
     </template>
 
     <script>
 
         class RouteMerge extends Polymer.Element {
-        
+
             static get is() {
                 return 'route-merge';
             }
 
-        
+
             static get properties() {
                 return {
-                    colunm :{
-                        type:Array,
-                        value:[
+                    colunm: {
+                        type: Array,
+                        value: [
                             {
-                                label:"รหัสสถานศึกษา",
-                                path : "",
-                                width :"150px",
-                                flex : "0"
+                                label: "รหัสสถานศึกษา",
+                                path: "",
+                                width: "150px",
+                                flex: "0"
                             },
                             {
-                                label:"ชื่อสถานศึกษา",
-                                path : "",
-                                width :"300px",
-                                flex : "1"
+                                label: "ชื่อสถานศึกษา",
+                                path: "",
+                                width: "300px",
+                                flex: "1"
                             },
                             {
-                                label:"ประเภท",
-                                path : "",
-                                width :"200px",
-                                flex : "0"
+                                label: "ประเภท",
+                                path: "",
+                                width: "200px",
+                                flex: "0"
                             },
                             {
-                                label:"ความสัมพันธ์",
-                                path : "",
-                                width :"200px",
-                                flex : "0"
+                                label: "ความสัมพันธ์",
+                                path: "",
+                                width: "200px",
+                                flex: "0"
                             }
                         ]
+                    },
+                    AcademyName:{
+                        type:String,
+                        value:"โรงเรียนเทศบาล 3 (ชาญวิทยา)"
                     }
                 };
             }
-            _addForm(){
+            _addForm() {
                 Nylon.page("merge/form")
             }
-            _onDetail(){
+            _onDetail() {
                 Nylon.page("merge/form")
             }
-         
+
 
         }
 

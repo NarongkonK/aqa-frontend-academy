@@ -1,6 +1,8 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+
+<link rel="import" href="./components/name-self.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
 <dom-module id="route-complete-report" topic="รายงานฉบับสมบูรณ์">
@@ -10,6 +12,10 @@
         <div class="page-container">
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
+                <aqa-toolbar slot="header">
+                    <name-self></name-self>
+                </aqa-toolbar>
+                
                 <div slot="content">
                     <aqa-table colunm="[[column]]" list="[[data]]" tools="[[tools]]"></aqa-table>
                     <div>จำนวน x รายการ</div>

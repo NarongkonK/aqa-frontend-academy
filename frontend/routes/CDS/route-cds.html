@@ -5,6 +5,7 @@
 <link rel="import" href="../../../components/aqa-table/aqa-table.html">
 <link rel="import" href="../../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../components/aqa-advance-search/aqa-advance-search.html">
+<link rel="import" href="../components/name-self.html">
 <dom-module id="route-cds" topic="CDS สถานศึกษา" parent="route-home">
     <template>
         <style include="aqa-styles">
@@ -17,9 +18,12 @@
             <div class="section">
                 <aqa-panel>
                     <app-toolbar slot="header">
-                        <div main-title>แบบฟอร์ม CDS</div>
+                        <name-self></name-self>
+                       
                     </app-toolbar>
                     <div slot="content">
+                         <div main-title style="font-size:23px;">แบบฟอร์ม CDS</div>
+                           
                         <!-- <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <aqa-button type="primary" icon="add" on-click="openDailog">เพิ่ม</aqa-button>

@@ -3,6 +3,9 @@
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+
+
+<link rel="import" href="./components/name-self.html">
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
 <dom-module id="route-campus" topic="วิทยาเขต" parent="route-home">
     <template>
@@ -11,6 +14,9 @@
         <div class="page-container">
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
+                <app-toolbar slot="header">
+                    <div main-title><name-self></name-self></div>
+                </app-toolbar>
                 <div slot="content">
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
@@ -63,6 +69,10 @@
                             }
                         ]
                     },
+                    AcademyName:{
+                        type:String,
+                        value: "โรงเรียนเทศบาล 3 (ชาญวิทยา)"
+                    }
                     // tools: {
                     //     type: Array,
                     //     value: [
@@ -85,7 +95,7 @@
                     // }
                 };
             }
-            _openPage(){
+            _openPage() {
                 Nylon.page('campus/form')
             }
         }

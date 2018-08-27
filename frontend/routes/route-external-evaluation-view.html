@@ -1,31 +1,62 @@
 <link rel="import" href="../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
-
+<link rel="import" href="../../../bower_components/aqa-form/aqa-input.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
 <dom-module id="route-external-evaluation-view" topic="รายละเอียด" parent="route-external-evaluation">
     <template>
-        <style>
-          
+        <style include="aqa-styles">
+            .section {
+                margin-bottom: 1rem;
+            }
         </style>
-        <aqa-panel>
-            <div slot="content">
-                    <embed src="../../../images/register/บันทึกข้อตกลง.pdf" type="application/pdf" height="700px" width="100%">
+        <div class="page-container">
+            <div class="section">
+                <aqa-panel>
+                    <div slot="content">
+                        <div class="row row-space">
+                            <div class="col-xs-3"></div>
+                            <div class="col-xs-2 start-xs">
+                                <aqa-input label="รหัสสถานศึกษา" value="B00001" disabled></aqa-input>
+                            </div>
+                            <div class="col-xs-5 start-xs">
+                                <aqa-input label="ชื่อสถานศึกษา" value="โรงเรียนเทศบาล 3 (ชาญวิทยา)" disabled></aqa-input>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                                <div class="col-xs-3"></div>
+                            <div class="col-xs-1 start-xs">
+                                <aqa-input label="รอบประเมิน" value="3" disabled></aqa-input>
+                            </div>
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-1 start-xs">
+                                <aqa-input label="ปีการศึกษา" value="2554" disabled></aqa-input>
+                            </div>
+                        </div>
+                    </div>
+                </aqa-panel>
             </div>
-        </aqa-panel>
-        
+
+            <aqa-panel>
+                <div slot="content">
+                    <embed src="../../../images/register/บันทึกข้อตกลง.pdf" type="application/pdf" height="700px" width="100%">
+                </div>
+            </aqa-panel>
+        </div>
 
     </template>
 
     <script>
-       
+
         class RouteExternalEvaluationView extends Polymer.Element {
-         
+
             static get is() {
                 return 'route-external-evaluation-view';
             }
 
             static get properties() {
                 return {
-                    
+
                 };
             }
 

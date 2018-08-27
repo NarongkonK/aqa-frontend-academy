@@ -3,7 +3,7 @@
     FormMixin = Parent => class FormMixin extends ReduxMixin(Parent) {
         static get observers() {
             return [
-                'mathStudent(count)'
+                'mathStudent(form.AmountStudent)'
             ]
         }
         static get properties() {
@@ -100,10 +100,11 @@
         }
         mathStudent(val) {
             var data = 0
+            // console.log(val)
             this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
                 Polymer.Async.timeOut.after(500),
                 () => {
-                    var num = parseInt(this.count)
+                    var num = parseInt(val)
                     var size = this.AcademySize;
                     var result = size.filter((item) => {
                         return item.StudentAmountStart <= num && item.StudentAmountEnd >= num

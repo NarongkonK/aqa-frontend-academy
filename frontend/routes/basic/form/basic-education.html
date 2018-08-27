@@ -116,13 +116,13 @@
                     <aqa-input label="จำนวนครู (คน)" form-path="AmountTeacher" value="[[form.AmountTeacher]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
-                    <aqa-input label="จำนวนนักเรียน (คน)" form-path="AmountStudent" value="[[form.AmountStudent]]" disabled="[[isEdit]]"></aqa-input>
+                    <aqa-input label="จำนวนนักเรียน (คน)" form-path="AmountStudent" value="{{form.AmountStudent}}" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-2">
                     <!-- [[SizeAcademy.0.Size]] -->
-                    <!-- <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"
-                        value="[[form.AcademySizeID]]"></aqa-combo-box> -->
-                    <aqa-input label="ขนาดสถานศึกษา (คน)" value="[[form.BasicAcademySize.Size]]" disabled></aqa-input>
+                    <aqa-combo-box label="ขนาดสถานศึกษา (คน)" form-path="AcademySizeID" items="[[SizeAcademy]]" item-label-path="Size" item-value-path="ID"
+                        value="[[form.AcademySizeID]]" disabled></aqa-combo-box>
+                    <!-- <aqa-input label="ขนาดสถานศึกษา (คน)" value="[[form.BasicAcademySize.Size]]" ></aqa-input> -->
                 </div>
             </div>
             <div class="row-space" style="margin-bottom:2rem;"></div>
@@ -146,7 +146,7 @@
                     },
                     isEdit: {
                         type: Boolean,
-                        value: true
+                        value: false
                     }
 
                 };

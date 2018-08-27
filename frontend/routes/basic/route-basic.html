@@ -17,11 +17,14 @@
             <aqa-panel>
                 <app-toolbar slot="header">
                     <div main-title>ข้อมูลพื้นฐาน : [[select.AcademyNameTh]]</div>
-                    <div style="align-content: flex-end">
+                    <template is="dom-if" if="{{isEdit}}">
+                     <div style="align-content: flex-end">
                         <aqa-tooltip label="แก้ไขข้อมูล">
                             <paper-icon-button icon="create" on-click="_isEdit"></paper-icon-button>
                         </aqa-tooltip>
                     </div>
+                    </template>
+                   
                 </app-toolbar>
 
                 <div slot="content">
@@ -57,7 +60,7 @@
                     },
                     isEdit: {
                         type: Boolean,
-                        value: false
+                        value: true
                     }
                 };
             }
@@ -77,15 +80,25 @@
             // }
             getForm() {
                 var data = this.$.form.submit()
-                // console.log(data)
-                if (this.select.ID) {
-                    data.ID = this.select.ID;
-                    Nylon.dispatch("updateAcademy", data)
-                }
-                else Nylon.dispatch("insertAcademy", data)
+                console.log(data)
+                // if (this.select.ID) {
+                //     data.ID = this.select.ID;
+                //     Nylon.dispatch("updateAcademy", data)
+                // }
+                // else Nylon.dispatch("insertAcademy", data)
             }
             _isEdit() {
+                if (this.isEdit == true){
+                    this.set("isEdit" , false)
+                    this.$.form.isEdit = false
+                }else{
+                    this.set("isEdit" , true)
+                    this.$.form.isEdit = true
+                }
+                
                 console.log(this.isEdit)
+               
+                
             }
         }
 

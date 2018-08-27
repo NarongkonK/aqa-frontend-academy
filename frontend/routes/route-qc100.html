@@ -4,6 +4,7 @@
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
+<link rel="import" href="./components/name-self.html">
 
 <dom-module id="route-qc100" topic="QC100" parent="route-home">
     <template>
@@ -16,9 +17,12 @@
             <div class="section">
                 <aqa-panel>
                     <app-toolbar slot="header">
-                        <div main-title>แบบฟอร์ม QC100</div>
+
+                        <name-self></name-self>
+
                     </app-toolbar>
                     <div slot="content">
+                        <div main-title style="font-size:23px;">แบบฟอร์ม QC100</div>
                         <aqa-table tools="[[tools]]" colunm="[[colunm]]" list="[[data]]"></aqa-table>
                         <div>จำนวน x รายการ</div>
                     </div>

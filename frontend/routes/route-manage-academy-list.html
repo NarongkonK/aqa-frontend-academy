@@ -3,6 +3,8 @@
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="./components/manage-academy-list.html">
 
+<link rel="import" href="./components/name-self.html">
+
 <dom-module id="route-manage-academy-list" topic="กำหนดรายชื่อสถานศึกษา" parent="route-home" path="/manage/academy-list">
     <template>
       
@@ -12,6 +14,7 @@
         
         <div class="page-container">
             <aqa-panel>
+                   
                 <div slot="content">
                   <manage-academy-list list="[[data]]" toolsBtn="[[toolsBtn]]"></manage-academy-list>
                 </div>

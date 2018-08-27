@@ -6,6 +6,7 @@
 <link rel="import" href="../../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../bower_components/aqa-form/aqa-form.html">
+<link rel="import" href="../../../bower_components/paper-behaviors/demo/paper-button.html">
 <link rel="import" href="./components/address-campus-form.html">
 <link rel="import" href="../../../redux-mixin.html">
 <link rel="import" href="../../redux/common-redux.html">
@@ -26,21 +27,30 @@
             <div class="section">
                 <aqa-panel>
                     <div slot="content">
+                        <template is="dom-if" if="{{isEdit}}">
+                        <div class="row end-xs">
+                            <aqa-tooltip label="แก้ไขข้อมูล">
+                                <paper-icon-button icon="create" on-click="_isEdit"></paper-icon-button>
+                            </aqa-tooltip>
+                        </div>
+                        </template>
+                        
+
                         <div class="row center-xs">
-                            <div class="col-xs-12 col-sm-2 col-md-2">
-                                <aqa-input label="รหัสสถานศึกษาหลัก"></aqa-input>
+                            <div class="col-xs-12 col-sm-2 col-md-2 start-xs">
+                                <aqa-input label="รหัสสถานศึกษาหลัก" disabled></aqa-input>
                             </div>
-                            <div class="col-xs-12 col-sm-9 col-md-6">
-                                <aqa-input label="ชื่อสถานศึกษา"></aqa-input>
+                            <div class="col-xs-12 col-sm-9 col-md-6 start-xs">
+                                <aqa-input label="ชื่อสถานศึกษา" disabled></aqa-input>
                             </div>
                         </div>
 
                         <div class="row center-xs">
-                            <div class="col-xs-12 col-sm-2 col-md-2">
-                                <aqa-input label="รหัสสวิทยาเขต"></aqa-input>
+                            <div class="col-xs-12 col-sm-2 col-md-2 start-xs">
+                                <aqa-input label="รหัสสวิทยาเขต" disabled="[[isEdit]]"></aqa-input>
                             </div>
-                            <div class="col-xs-12 col-sm-9 col-md-6">
-                                <aqa-input label="ชื่อชื่อวิทยาเขต"></aqa-input>
+                            <div class="col-xs-12 col-sm-9 col-md-6 start-xs">
+                                <aqa-input label="ชื่อวิทยาเขต" disabled="[[isEdit]]"></aqa-input>
                             </div>
                         </div>
 
@@ -54,14 +64,17 @@
                         <div main-title>สถานศึกษา</div>
                     </app-toolbar>
                     <div slot="content">
-                        <address-campus-form></address-campus-form>
-
-                        <div class="row center-xs" style="margin-top:1rem;">
-                            <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <aqa-button type="danger">ยกเลิก</aqa-button>
-                        </div>
+                        <address-campus-form id="addressCampus" isEdit="[[isEdit]]"></address-campus-form>
                     </div>
                 </aqa-panel>
+                <template is="dom-if" if="{{!isEdit}}">
+                    <div class="row center-xs" style="margin-top:1rem;">
+                        <aqa-button type="success" on-click="getForm">บันทึก</aqa-button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <aqa-button type="danger">ยกเลิก</aqa-button>
+                    </div>
+                </template>
+
+
 
 
 
@@ -86,10 +99,17 @@
 
             static get properties() {
                 return {
-
+                    isEdit: {
+                        type: Boolean,
+                        value: true
+                    }
                 };
             }
-
+            _isEdit() {
+                this.set("isEdit", false)
+                
+                this.$.addressCampus.isEdit = false
+            }
 
         }
 

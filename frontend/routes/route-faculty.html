@@ -3,7 +3,7 @@
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
-
+<link rel="import" href="./components/name-self.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
 
 <dom-module id="route-faculty" topic="คณะ" parent="route-home">
@@ -13,6 +13,9 @@
         <div class="page-container">
             <aqa-advance-search></aqa-advance-search>
             <aqa-panel>
+                <app-toolbar slot="header">
+                    <div main-title><name-self></name-self></div>
+                </app-toolbar>
                 <div slot="content">
                     <div class="row row-space">
                         <div class="col-xs-12 col-sm-6 col-md-4">
@@ -20,7 +23,7 @@
                             <aqa-button type="danger" icon="remove" on-click="">ลบ</aqa-button>
                         </div>
                     </div>
-                    <aqa-table checkbox colunm="[[collumn]]" list="[1]" on-edit="_editData"></aqa-table>
+                    <aqa-table checkbox colunm="[[column]]" list="[1]" on-edit="_editData"></aqa-table>
                 </div>
             </aqa-panel>
         </div>
@@ -39,7 +42,7 @@
 
             static get properties() {
                 return {
-                    collumn: {
+                    column: {
                         type: Array,
                         value: [
                             {
@@ -81,13 +84,17 @@
                                 icon: 'aqa-tool:bin'
                             }
                         ]
+                    },
+                    AcademyName:{
+                        type:String,
+                        value:"โรงเรียนเทศบาล 3 (ชาญวิทยา)"
                     }
                 };
             }
-            _openDialog(){
+            _openDialog() {
                 Nylon.dialog.open("/faculty")
             }
-            _editData(){
+            _editData() {
                 Nylon.dialog.open("/faculty")
             }
         }

@@ -2,21 +2,34 @@
 <link rel="import" href="../../../../bower_components/aqa-form/aqa-input.html">
 <link rel="import" href="../../../../bower_components/aqa-form/aqa-combo-box.html">
 <link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../bower_components/paper-behaviors/demo/paper-button.html">
+
 <link rel="import" href="../../../redux-mixin.html">
 <dom-module id="dialog-faculty" topic="จัดการข้อมูล">
     <template>
         <style include="aqa-styles">
         </style>
         <div class="modal-body">
+            <template is="dom-if" if="{{isEdit}}">
+                <div class="row">
+                    <div class="col-xs-12 end-xs">
+                        <paper-icon-button icon="create" on-click="_isEdit"></paper-icon-button>
+                    </div>
+                </div>
+            </template>
+
             <aqa-input label="รหัสสถานศึกษา" disabled></aqa-input>
             <aqa-input label="ชื่อสถานศึกษา" disabled></aqa-input>
-            <aqa-input label="รหัสคณะ"></aqa-input>
-            <aqa-input label="ชื่อคณะ"></aqa-input>
-            <aqa-combo-box label="วิทยาเขต"></aqa-combo-box>
+            <aqa-input label="รหัสคณะ" disabled="[[isEdit]]" ></aqa-input>
+            <aqa-input label="ชื่อคณะ" disabled="[[isEdit]]"></aqa-input>
+            <aqa-combo-box label="วิทยาเขต" disabled="[[isEdit]]"></aqa-combo-box>
         </div>
         <div class="modal-footer">
-            <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
-            <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+            <template is="dom-if" if="{{!isEdit}}">
+                <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button>
+                <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+            </template>
+
         </div>
 
     </template>
@@ -30,11 +43,17 @@
 
             static get properties() {
                 return {
-                   
+                    isEdit: {
+                        type: Boolean,
+                        value: true
+                    }
                 };
             }
             closeDialog() {
                 Nylon.dialog.close()
+            }
+            _isEdit(){
+                this.set("isEdit", false)
             }
         }
 

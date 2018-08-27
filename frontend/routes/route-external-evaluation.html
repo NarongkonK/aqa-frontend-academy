@@ -3,7 +3,7 @@
 <link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
 
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
-
+<link rel="import" href="./components/name-self.html">
 <dom-module id="route-external-evaluation" topic="ผลประเมินคุณภาพภายนอก" parent="route-home">
     <template>
         <style include="aqa-styles">
@@ -11,6 +11,9 @@
         </style>
     <div class="page-container">
         <aqa-panel>
+                <app-toolbar slot="header">
+                    <name-self></name-self>
+                </app-toolbar>
             <div slot="content">
                 <aqa-table colunm="[[colunm]]" list="[[list]]" tools="[[tools]]" on-detail="_toPage"></aqa-table>
             </div>

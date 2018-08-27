@@ -4,6 +4,7 @@
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
+<link rel="import" href="./components/name-self.html">
 
 <dom-module id="route-manage-document" topic="จัดการเอกสาร" parent="route-home">
     <template>
@@ -11,6 +12,9 @@
            
         </style>
         <aqa-panel>
+                <app-toolbar slot="header">
+                    <name-self></name-self>
+                </app-toolbar>
             <div slot="content">
                 <div class="row row-space">
                     <div class="col-xs-12">

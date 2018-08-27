@@ -1,0 +1,44 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../bower_components/aqa-styles/aqa-styles.html">
+
+<dom-module id="name-self">
+    <template>
+        <style include="aqa-styles">
+           
+        </style>
+        
+            <div main-title>รหัสสถานศึกษา : [[id]]  ชื่อสถานศึกษา : [[name]]</div>
+     
+         
+        
+
+    </template>
+
+    <script>
+      
+        class NameSelf extends Polymer.Element {
+          
+            static get is() {
+                return 'name-self';
+            }
+
+            static get properties() {
+                return {
+                    id:{
+                        type:String,
+                        value:"B00001"
+                    },
+                    name:{
+                        type:String,
+                        value:"โรงเรียนเทศบาล 3 (ชาญวิทยา)"
+                    }
+                };
+            }
+
+           
+
+        }
+
+        window.customElements.define(NameSelf.is, NameSelf);
+    </script>
+</dom-module>

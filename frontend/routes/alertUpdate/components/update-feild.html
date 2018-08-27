@@ -18,34 +18,32 @@
             }
         </style>
         <template is="dom-repeat" items="{{list}}">
-            <div class="row">
-                <div class="col-xs-1">
+            <div class="row center-xs">
+                <div class="col-xs-1 end-xs">
                     <paper-checkbox></paper-checkbox>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-4 start-xs">
                     <aqa-input label="[[item.label]]" value="[[item.path1]]"></aqa-input>
                 </div>
-                <div class="col-xs-1 btn-center">
+                <div class="col-xs-1 btn-center start-xs">
                     <aqa-button type="primary">แก้ไข</aqa-button>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-4 start-xs">
                     <aqa-input label="[[item.label]]" value="[[item.path1]]"></aqa-input>
                 </div>
-                <div class="col-xs-1 btn-center">
+                <div class="col-xs-1 btn-center start-xs">
                     <aqa-button type="primary">ยกเลิก</aqa-button>
                 </div>
             </div>
             <div class="row-space"></div>
         </template>
-        <div class="row">
-            <div class="col-xs-4"></div>
-            <div class="col-xs-4 ">
-                <div>
-                    <div>
-                        หมายเหตุ
-                    </div>
-                    <iron-autogrow-textarea rows="4" placeholder=""></iron-autogrow-textarea>
+        <div class="row center-xs">
+            
+            <div class="col-xs-4">
+                <div style="text-align:left">
+                    หมายเหตุ
                 </div>
+                    <iron-autogrow-textarea style="width:100%" rows="4" placeholder=""></iron-autogrow-textarea>
             </div>
         </div>
 

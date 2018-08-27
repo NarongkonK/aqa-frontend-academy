@@ -4,7 +4,7 @@
 <link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
 
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
-
+<link rel="import" href="./components/name-self.html">
 <dom-module id="route-note" topic="หมายเหตุ" parent="route-home">
     <template>
         <style include="aqa-styles">
@@ -12,10 +12,13 @@
 
         <div class="page-container">
             <aqa-panel>
+                    <app-toolbar slot="header">
+                        <name-self></name-self>
+                    </app-toolbar>
                 <div slot="content">
                     <div class="row row-space">
                         <div class="col-xs-12">
-                            <aqa-button type="primary" on-click="_toPage">เพิ่ม</aqa-button>
+                            <aqa-button type="primary" icon="add" on-click="_toPage">เพิ่ม</aqa-button>
                         </div>
                     </div>
                     <aqa-table colunm="[[colunm]]" list="[[list]]" tools="[[tools]]" on-edit="_toPage"></aqa-table>

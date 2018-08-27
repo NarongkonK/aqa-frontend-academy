@@ -4,74 +4,77 @@
 
 <link rel="import" href="../../components/aqa-table/aqa-table.html">
 <link rel="import" href="../../components/aqa-advance-search/aqa-advance-search.html">
+<link rel="import" href="./components/name-self.html">
 
 <dom-module id="route-draft-report" topic="ร่างรายงาน" parent="route-home">
     <template>
         <style include="aqa-styles">
-            
         </style>
-    <div class="page-container">
-        <aqa-advance-search></aqa-advance-search>
-        <aqa-panel>
-            <div slot="content">
-                <aqa-table colunm="[[colunm]]" tools="[[tools]]" list="[[data]]" on-detail="_view"></aqa-table>
-            </div>
-        </aqa-panel>
-    </div>
-        
+        <div class="page-container">
+            <aqa-advance-search></aqa-advance-search>
+            <aqa-panel>
+                <app-toolbar slot="header">
+                    <name-self></name-self>
+                </app-toolbar>
+                <div slot="content">
+                    <aqa-table colunm="[[colunm]]" tools="[[tools]]" list="[[data]]" on-detail="_view"></aqa-table>
+                </div>
+            </aqa-panel>
+        </div>
+
 
     </template>
 
     <script>
-    
+
         class RouteDraftReport extends Polymer.Element {
-       
+
             static get is() {
                 return 'route-draft-report';
             }
 
-     
+
             static get properties() {
                 return {
-                    colunm:{
-                        type:Array,
-                        value:[
+                    colunm: {
+                        type: Array,
+                        value: [
                             {
-                                label:"รอบการประเมิน",
-                                path:"round",
-                                width:"100px",
-                                flex:"1"
+                                label: "รอบการประเมิน",
+                                path: "round",
+                                width: "100px",
+                                flex: "1"
                             },
                             {
-                                label:"ปีที่ได้รับการประเมิน",
-                                path:"year",
-                                width:"100px",
-                                flex:"1"
+                                label: "ปีที่ได้รับการประเมิน",
+                                path: "year",
+                                width: "100px",
+                                flex: "1"
                             }
                         ]
                     },
-                    tools:{
-                        type:Array,
-                        value:[
+                    tools: {
+                        type: Array,
+                        value: [
                             {
-                                label:"ดูรายละเอียด",
-                                event:"detail",
-                                icon:"icons:visibility"
+                                label: "ดูรายละเอียด",
+                                event: "detail",
+                                icon: "icons:visibility"
                             }
                         ]
                     },
-                    data:{
-                        type:Array,
-                        value:[
+                    data: {
+                        type: Array,
+                        value: [
                             {
-                                round:"4",
-                                year:"2560"
+                                round: "4",
+                                year: "2560"
                             }
                         ]
                     }
                 };
             }
-            _view(){
+            _view() {
                 Nylon.page("/draft/report-view")
             }
 

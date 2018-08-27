@@ -1,0 +1,70 @@
+<link rel="import" href="../../../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../../../../bower_components/aqa-form/aqa-input.html">
+
+<dom-module id="dialog-merge-detail" topic="รายละเอียด">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    สถานศึกษาที่ยุบรวม
+                </div>
+            </div>
+            <template is="dom-repeat" items="{{list}}" >
+             <div class="row row-space">
+                <div class="col-xs-4">
+                    <aqa-input label="รหัสสถานศึกษา" value="[[item.ID]]" disabled></aqa-input>
+                </div>
+                <div class="col-xs-8">
+                        <aqa-input label="ชื่อสถานศึกษา"  value="[[item.name]]" disabled></aqa-input>
+                    </div>
+            </div>
+            </template>
+           
+        </div>
+        <div class="modal-footer">
+            <!-- <aqa-button type="success" on-click="closeDialog">บันทึก</aqa-button> -->
+            <aqa-button type="default-outline" on-click="closeDialog">ยกเลิก</aqa-button>
+        </div>
+
+
+    </template>
+
+    <script>
+
+        class DialogMergeDetail extends Polymer.Element {
+
+            static get is() {
+                return 'dialog-merge-detail';
+            }
+
+
+            static get properties() {
+                return {
+                    list:{
+                        type:Array,
+                        value:[
+                            {
+                                ID:"xxxxx1",
+                                name:"โรงเรียน1"
+                            },
+                            {
+                                ID:"xxxxx2",
+                                name:"โรงเรียน2"
+                            }
+                        ]
+                    }
+                };
+            }
+            closeDialog(){
+                Nylon.dialog.close()
+            }
+
+        }
+
+        window.customElements.define(DialogMergeDetail.is, DialogMergeDetail);
+    </script>
+</dom-module>

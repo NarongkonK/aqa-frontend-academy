@@ -1,22 +1,59 @@
 <link rel="import" href="../../../../../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../../../../../bower_components/aqa-styles/aqa-styles.html">
 
+
 <dom-module id="under-data">
     <template>
         <style include="aqa-styles">
-          .result {
+            .result {
                 background: rgb(207, 210, 211);
             }
-        </style>
 
-        
-<div class="result">
-        <div class="row">
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            th,
+            td {
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2
+            }
+
+            th {
+                background-color: #699FE9;
+                color: white;
+            }
+        </style>
+        <table>
+            <tr>
+                <th>สถานะภาพสถานศึกษา</th>
+                <th> ยุบรวม (แห่ง)</th>
+                <th>โรงเรียนสาขา (แห่ง)</th>
+                <th>เรียนร่วม (แห่ง)</th>
+            </tr>
+
+            <tr>
+                <td>ดำเนินการ</td>
+                <td><a href="/basic" on-click="_toPage">2</a></td>
+                <td>2</td>
+                <td>2</td>
+            </tr>
+        </table>
+
+        <!-- <div class="result"> -->
+        <!-- <div class="row">
             <div class="col-xs-12 col-sm-3 col-md-3">
                 สถานะภาพสถานศึกษา
             </div>
             <div class="col-xs-12 col-sm-2 col-md-2">
-                ยุบรวม (แห่ง)
+                <div on-click="_toPage">
+                      <a href="/basic" on-click="_toPage">ยุบรวม (แห่ง)</a>
+                </div>
             </div>
             <div class="col-xs-12 col-sm-2 col-md-2">
                 โรงเรียนสาขา (แห่ง)
@@ -38,26 +75,56 @@
             <div class="col-xs-12 col-sm-2 col-md-2">
                 2
             </div>
-        </div>
-    </div>
+        </div> -->
+        <!-- </div> -->
     </template>
 
     <script>
-       
+
         class UnderData extends Polymer.Element {
-        
+
             static get is() {
                 return 'under-data';
             }
 
-           
+
             static get properties() {
                 return {
-                    
+                    colunm: {
+                        type: Array,
+                        value: [
+                            {
+                                label: "สถานภาพสถานศึกษา",
+                                path: "",
+                                width: "100",
+                                flex: 1
+                            },
+                            {
+                                label: "ยุบรวม (แห่ง)",
+                                path: "",
+                                width: "100",
+                                flex: 1
+                            },
+                            {
+                                label: "โรงเรียนสาขา (แห่ง)",
+                                path: "",
+                                width: "100",
+                                flex: 1
+                            },
+                            {
+                                label: "เรียนร่วม (แห่ง)",
+                                path: "",
+                                width: "100",
+                                flex: 1
+                            }
+                        ]
+                    }
                 };
             }
 
-            
+            _toPage() {
+                Nylon.dialog.open("/merge/detail")
+            }
 
         }
 

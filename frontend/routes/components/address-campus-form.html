@@ -16,59 +16,61 @@
         <nylon-form id="myForm">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                    <aqa-input label="เลขที่" form-path="Number" value="[[form.Number]]"></aqa-input>
+                    <aqa-input label="เลขที่" form-path="Number" value="[[form.Number]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                    <aqa-input label="หมู่ที่" form-path="VillageNo" value="[[form.VillageNo]]"></aqa-input>
+                    <aqa-input label="หมู่ที่" form-path="VillageNo" value="[[form.VillageNo]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                    <aqa-input label="หมู่บ้าน" form-path="Village" value="[[form.Village]]"></aqa-input>
+                    <aqa-input label="หมู่บ้าน" form-path="Village" value="[[form.Village]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <aqa-input label="อาคาร" form-path="Building" value="[[form.Building]]"></aqa-input>
+                    <aqa-input label="อาคาร" form-path="Building" value="[[form.Building]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-5 col-md-5 col-lg-3">
-                    <aqa-input label="ซอย" form-path="Lane" value="[[form.Lane]]"></aqa-input>
+                    <aqa-input label="ซอย" form-path="Lane" value="[[form.Lane]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <aqa-input label="ถนน" form-path="Road" value="[[form.Road]]"></aqa-input>
+                    <aqa-input label="ถนน" form-path="Road" value="[[form.Road]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                
             </div>
             <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                            <aqa-input label="รหัสไปรษณีย์" form-path="Zipcode" value="{{zipcode}}"></aqa-input>
+                            <aqa-input label="รหัสไปรษณีย์" form-path="Zipcode" value="{{zipcode}}" disabled="[[isEdit]]"></aqa-input>
                         </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-                    <aqa-combo-box label="ภาค" items="[[geography]]" item-label-path="Name" item-value-path="ID" form-path="GeographyID" value="[[form.GeographyID]]"></aqa-combo-box>
+                    <aqa-combo-box label="ภาค" items="[[geography]]" item-label-path="Name" item-value-path="ID" 
+                    form-path="GeographyID" value="[[form.GeographyID]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                  <div class="col-xs-12 col-sm-6 col-md-4">
-                    <aqa-combo-box label="จังหวัด" items="[[province]]" item-label-path="NameTh" item-value-path="Code" form-path="ProvinceCode"
+                    <aqa-combo-box label="จังหวัด" items="[[province]]" item-label-path="NameTh" item-value-path="Code" 
+                    form-path="ProvinceCode" disabled="[[isEdit]]"
                         value="[[form.ProvinceCode]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <aqa-combo-box label="อำเภอ / เขต" items="[[amphure]]" item-label-path="NameTh" item-value-path="Code" form-path="AmphureCode"
-                        value="[[form.AmphureCode]]"></aqa-combo-box>
+                        value="[[form.AmphureCode]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <aqa-combo-box label="ตำบล / แขวง" items="[[district]]" item-label-path="NameTh" item-value-path="Code" form-path="DistrictCode"
-                        value="[[form.DistrictCode]]"></aqa-combo-box>
+                        value="[[form.DistrictCode]]" disabled="[[isEdit]]"></aqa-combo-box>
                 </div>
                
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                    <aqa-input label="โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]"></aqa-input>
+                    <aqa-input label="โทรศัพท์" form-path="Telephone" value="[[form.Telephone]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-                    <aqa-input label="โทรสาร" form-path="Fax" value="[[form.Fax]]"></aqa-input>
+                    <aqa-input label="โทรสาร" form-path="Fax" value="[[form.Fax]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]"></aqa-input>
+                    <aqa-input label="อีเมล" form-path="Email" value="[[form.Email]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4">
-                    <aqa-input label="เว็บไซด์" form-path="Website" value="[[form.Website]]"></aqa-input>
+                    <aqa-input label="เว็บไซด์" form-path="Website" value="[[form.Website]]" disabled="[[isEdit]]"></aqa-input>
                 </div>
             </div>
         </nylon-form>
@@ -109,6 +111,10 @@
                         type: String,
                         value: "",
                         observer: "getAddress"
+                    },
+                    isEdit:{
+                        type:Boolean,
+                        value:true
                     }
                 };
             }
