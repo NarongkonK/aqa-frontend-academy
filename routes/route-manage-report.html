@@ -1,0 +1,49 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../../bower_components/aqa-button/aqa-button.html">
+<link rel="import" href="../../../bower_components/aqa-form/aqa-combo-box.html">
+
+<dom-module id="route-manage-report" topic="ข้อมูลรายงานผู้บริหาร" parent="route-home">
+    <template>
+        <style include="aqa-styles">
+            
+        </style>
+        <div class="page-container">
+            <aqa-panel>
+                <div slot="content">
+                    <div class="row center-xs">
+                        <div class="col-xs-3 start-xs">
+                            <aqa-combo-box label="ระดับ"></aqa-combo-box>
+                        </div>
+                        <div class="col-xs-2 start-xs" style="margin-top:1.5rem;">
+                            <aqa-button type="primary">Export</aqa-button>
+                        </div>
+                    </div>
+                </div>
+            </aqa-panel>
+        </div>
+        
+
+    </template>
+
+    <script>
+        
+        class RouteManageReport extends Polymer.Element {
+      
+            static get is() {
+                return 'route-manage-report';
+            }
+
+            static get properties() {
+                return {
+                    
+                };
+            }
+
+
+        }
+
+        window.customElements.define(RouteManageReport.is, RouteManageReport);
+    </script>
+</dom-module>

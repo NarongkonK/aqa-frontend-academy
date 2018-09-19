@@ -66,12 +66,26 @@
                     <aqa-panel id="basic">
                         <div slot="content">
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <aqa-button type="danger" icon="remove">ลบ</aqa-button>
-                                    <div class="row-space"></div>
-                                    <aqa-table checkbox colunm="[[colunm2]]" tools="[[tools]]" list="[[list]]"></aqa-table>
+                                <div class="col-xs-6 start-xs">
+                                    <template is="dom-if" if="{{isEdit}}">
+
+                                        <aqa-button type="danger" icon="remove">ลบ</aqa-button>
+
+                                    </template>
+                                </div>
+                                <div class="col-xs-6 end-xs">
+                                    <template is="dom-if" if="{{!isEdit}}">
+                                        <paper-icon-button on-click="_edit" icon="create" title="แก้ไข"></paper-icon-button>
+                                    </template>
                                 </div>
                             </div>
+                            <div class="row-space"></div>
+
+                            <aqa-table checkbox colunm="[[colunm2]]" tools="[[tools]]" list="[[list]]"></aqa-table>
+
+
+
+
                         </div>
                     </aqa-panel>
                 </aqa-tab>
@@ -94,24 +108,25 @@
                     tools: {
                         type: Array,
                         value: [
-                            {
-                                label: 'อัพโหลด',
-                                event: 'upload',
-                                icon: 'icons:file-upload'
-                            },
                             // {
-                            //     label: 'ดาว์โหลด',
-                            //     event: 'download',
-                            //     icon: 'icons:get-app'
+                            //     label: 'อัพโหลด',
+                            //     event: 'upload',
+                            //     icon: 'icons:file-upload'
                             // },
-                            {
-                                label: 'ลบ',
-                                event: 'delete',
-                                icon: 'aqa-tool:bin'
-                            },
-                           
+                            // // {
+                            // //     label: 'ดาว์โหลด',
+                            // //     event: 'download',
+                            // //     icon: 'icons:get-app'
+                            // // },
+                            // {
+                            //     label: 'ลบ',
+                            //     event: 'delete',
+                            //     icon: 'aqa-tool:bin'
+                            // },
+
                         ]
                     },
+
                     list: {
                         type: Array,
                         value: [
@@ -167,12 +182,6 @@
                                 path: "Province",
                                 width: "200px",
                                 flex: "1"
-                            },
-                            {
-                                label: "แนบไฟล์",
-                                path: "",
-                                width: "200px",
-                                flex: "1"
                             }
                         ]
                     },
@@ -222,9 +231,30 @@
                                 flex: "1"
                             }
                         ]
+                    },
+                    isEdit: {
+                        type: Boolean,
+                        value: false
                     }
                 };
             }
+            _edit() {
+                this.set("isEdit", true)
+                this.set("tools", [
+                    {
+                        label: 'อัพโหลด',
+                        event: 'upload',
+                        icon: 'icons:file-upload'
+                    },
+
+                    {
+                        label: 'ลบ',
+                        event: 'delete',
+                        icon: 'aqa-tool:bin'
+                    }])
+                console.log(this.tools)
+            }
+
             _openDialog() {
                 Nylon.dialog.open("/merge")
             }

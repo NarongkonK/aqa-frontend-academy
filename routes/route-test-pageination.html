@@ -1,0 +1,83 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/aqa-styles/aqa-styles.html">
+<link rel="import" href="../../../bower_components/aqa-panel/aqa-panel.html">
+<link rel="import" href="../../redux-mixin.html">
+<link rel="import" href="../../components/aqa-advance-table/aqa-advance-table.html">
+<link rel="import" href="../redux/test-redux.html">
+
+<dom-module id="route-test-pageination" topic="ทดสอบข้อมูล" path="/test">
+    <template>
+        <style include="aqa-styles">
+        </style>
+        <div class="page-container">
+            <aqa-panel>
+                <div slot="content">
+                    <aqa-advance-table table="[[table]]" data="[[list]]" on-refresh="_getDataList"></aqa-advance-table>
+                </div>
+            </aqa-panel>
+        </div>
+
+
+    </template>
+
+    <script>
+
+        class RouteTestPageination extends ReduxMixin(Polymer.Element) {
+
+            static get is() {
+                return 'route-test-pageination';
+            }
+
+            static get properties() {
+                return {
+                    table: {
+                        type: Object,
+                        value: {
+                            tool: [
+                                {
+                                    name: "link",
+                                    label: "บทบาทผู้ใช้งาน"
+                                },
+                                "view",
+                                // "link",
+                                "edit",
+                                "del"
+                            ],
+                            colunm: [
+                                {
+                                    label: "ชื่อ",
+                                    path: "Name",
+                                    order: true,
+                                    slot: true
+                                },
+                                {
+                                    label: "อายุ",
+                                    path: "Age",
+                                    order: true
+                                }
+
+                            ]
+                        }
+                    },
+                    list: {
+                        type: Object,
+                        statePath: "test.test"
+                    }
+                };
+            }
+            nylonPagesActive(){
+                // super.ready()
+                // Nylon.dispatch("testInation")                
+            }
+            _getDataList(e) {
+                console.log(e.detail)
+                Nylon.dispatch("testInation", e.detail)
+            }
+
+
+
+        }
+
+        window.customElements.define(RouteTestPageination.is, RouteTestPageination);
+    </script>
+</dom-module>

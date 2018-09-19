@@ -5,13 +5,99 @@
 <link rel="import" href="../../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 <link rel="import" href="../../../bower_components/paper-radio-group/paper-radio-group.html">
 <link rel="import" href="../../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
 
-<dom-module id="route-draft-report-view" topic="อ่านร่างรายงาน" parent="route-draft-report">
+<link rel="import" href="../../components/aqa-advance-table/aqa-advance-table.html">
+
+
+
+<dom-module id="route-draft-report-view" topic="ตรวจสอบร่างรายงาน" parent="route-draft-report">
     <template>
         <style include="aqa-styles">
+            .section {
+                margin-bottom: 1.5rem;
+            }
+
+            .note {
+                margin-left: 2rem;
+            }
         </style>
         <div class="page-container">
-            <aqa-panel>
+            <div class="section">
+                <aqa-panel>
+                    <app-toolbar slot="header">
+                        <div main-title>Step 1 of 3 ดาวน์โหลดไฟล์การประเมินคุณภาพภายนอก</div>
+                    </app-toolbar>
+
+                    <div slot="content">
+                        <aqa-advance-table table="[[table1]]" data="[[list1]]"></aqa-advance-table>
+                    </div>
+                </aqa-panel>
+            </div>
+
+            <div class="section">
+                <aqa-panel>
+                    <app-toolbar slot="header">
+                        <div main-title>Step 2 of 3 อัพโหลดไฟล์การประเมินคุณภาพภายนอก</div>
+                    </app-toolbar>
+
+                    <div slot="content">
+                        <aqa-advance-table table="[[table2]]" data="[[list2]]"></aqa-advance-table>
+                    </div>
+                </aqa-panel>
+            </div>
+
+            <div class="section">
+                <aqa-panel>
+                    <app-toolbar slot="header">
+                        <div main-title>Step 3 of 3 ผลการพิจารณา(ร่าง)รายงานการประเมินสำหรับสถานศึกษา</div>
+                    </app-toolbar>
+
+                    <div slot="content">
+                        <div>
+                            &nbsp;&nbsp;&nbsp;ตามที่สถานศึกษาได้ตรวจสอบ (ร่าง) รายงานการประเมินคุณภาพ นอกสถานศึกษาระดับการศึกษาขั้นพื้นฐาน รอบสี่ ที่ผ่านการตรวจสอบและลงนามรับรองจากผู้ประเมินแล้ว
+                        </div>
+                        <div> เมื่อวันที่ ... เดือน ... พ.ศ. ... จากคณะผู้ประเมินประกอบด้วย</div>
+                        <div>1. .............
+                            <br>2. .............
+                            <br>3. .............
+                        </div>
+                        <div>
+                            กรุณาระบุผลการพิจารณา(ร่าง)รายงาน
+                        </div>
+                        <div>
+                            <paper-radio-group selected="a" aria-labelledby="label1">
+                                <paper-radio-button name="a">
+                                    เห็นชอบและยอมรับผลการประเมิน(ร่าง)รายงานการประเมินคุณภาพนอกสถานศึกษา ระดับการศึกษาขั้นพื้นฐาน รอบสี่ ตามที่คณะผู้ประเมิน
+                                </paper-radio-button>
+                                <paper-radio-button name="b">
+                                    เห็นชอบและยอมรับผลการประเมิน(ร่าง)รายงานประเมินคุณภาพภายสอกสถานศึกษา ระดับการศึกษาขั้นพื้นฐาน รอบสี่ ตามที่คณะผู้ประเมินเสนอ
+                                    โด้ยมีข้อแก้ไขดังนี้
+                                </paper-radio-button>
+                                <br>
+                                <iron-autogrow-textarea class="note" rows="4" placeholder="บันทึกข้อแก้ไข"></iron-autogrow-textarea>
+
+                                <br>
+                                <paper-radio-button name="d">
+                                    ไม่เห็นชอบเนื่องจากมีข้อทักท้วง พร้อมแนบเอกสาร/หลักฐาน ประกอบดังนี้
+                                </paper-radio-button>
+                                <br>
+                                <iron-autogrow-textarea class="note" rows="4" placeholder="บันทึกข้อแก้ไข"></iron-autogrow-textarea>
+                            </paper-radio-group>
+
+                            <div>
+                                เอกสารแนบกรณีมีข้อทักท้วง(ถ้ามี): 
+                                <aqa-button type="primary">แนบไฟล์</aqa-button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </aqa-panel>
+            </div>
+            <!-- <aqa-panel>
                 <div slot="content">
                     <div class="row">
                         <div class="col-xs-6">
@@ -58,9 +144,13 @@
                     </div>
                 </div>
 
-            </aqa-panel>
+            </aqa-panel> -->
         </div>
-      
+        <div class="row center-xs">
+            <aqa-button type="success">บันทึก</aqa-button>
+            <aqa-button type="danger">ยกเลิก</aqa-button>
+        </div>
+
 
     </template>
 
@@ -74,6 +164,76 @@
 
             static get properties() {
                 return {
+                    table1: {
+                        type: Object,
+                        value: {
+                            tool: [
+                                // {
+                                //     name: "link",
+                                //     label: "บทบาทผู้ใช้งาน"
+                                // },
+                                // "view",
+                                // "link"
+                                "download"
+                                // "edit",
+                                // "del"
+                            ],
+                            colunm: [
+                                {
+                                    label: "ชื่อ",
+                                    path: "Name",
+                                    order: true,
+                                    slot: true,
+                                    width: "800px"
+                                }
+                            ]
+                        }
+                    },
+                    list1: {
+                        type: Object,
+                        // statePath: "test.test"
+                        value: {
+                            Data: [
+                                {
+                                    Name: "(ร่าง) รายงานการประเมินโรงเรียน ..."
+                                },
+                                {
+                                    Name: "แบบฟอร์มประเมินคุณภาพรายงานสำหรับสถานศึกษา"
+                                }
+                            ]
+                        }
+                    },
+                    table2: {
+                        type: Object,
+                        value: {
+                            tool: [
+                                "upload"
+                            ],
+                            colunm: [
+                                {
+                                    label: "ชื่อ",
+                                    path: "Name",
+                                    order: true,
+                                    slot: true,
+                                    width: "800px"
+                                }
+                            ]
+                        }
+                    },
+                    list2: {
+                        type: Object,
+                        // statePath: "test.test"
+                        value: {
+                            Data: [
+                                {
+                                    Name: "(ร่าง) รายงานการประเมินโรงเรียน ..."
+                                },
+                                {
+                                    Name: "แบบฟอร์มประเมินคุณภาพรายงานสำหรับสถานศึกษา"
+                                }
+                            ]
+                        }
+                    }
 
                 };
             }

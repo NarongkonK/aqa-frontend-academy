@@ -1,0 +1,38 @@
+<script>
+    Nylon.addReducer('test', function (state, action) {
+        state = state || {
+            test: {Data:[]}
+           
+        }
+
+        switch (action.type) {
+            case 'TEST_GET':
+                return Object.assign({}, state, { test: action.payload })
+         
+            default:
+                return state
+        }
+        return state
+    })
+
+    Nylon.addAction({
+        
+        testInation: function (detail) {
+            return dispatch => {
+                // console.log(detail)
+                var url = ""
+                if(!detail){
+                    url = Nylon.apiURL.assessment+"/nut/?_page=1&_limit=10"
+                }
+                else {
+                    url = Nylon.apiURL.assessment+"/nut/?_page="+detail.page+"&_limit="+detail.limit+"&_order="+detail.type+"&_field="+detail.field
+                }
+                // console.log(url)
+                axios.get(url)
+                .then((res)=>{
+                    dispatch({ type: 'TEST_GET', payload: res.data })
+                })
+            }
+        }
+    })
+</script>
